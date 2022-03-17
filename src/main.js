@@ -41,7 +41,7 @@ new Vue({
   i18n,
   render: h => h(App),
 }).$mount('#app')
-Vue.prototype.$orchestratorAddress = 'http://app.hercules-rpa.svc.cluster.local:5000'
+Vue.prototype.$orchestratorAddress = 'http://10.208.99.102:32656'
 
 // const axiosInstance = axios.create({
 //   baseURL: 'http://10.208.99.12:5000/api/orchestrator',
@@ -57,7 +57,7 @@ Vue.use(VueFormGenerator)
 Vue.use(VueFormulate, {
   uploader: async function (file, progress, error, options) {
   try {
-    options.uploadUrl = 'http://app.hercules-rpa.svc.cluster.local:5000/api/orchestrator/files'
+    options.uploadUrl = 'http://10.208.99.102:32656/api/orchestrator/files'
     const formData = new FormData()
     formData.append('file', file)
     const result = await fetch(options.uploadUrl, {
