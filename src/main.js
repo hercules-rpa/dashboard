@@ -57,7 +57,7 @@ Vue.use(VueFormGenerator)
 Vue.use(VueFormulate, {
   uploader: async function (file, progress, error, options) {
   try {
-    options.uploadUrl = 'http://10.208.99.102:32656/api/orchestrator/files'
+    options.uploadUrl = 'http://10.208.99.12:5000/api/orchestrator/files'
     const formData = new FormData()
     formData.append('file', file)
     const result = await fetch(options.uploadUrl, {

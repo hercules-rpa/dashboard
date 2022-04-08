@@ -29,8 +29,8 @@
           md="auto"
         >
           <div class="text-body-1 font-weight-light pt-6 pt-md-0 text-center">
-            &copy; 2021, made
-            by <a href="https://um.es">UMU Robots</a> for RPA Development.
+            &copy; 2022, made
+            by <a href="https://um.es">TREELOGIC</a> for Hércules-RPA.
           </div>
         </v-col>
       </v-row>
