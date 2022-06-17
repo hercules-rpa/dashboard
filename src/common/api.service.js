@@ -170,3 +170,13 @@ export const ArticlesService = {
       return ApiService.delete(`articles/${slug}`)
     },
   }
+
+  export const ProfileRecommendationService = {
+    query (params) {
+        Vue.axios.defaults.headers.common.Authorization = `Bearer ${params}`
+        return ApiService.query('register/profile')
+    },
+    get (slug) {
+        return ApiService.get('schedules', slug)
+    }
+  }

@@ -90,7 +90,7 @@ export default new Router({
         },
         {
           name: 'User Profile Recommendation',
-          path: 'pages/:token/profilerecommendation',
+          path: 'pages/profilerecommendation/:token',
           component: () => import('@/views/dashboard/pages/ProfileRecommendation'),
         },
         {
