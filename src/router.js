@@ -89,6 +89,11 @@ export default new Router({
           component: () => import('@/views/dashboard/pages/UserProfile'),
         },
         {
+          name: 'User Profile Recommendation',
+          path: 'pages/:token/profilerecommendation',
+          component: () => import('@/views/dashboard/pages/ProfileRecommendation'),
+        },
+        {
           name: 'Notifications',
           path: 'components/notifications',
           component: () => import('@/views/dashboard/component/Notifications'),
