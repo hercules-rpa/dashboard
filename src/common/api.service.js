@@ -178,5 +178,5 @@ export const ArticlesService = {
     },
     get (slug) {
         return ApiService.get('schedules', slug)
-    }
+    },
   }
