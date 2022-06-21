@@ -23,13 +23,15 @@
           >
             <template v-slot:label="{item}">
               <div class="row">
-                <div class="column1">
+                <div class="columnAreas">
                   {{ item.name }}
                 </div>
-                <div class="column2">
+                <div class="columnRating">
                   <input
                     v-if="item.id != 0"
                     id="checkbox"
+                    v-model="rating"
+                    :value="item"
                     type="checkbox"
                     style="width:100%;align:right;margin: auto;"
                   >
@@ -51,7 +53,7 @@
             key="title"
             class="text-h4 font-weight-light pa-4 text-center"
           >
-            Selecciona tus áreas temáticas para que el sistema de recomendación te notifique de futuras convocatorias.
+            <span> {{ rating }} </span>
           </div>
 
           <v-scroll-x-transition
@@ -83,7 +85,7 @@
     <v-card-actions>
       <v-btn
         text
-        @click="tree = []"
+        @click="tree = [], rationg = []"
       >
         Reset
       </v-btn>
@@ -122,6 +124,7 @@
         ],
         areastematicas: [],
         tree: [],
+        rating: [],
       }
     },
     computed: {
@@ -178,7 +181,7 @@
 .row {
   display: flex;
 }
-.column1 {
+.columnAreas {
   display: block;
   position:relative;
   width: 75%;
@@ -187,7 +190,7 @@
   overflow: hidden;
   margin: 0 auto;
 }
-.column2 {
+.columnRating {
   display: block;
   position:relative;
   width: 20%;
