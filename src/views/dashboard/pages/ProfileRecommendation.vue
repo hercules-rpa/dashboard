@@ -43,7 +43,7 @@
                       yellow
                       length="5"
                       size="20"
-                      :value="item.puntuacion"
+                      :value="item.rating"
                       @input="selectItem(item)"
                     />
                   </div>
@@ -148,7 +148,7 @@
           id: areatematica.id,
           name: areatematica.descripcion,
           children: this.getChildren(areatematica),
-          puntuacion: areatematica.puntuacion,
+          rating: areatematica.puntuacion,
         }))
         return [{
           id: 0,
@@ -214,7 +214,7 @@
         if (areatematica[areatematica.id].length > 0) {
           // eslint-disable-next-line no-unused-vars
           for (const area of areatematica[areatematica.id]) {
-            areasHijos.push({ id: area.id, name: area.descripcion, puntuacion: area.puntuacion, children: this.getChildren(area) })
+            areasHijos.push({ id: area.id, name: area.descripcion, rating: area.puntuacion, children: this.getChildren(area) })
           }
         }
 
