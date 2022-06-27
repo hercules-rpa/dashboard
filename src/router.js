@@ -94,6 +94,11 @@ export default new Router({
           component: () => import('@/views/dashboard/pages/ProfileRecommendation'),
         },
         {
+          name: 'Feedback Researcher',
+          path: 'pages/feedback/:token/:idconvocatoria/:util',
+          component: () => import('@/views/dashboard/pages/Feedback'),
+        },
+        {
           name: 'Notifications',
           path: 'components/notifications',
           component: () => import('@/views/dashboard/component/Notifications'),

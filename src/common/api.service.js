@@ -180,3 +180,10 @@ export const ArticlesService = {
         return ApiService.get('schedules', slug)
     },
   }
+
+  export const FeedbackService = {
+    query (params, slug) {
+        Vue.axios.defaults.headers.common.Authorization = `Bearer ${params}`
+        return ApiService.post('register/feedback/' + slug)
+    },
+  }
