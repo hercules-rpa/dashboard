@@ -43,8 +43,7 @@
                       yellow
                       length="5"
                       size="20"
-
-                      value="0"
+                      :value="item.puntuacion"
                       @input="selectItem(item)"
                     />
                   </div>
@@ -69,6 +68,7 @@
               <span>Tree : {{ tree }}</span>
             </div>
             <div><span>Tree : {{ tree }}</span></div>
+            <div><span>Tree : {{ itemsSelected.values() }}</span></div>
             <v-scroll-x-transition
               group
               hide-on-leave
@@ -148,6 +148,7 @@
           id: areatematica.id,
           name: areatematica.descripcion,
           children: this.getChildren(areatematica),
+          puntuacion: areatematica.puntuacion,
         }))
         return [{
           id: 0,
@@ -168,12 +169,12 @@
     },
 
     methods: {
-      fillChildrenRecursive (item) {
+      fillChildrenRecursive (padre) {
         // console.log('recursive')
-        if (item.children.length > 0) {
-          item.children.forEach(element => {
-            element.rating = item.rating
-            this.fillChildrenRecursive(item)
+        if (padre.children.length > 0) {
+          padre.children.forEach(hijo => {
+            hijo.rating = padre.rating
+            this.fillChildrenRecursive(hijo)
           })
         }
       },
@@ -213,7 +214,7 @@
         if (areatematica[areatematica.id].length > 0) {
           // eslint-disable-next-line no-unused-vars
           for (const area of areatematica[areatematica.id]) {
-            areasHijos.push({ id: area.id, name: area.descripcion, children: this.getChildren(area) })
+            areasHijos.push({ id: area.id, name: area.descripcion, puntuacion: area.puntuacion, children: this.getChildren(area) })
           }
         }
 
