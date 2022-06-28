@@ -110,9 +110,9 @@
           depressed
           @click="save()"
         >
-          Save
+          Enviar
           <v-icon right>
-            mdi-content-save
+            mdi-send
           </v-icon>
         </v-btn>
       </v-card-actions>
