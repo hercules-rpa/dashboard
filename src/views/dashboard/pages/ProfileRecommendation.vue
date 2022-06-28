@@ -98,7 +98,7 @@
       <v-card-actions>
         <v-btn
           text
-          @click="tree = [], rating = [], itemsSelected = []"
+          @click="initialize()"
         >
           Reset
         </v-btn>
@@ -107,6 +107,7 @@
           class="white--text"
           color="green darken-1"
           depressed
+          @click="save()"
         >
           Save
           <v-icon right>
@@ -137,13 +138,30 @@
           },
         ],
         areastematicas: [],
+        areasTematicasIniciales: [],
         tree: [],
         rating: [],
         itemsSelected: new Map(),
+        items: [],
       }
     },
     computed: {
-      items () {
+    },
+    mounted: function () {
+      ProfileRecommendationService.query(this.$route.params.token)
+        .then(response => {
+          console.log(response.data)
+          this.areastematicas = response.data
+          this.areasTematicasIniciales = response.data
+          this.items = this.fillItems()
+        })
+        .catch(error => {
+          throw new Error(error)
+        })
+    },
+
+    methods: {
+      fillItems () {
         const children = this.areastematicas.map(areatematica => ({
           id: areatematica.id,
           name: areatematica.descripcion,
@@ -156,19 +174,6 @@
           children,
         }]
       },
-    },
-    mounted: function () {
-      ProfileRecommendationService.query(this.$route.params.token)
-        .then(response => {
-          console.log(response.data)
-          this.areastematicas = response.data
-        })
-        .catch(error => {
-          throw new Error(error)
-        })
-    },
-
-    methods: {
       fillChildrenRecursive (padre) {
         // console.log('recursive')
         if (padre.children.length > 0) {
@@ -208,6 +213,34 @@
           console.log('ITEM :', item)
           console.log(this.itemsSelected)
         }
+      },
+      buildResponse (array, areasList) {
+        array.forEach(area => {
+          if (area.rating > 0) {
+            areasList.push({ idarea: area.id, puntuacion: area.rating })
+          }
+          if (area.children.length > 0) {
+            this.buildResponse(area.children, areasList)
+          }
+        })
+      },
+      save () {
+        console.log('ITEMSINICIAL : ', this.items)
+        const areasList = []
+        this.buildResponse(this.items[0].children, areasList)
+        console.log('AREASLIST : ', areasList)
+        // ProfileRecommendationService.register(this.$route.params.token, areasList)
+        //   .then(response => {
+        //     console.log(response)
+        //   }).catch(error => {
+        //     throw new Error(error)
+        //   })
+      },
+      initialize () {
+        this.areastematicas = this.areasTematicasIniciales
+        this.items = this.fillItems()
+        console.log(this.areastematicas)
+        console.log(this.areasTematicasIniciales)
       },
 
       getChildren (areatematica) {
