@@ -185,11 +185,11 @@
       },
       isInItem (item, id) {
         if (item.children.length > 0) {
-          item.children.forEach(element => {
-            if (id === element.id) {
+          item.children.forEach(hijo => {
+            if (id === hijo.id) {
               return true
             } else {
-              this.isInItem(element, id)
+              this.isInItem(hijo, id)
             }
           })
         } else {
@@ -204,6 +204,7 @@
           this.fillChildrenRecursive(item)
 
           // this.tree.push(this.item)
+          console.log(this.items)
           console.log('ITEM :', item)
           console.log(this.itemsSelected)
         }
