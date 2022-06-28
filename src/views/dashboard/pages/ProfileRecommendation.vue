@@ -69,6 +69,7 @@
             </div>
             <div><span>Tree : {{ tree }}</span></div>
             <div><span>Tree : {{ itemsSelected.values() }}</span></div>
+            <div><span>Tree : {{ items.values() }}</span></div>
             <v-scroll-x-transition
               group
               hide-on-leave
@@ -229,12 +230,12 @@
         const areasList = []
         this.buildResponse(this.items[0].children, areasList)
         console.log('AREASLIST : ', areasList)
-        // ProfileRecommendationService.register(this.$route.params.token, areasList)
-        //   .then(response => {
-        //     console.log(response)
-        //   }).catch(error => {
-        //     throw new Error(error)
-        //   })
+        ProfileRecommendationService.register(this.$route.params.token, areasList)
+          .then(response => {
+            console.log(response)
+          }).catch(error => {
+            throw new Error(error)
+          })
       },
       initialize () {
         this.areastematicas = this.areasTematicasIniciales
