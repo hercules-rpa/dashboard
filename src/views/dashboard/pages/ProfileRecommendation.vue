@@ -171,7 +171,7 @@
         }))
         return [{
           id: 0,
-          name: 'All Areas',
+          name: 'Áreas Temáticas',
           children,
         }]
       },

@@ -181,6 +181,6 @@ export const ArticlesService = {
     },
     register (token, areasList) {
       Vue.axios.defaults.headers.common.Authorization = `Bearer ${token}`
-      return ApiService.post('register/calificacion/area', { areasList })
+      return ApiService.post('register/calificacion/area', areasList)
     },
   }
