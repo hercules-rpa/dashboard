@@ -24,6 +24,7 @@
     "vue": "^2.6.11",
     "vue-ads-table-tree": "^2.4.2",
     "vue-axios": "^3.2.4",
+    "vue-feedback-reaction": "^1.2.0",
     "vue-form-generator": "^2.3.4",
     "vue-i18n": "^8.15.3",
     "vue-router": "^3.1.3",

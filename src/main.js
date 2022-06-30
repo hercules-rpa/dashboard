@@ -16,6 +16,7 @@ import VueFormGenerator from 'vue-form-generator'
 import { FieldArray } from 'vfg-field-array'
 import 'vue-form-generator/dist/vfg-core.css'
 import VueFormulate from '@braid/vue-formulate'
+import VueFeedbackReaction from 'vue-feedback-reaction'
 // import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
@@ -63,6 +64,7 @@ Vue.prototype.$orchestratorAddress = 'http://10.208.99.102:32656'
 // })
 
 Vue.use(VueFormGenerator)
+Vue.use(VueFeedbackReaction)
 
 // Vue.use(VueFormulate, {
 //   uploader: axiosInstance,
