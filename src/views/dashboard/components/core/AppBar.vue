@@ -116,14 +116,32 @@
       </v-list>
     </v-menu>
 
-    <v-btn
-      class="ml-2"
-      min-width="0"
-      text
-      to="/pages/user"
+    <v-menu
+      :key="text"
+      offset-y
+      :rounded="rounded"
     >
-      <v-icon>mdi-account</v-icon>
-    </v-btn>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          class="ml-2"
+          min-width="0"
+          text
+          v-bind="attrs"
+          v-on="on"
+        >
+          <v-icon>mdi-account</v-icon>
+        </v-btn>
+      </template>
+      <v-list>
+        <v-list-item
+          v-for="(item, index) in items"
+          :key="index"
+          @click="selectSection(item)"
+        >
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
   </v-app-bar>
 </template>
 
@@ -179,6 +197,10 @@
         'Another one',
         'El robot 5 ha sido actualizado',
       ],
+      items: [
+        { title: 'Preferencias' },
+        { title: 'Logout' },
+      ],
     }),
 
     computed: {
@@ -186,6 +208,17 @@
     },
 
     methods: {
+      selectSection (item) {
+        if (item.title === 'Logout') {
+          console.log('nos deslogueamos')
+          this.$store.dispatch('logoutAction')
+          this.$router.push({ path: '/login' })
+        }
+        if (item.title === 'Preferencias') {
+          console.log('vamos a settings')
+          this.$router.push({ path: '/pages/user' })
+        }
+      },
       ...mapMutations({
         setDrawer: 'SET_DRAWER',
       }),

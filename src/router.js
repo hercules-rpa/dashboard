@@ -8,6 +8,27 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      name: 'Login',
+      path: '/login',
+      component: () => import('@/views/dashboard/pages/Login'),
+    },
+    {
+      path: '/p',
+      component: () => import('@/views/dashboard/NormalIndex'),
+      children: [
+        {
+          name: 'UserProfileRecommendation',
+          path: '/p/profilerecommendation/:token',
+          component: () => import('@/views/dashboard/pages/ProfileRecommendation'),
+        },
+        {
+          name: 'FeedbackResearcher',
+          path: '/p/feedback/:token/:idconvocatoria/:util',
+          component: () => import('@/views/dashboard/pages/Feedback'),
+        },
+      ],
+    },
+    {
       path: '/',
       component: () => import('@/views/dashboard/Index'),
       children: [
@@ -84,19 +105,9 @@ export default new Router({
         },
         // Pages
         {
-          name: 'User Profile',
+          name: 'UserProfile',
           path: 'pages/user',
           component: () => import('@/views/dashboard/pages/UserProfile'),
-        },
-        {
-          name: 'User Profile Recommendation',
-          path: 'pages/profilerecommendation/:token',
-          component: () => import('@/views/dashboard/pages/ProfileRecommendation'),
-        },
-        {
-          name: 'Feedback Researcher',
-          path: 'pages/feedback/:token/:idconvocatoria/:util',
-          component: () => import('@/views/dashboard/pages/Feedback'),
         },
         {
           name: 'Notifications',

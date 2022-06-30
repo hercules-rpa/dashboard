@@ -9,7 +9,7 @@ export default new Vuex.Store({
     barColor: 'rgba(189, 42, 51, .8), rgba(189, 42, 40, .8)',
     barImage: 'https://demos.creative-tim.com/material-dashboard/assets/img/sidebar-1.jpg',
     drawer: null,
-    logged: true,
+    logged: false,
     test: false,
   },
   mutations: {

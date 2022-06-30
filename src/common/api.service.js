@@ -190,4 +190,10 @@ export const ArticlesService = {
         Vue.axios.defaults.headers.common.Authorization = `Bearer ${params}`
         return ApiService.post('register/feedback/' + slug)
     },
-  }
+}
+
+export const LoginService = {
+  login (email, password) {
+      return ApiService.post('login', { email: email, password: password })
+    },
+}
