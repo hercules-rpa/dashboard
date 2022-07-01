@@ -1,130 +1,169 @@
 <template>
-  <v-container
-    id="new-process"
-    fluid
-    tag="section"
-  >
-    <base-material-card
-      icon="mdi-clipboard-text"
-      title="Profile Recomendation"
-      class="px-5 py-3"
+  <div>
+    <v-dialog
+      v-model="dialog"
+      max-width="500"
     >
-      <v-row>
-        <v-col
-          cols="12"
-          md="12"
-        >
-          <v-card-text>
-            <h1
-              v-if="error"
-              class="mt-10 red--text"
-            >
-              Ha ocurrido un error : {{ code }}
-            </h1>
-            <v-treeview
-              v-if="!error"
-              v-model="tree"
-              rounded
-              hoverable
-              :items="items"
-              selection-type="leaf"
-              selected-color="indigo"
-              return-object
-              item-key="id"
-            >
-              <template v-slot:label="{item}">
-                <div class="row">
-                  <div class="columnAreas">
-                    {{ item.name }}
-                  </div>
-                  <div class="columnRating">
-                    <v-rating
-                      v-if="item.id != 0"
-                      v-model="item.rating"
-                      empty-icon="mdi-star-outline"
-                      full-icon="mdi-star"
-                      half-icon="mdi-star-half-full"
-                      hover
-                      background-color="grey"
-                      color="orange"
-                      yellow
-                      length="5"
-                      size="20"
-                      :value="item.rating"
-                      @input="selectItem(item)"
-                    />
-                  </div>
-                </div>
-              </template>
-            </v-treeview>
-          </v-card-text>
-        </v-col>
-        <v-divider vertical />
+      <v-card class="text-center">
+        <v-card-title>
+          <span v-if="code === 201">Información enviada correctamente</span><span v-else>Ha ocurrido un error al realizar la petición</span>
 
-        <v-col
-          cols="12"
-          md="4"
-        >
-          <v-card-text>
-            <div
-              v-if="tree.length === 0"
-              key="title"
-              class="text-h4 font-weight-light pa-4 text-center"
-            >
-              <span>Rating : {{ rating }} </span>
-              <span>Tree : {{ tree }}</span>
-            </div>
-            <div><span>Tree : {{ tree }}</span></div>
-            <div><span>Tree : {{ itemsSelected.values() }}</span></div>
-            <div><span>Tree : {{ items.values() }}</span></div>
-            <v-scroll-x-transition
-              group
-              hide-on-leave
-            >
-              <v-chip
-                v-for="(selection, i) in tree"
-                :key="i"
-                color="grey"
-                dark
-                small
-                class="ma-1"
-              >
-                <v-icon
-                  left
-                  small
-                >
-                  mdi-beer
-                </v-icon>
-                {{ selection.name }}
-              </v-chip>
-            </v-scroll-x-transition>
-          </v-card-text>
-        </v-col>
-      </v-row>
+          <v-spacer />
 
-      <v-divider />
-      <v-card-actions>
-        <v-btn
-          text
-          @click="initialize()"
-        >
-          Reset
-        </v-btn>
-        <v-spacer />
-        <v-btn
-          class="white--text"
-          color="green darken-1"
-          depressed
-          @click="save()"
-        >
-          Enviar
-          <v-icon right>
-            mdi-send
+          <v-icon
+            aria-label="Close"
+            @click="dialog = false"
+          >
+            mdi-close
           </v-icon>
-        </v-btn>
-      </v-card-actions>
-    </base-material-card>
-  </v-container>
+        </v-card-title>
+
+        <v-card-text v-if="code === 201">
+          Información enviada correctamente
+        </v-card-text><v-card-text v-else>
+          Ha ocurrido un error al realizar la petición -> codigo de error {{ code }}
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+
+          <v-btn
+            color="primary"
+            text
+            @click="cerrarDialog"
+          >
+            Cerrar
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-container
+      id="new-process"
+      fluid
+      tag="section"
+    >
+      <base-material-card
+        icon="mdi-clipboard-text"
+        title="Profile Recomendation"
+        class="px-5 py-3"
+      >
+        <v-row>
+          <v-col
+            cols="12"
+            md="12"
+          >
+            <v-card-text>
+              <h1
+                v-if="error"
+                class="mt-10 red--text"
+              >
+                Ha ocurrido un error : Sesión caducada
+              </h1>
+              <v-treeview
+                v-if="!error"
+                v-model="tree"
+                rounded
+                hoverable
+                :items="items"
+                selection-type="leaf"
+                selected-color="indigo"
+                return-object
+                item-key="id"
+              >
+                <template v-slot:label="{item}">
+                  <div class="row">
+                    <div class="columnAreas">
+                      {{ item.name }}
+                    </div>
+                    <div class="columnRating">
+                      <v-rating
+                        v-if="item.id != 0"
+                        v-model="item.rating"
+                        empty-icon="mdi-star-outline"
+                        full-icon="mdi-star"
+                        half-icon="mdi-star-half-full"
+                        hover
+                        background-color="grey"
+                        color="orange"
+                        yellow
+                        length="5"
+                        size="20"
+                        :value="item.rating"
+                        @input="selectItem(item)"
+                      />
+                    </div>
+                  </div>
+                </template>
+              </v-treeview>
+            </v-card-text>
+          </v-col>
+          <v-divider vertical />
+
+          <v-col
+            cols="12"
+            md="4"
+          >
+            <v-card-text>
+              <div
+                v-if="tree.length === 0"
+                key="title"
+                class="text-h4 font-weight-light pa-4 text-center"
+              >
+                <span>Rating : {{ rating }} </span>
+                <span>Tree : {{ tree }}</span>
+              </div>
+              <div><span>Tree : {{ tree }}</span></div>
+              <div><span>Tree : {{ itemsSelected.values() }}</span></div>
+              <div><span>Tree : {{ items.values() }}</span></div>
+              <v-scroll-x-transition
+                group
+                hide-on-leave
+              >
+                <v-chip
+                  v-for="(selection, i) in tree"
+                  :key="i"
+                  color="grey"
+                  dark
+                  small
+                  class="ma-1"
+                >
+                  <v-icon
+                    left
+                    small
+                  >
+                    mdi-beer
+                  </v-icon>
+                  {{ selection.name }}
+                </v-chip>
+              </v-scroll-x-transition>
+            </v-card-text>
+          </v-col>
+        </v-row>
+
+        <v-divider />
+        <v-card-actions>
+          <v-btn
+            text
+            @click="initialize()"
+          >
+            Reset
+          </v-btn>
+          <v-spacer />
+          <v-btn
+            :disabled="error"
+            class="white--text"
+            color="green darken-1"
+            depressed
+            @click="save()"
+          >
+            Enviar
+            <v-icon right>
+              mdi-send
+            </v-icon>
+          </v-btn>
+        </v-card-actions>
+      </base-material-card>
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -153,6 +192,7 @@
         items: [],
         error: false,
         code: '',
+        dialog: false,
       }
     },
     computed: {
@@ -251,8 +291,15 @@
         console.log('AREASLIST : ', areasList)
         ProfileRecommendationService.register(this.$route.params.token, areasList)
           .then(response => {
+            this.code = response.status
             console.log(response)
+            if (this.response.status === 201) {
+              this.dialog = true
+            } else {
+              this.dialog = true
+            }
           }).catch(error => {
+            this.dialog = true
             throw new Error(error)
           })
       },
