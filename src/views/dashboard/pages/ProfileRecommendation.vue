@@ -15,7 +15,14 @@
           md="12"
         >
           <v-card-text>
+            <h1
+              v-if="error"
+              class="mt-10 red--text"
+            >
+              Ha ocurrido un error : {{ code }}
+            </h1>
             <v-treeview
+              v-if="!error"
               v-model="tree"
               rounded
               hoverable
@@ -144,6 +151,8 @@
         rating: [],
         itemsSelected: new Map(),
         items: [],
+        error: false,
+        code: '',
       }
     },
     computed: {
@@ -151,12 +160,22 @@
     mounted: function () {
       ProfileRecommendationService.query(this.$route.params.token)
         .then(response => {
-          console.log(response.data)
-          this.areastematicas = response.data
-          this.areasTematicasIniciales = response.data
-          this.items = this.fillItems()
+          this.code = response.status
+          console.log(response.status)
+          if (response.status === 200) {
+            console.log(response.data)
+            this.areastematicas = response.data
+            this.areasTematicasIniciales = response.data
+            this.items = this.fillItems()
+            this.error = false
+          } else {
+            this.error = true
+          }
         })
         .catch(error => {
+          this.error = true
+          this.code = error
+          console.log(error)
           throw new Error(error)
         })
     },
