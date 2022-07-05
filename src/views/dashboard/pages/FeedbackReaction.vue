@@ -16,21 +16,23 @@
     >
       Su feedback no ha podido registrarse o ya se registró anteriormente con este token.
     </h2>
-    <h2 class="mt-10">
-      ¿ Qué le ha parecido la experiencia de usuario ?
-    </h2>
-    <vue-feedback-reaction
-      v-model="feedback"
-      class="feedback mt-10"
-      :labels="['Muy mala', 'Mala', 'Normal', 'Buena', 'Excelente']"
-      label-class="font-medium text-sm text-gray-800"
-    />
-    <v-btn
-      color="red"
-      class="mt-10"
-    >
-      Enviar
-    </v-btn>
+    <div v-if="conRating">
+      <h2 class="mt-10">
+        ¿ Qué le ha parecido la experiencia de usuario ?
+      </h2>
+      <vue-feedback-reaction
+        v-model="feedback"
+        class="feedback mt-10"
+        :labels="['Muy mala', 'Mala', 'Normal', 'Buena', 'Excelente']"
+        label-class="font-medium text-sm text-gray-800"
+      />
+      <v-btn
+        color="red"
+        class="mt-10"
+      >
+        Enviar
+      </v-btn>
+    </div>
   </div>
 </template>
 <script>
@@ -45,6 +47,7 @@
         active: false,
         disabled: false,
         error: false,
+        conRating: false,
       }
     },
     computed: {
