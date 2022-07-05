@@ -288,6 +288,9 @@
           }
         })
       },
+      cerrarDialog () {
+        this.dialog = false
+      },
       save () {
         console.log('ITEMSINICIAL : ', this.items)
         const areasList = []
