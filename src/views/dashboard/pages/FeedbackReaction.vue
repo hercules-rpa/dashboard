@@ -1,21 +1,48 @@
 <template>
   <div class="app">
-    <h1 v-if="!error">
-      Gracias por su participación
-    </h1><h1 v-else>
-      Ha ocurrido un error
-    </h1>
-    <h2
-      v-if="!error"
+    <div v-if="!error">
+      <h1>
+        Gracias por su participación
+      </h1>
+      <v-icon
+        color="green"
+        class="mt-10"
+        size="70"
+      >
+        mdi-check-circle-outline
+      </v-icon>
+      <h4 class="mt-3">
+        La información se envío correctamente
+      </h4>
+      <h2
+        class="mt-10"
+      >
+        Su feedback es importante para alimentar al sistema de recomendación.
+      </h2>
+    </div>
+    <div v-else>
+      <h1>
+        Ha ocurrido un error
+      </h1>
+      <v-icon
+        color="red"
+        class="mt-10"
+        size="70"
+      >
+        mdi-alert-circle-outline
+      </v-icon>
+      <h2
+        class="mt-10"
+      >
+        Su feedback no ha podido registrarse o ya se registró anteriormente.
+      </h2>
+    </div>
+    <v-img
       class="mt-10"
-    >
-      Su feedback es importante para alimentar al sistema de recomendación.
-    </h2><h2
-      v-else
-      class="mt-10"
-    >
-      Su feedback no ha podido registrarse o ya se registró anteriormente con este token.
-    </h2>
+      contain
+      src="../../../assets/hercules.png"
+      max-height="100"
+    />
     <div v-if="conRating">
       <h2 class="mt-10">
         ¿ Qué le ha parecido la experiencia de usuario ?
