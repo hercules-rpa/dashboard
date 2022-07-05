@@ -74,7 +74,10 @@
                     <div class="columnAreas">
                       {{ item.name }}
                     </div>
-                    <div class="columnRating">
+                    <div
+                      v-if="!item.fuente"
+                      class="columnRating"
+                    >
                       <v-rating
                         v-if="item.id != 0"
                         v-model="item.rating"
@@ -227,6 +230,7 @@
           name: areatematica.descripcion,
           children: this.getChildren(areatematica),
           rating: areatematica.puntuacion,
+          fuente: areatematica.fuente,
         }))
         return [{
           id: 0,
@@ -315,7 +319,7 @@
         if (areatematica[areatematica.id].length > 0) {
           // eslint-disable-next-line no-unused-vars
           for (const area of areatematica[areatematica.id]) {
-            areasHijos.push({ id: area.id, name: area.descripcion, rating: area.puntuacion, children: this.getChildren(area) })
+            areasHijos.push({ id: area.id, name: area.descripcion, rating: area.puntuacion, fuente: area.fuente, children: this.getChildren(area) })
           }
         }
 
