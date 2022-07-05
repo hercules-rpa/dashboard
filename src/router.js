@@ -24,7 +24,7 @@ export default new Router({
         {
           name: 'FeedbackResearcher',
           path: '/p/feedback/:token/:idconvocatoria/:util',
-          component: () => import('@/views/dashboard/pages/Feedback'),
+          component: () => import('@/views/dashboard/pages/FeedbackReaction'),
         },
         {
           name: 'FeedbackReactionResearcher',
