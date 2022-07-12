@@ -38,7 +38,6 @@
                   name="perfil_tecnologico"
                   label="Perfil Tecnológico"
                   :value="false"
-                  validation="required"
                 />
                 <FormulateInput
                   v-if="processParameters.comision === '21'"
@@ -47,7 +46,6 @@
                   :options="{investigacion: 'Investigación', docencia: 'Docencia'}"
                   placeholder="Selecciona una opción"
                   label="Categoría de acreditación"
-                  validation="required"
                 />
                 <FormulateInput
                   v-if="processParameters.comision === '9'"
@@ -56,7 +54,10 @@
                   :options="{1: 'Ciencias Sociales, Políticas y Comunicación', 2: 'Ciencias del Comportamiento',3: 'Biblioteconomía y Documentación',4: 'Estudios de Género',5: 'Antropología Social, Trabajo Social y Servicios Sociales e Historia del Pensamiento y de los Movimientos Sociales',6:'Otros'}"
                   placeholder="Selecciona una opción"
                   label="Subcomité"
-                  validation="required"
+                />
+                <FormulateInput
+                  type="submit"
+                  label="Ejecutar"
                 />
               </FormulateForm>
               <div v-if="test">
