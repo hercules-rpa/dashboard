@@ -60,6 +60,7 @@
                   validation="required"
                 />
                 <FormulateInput
+                  v-if="this.$route.params.idProcess === '22'"
                   type="submit"
                   label="Ejecutar"
                 />
@@ -429,63 +430,6 @@
           },
         ],
         schema: [
-          {
-            type: 'text',
-            name: 'orcid',
-            label: 'Orcid',
-          },
-          {
-            type: 'text',
-            name: 'personaref',
-            label: 'PersonaRef',
-          },
-          {
-            type: 'text',
-            name: 'email',
-            label: 'Email',
-            validation: 'optional|email',
-          },
-          {
-            type: 'select',
-            options: {
-              50: 'Titularidad',
-              51: 'Cátedra',
-            },
-            placeholder: 'Selecciona una acreditación',
-            name: 'tipo_acreditacion',
-            validation: 'required',
-            label: 'Acreditación',
-          },
-          {
-            type: 'select',
-            options: {
-              1: 'Matemáticas',
-              2: 'Física',
-              3: 'Química',
-              4: 'Ciencias de la naturaleza ',
-              5: 'Biología Celular y Molecular',
-              6: 'Ciencias biomédicas',
-              7: 'Medicina clínica y especialidades clínicas',
-              8: 'Otras especialidades sanitarias',
-              9: 'Ingeniería química, de los materiales y del medio natural',
-              10: 'Ingeniería mecánica y de la navegación',
-              11: 'Ingeniería eléctrica y de las telecomunicaciones',
-              12: 'Ingeniería informática',
-              13: 'Arquitectura, ingeniería civil, construcción y urbanismo',
-              14: 'Derecho',
-              15: 'Ciencias económicas y ciencias empresariales',
-              16: 'Ciencias económicas y ciencias empresariales',
-              17: 'Ciencias de la educación',
-              18: 'Ciencias del comportamiento',
-              19: 'Ciencias sociales',
-              20: 'Historia, filosofía y geografía - Historia del arte y expresión artística',
-              21: 'Filología y lingüística',
-            },
-            placeholder: 'Selecciona una comisión',
-            name: 'comision',
-            validation: 'required',
-            label: 'comisión de investigación',
-          },
         ],
 
       }
@@ -503,9 +447,7 @@
       ProcessService.getForm(this.$route.params.idProcess)
         .then(response => {
           console.log(response.data)
-          if (response.data.length !== 0) {
-            this.schema = response.data
-          }
+          this.schema = response.data
         })
         .catch(error => {
           throw new Error(error)
