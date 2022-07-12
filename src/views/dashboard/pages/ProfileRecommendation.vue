@@ -1,6 +1,42 @@
 <template>
   <div>
     <v-dialog
+      v-model="dialog4"
+      max-width="500"
+    >
+      <v-card class="text-center">
+        <v-card-title>
+          <span v-if="codeDelete === 200">Los datos de entrenamiento se han borrado correctamente</span><span v-else>Ha ocurrido un error al borrar los datos de entrenamiento</span>
+
+          <v-spacer />
+
+          <v-icon
+            aria-label="Close"
+            @click="cerrarDialogEntrenamiento"
+          >
+            mdi-close
+          </v-icon>
+        </v-card-title>
+
+        <v-card-text v-if="codeDelete === 200">
+          Datos de entrenamiento borrados correctamente, se ha cargado el perfil base
+        </v-card-text><v-card-text v-else>
+          Ha ocurrido un error al realizar la petición -> codigo de error {{ codeDelete }}
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+
+          <v-btn
+            color="primary"
+            text
+            @click="cerrarDialogEntrenamiento"
+          >
+            Cerrar
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-dialog
       v-model="dialog"
       max-width="500"
     >
@@ -34,6 +70,43 @@
             Cerrar
           </v-btn>
         </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-dialog
+      v-model="dialog3"
+      max-width="300"
+    >
+      <v-card>
+        <v-card-title>
+          ¿ Está seguro de que desea borrar todos los datos de entrenamiento y cargar el perfil base ?
+
+          <v-spacer />
+
+          <v-icon
+            aria-label="Close"
+            @click="dialog3 = false"
+          >
+            mdi-close
+          </v-icon>
+        </v-card-title>
+
+        <v-card-text class="pb-6 pt-12 text-center">
+          <v-btn
+            class="mr-3"
+            text
+            @click="dialog3 = false"
+          >
+            No
+          </v-btn>
+
+          <v-btn
+            color="success"
+            text
+            @click="borrarDatosEntrenamiento(token)"
+          >
+            Sí
+          </v-btn>
+        </v-card-text>
       </v-card>
     </v-dialog>
     <v-container
@@ -146,9 +219,17 @@
         <v-card-actions>
           <v-btn
             text
+            color="blue darken-1"
             @click="initialize()"
           >
-            Reset
+            Limpiar
+          </v-btn>
+          <v-btn
+            text
+            color="blue darken-1"
+            @click="borrarDatosDialog()"
+          >
+            Borrar datos de entrenamiento
           </v-btn>
           <v-spacer />
           <v-btn
@@ -196,34 +277,42 @@
         error: false,
         code: '',
         dialog: false,
+        dialog3: false,
+        dialog4: false,
+        token: '',
+        codeDelete: '',
       }
     },
     computed: {
     },
     mounted: function () {
-      ProfileRecommendationService.query(this.$route.params.token)
-        .then(response => {
-          this.code = response.status
-          console.log(response.status)
-          if (response.status === 200) {
-            console.log(response.data)
-            this.areastematicas = response.data
-            this.areasTematicasIniciales = response.data
-            this.items = this.fillItems()
-            this.error = false
-          } else {
-            this.error = true
-          }
-        })
-        .catch(error => {
-          this.error = true
-          this.code = error
-          console.log(error)
-          throw new Error(error)
-        })
+      this.loadData()
     },
 
     methods: {
+      loadData () {
+        this.token = this.$route.params.token
+        ProfileRecommendationService.query(this.$route.params.token)
+          .then(response => {
+            this.code = response.status
+            console.log(response.status)
+            if (response.status === 200) {
+              console.log(response.data)
+              this.areastematicas = response.data
+              this.areasTematicasIniciales = response.data
+              this.items = this.fillItems()
+              this.error = false
+            } else {
+              this.error = true
+            }
+          })
+          .catch(error => {
+            this.error = true
+            this.code = error
+            console.log(error)
+            throw new Error(error)
+          })
+      },
       fillItems () {
         const children = this.areastematicas.map(areatematica => ({
           id: areatematica.id,
@@ -291,6 +380,10 @@
       cerrarDialog () {
         this.dialog = false
       },
+      cerrarDialogEntrenamiento () {
+        this.dialog4 = false
+        this.$router.go()
+      },
       save () {
         console.log('ITEMSINICIAL : ', this.items)
         const areasList = []
@@ -315,6 +408,26 @@
         this.items = this.fillItems()
         console.log(this.areastematicas)
         console.log(this.areasTematicasIniciales)
+      },
+      borrarDatosDialog () {
+        this.dialog3 = true
+      },
+      borrarDatosEntrenamiento (token) {
+        this.dialog3 = false
+        ProfileRecommendationService.borrarDatosEntrenamiento(token)
+          .then(response => {
+            this.codeDelete = response.status
+            console.log(response)
+            if (this.response.status === 200) {
+              this.dialog4 = true
+            } else {
+              this.dialog4 = true
+            }
+            this.loadData()
+          }).catch(error => {
+            this.dialog4 = true
+            throw new Error(error)
+          })
       },
 
       getChildren (areatematica) {

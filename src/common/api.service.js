@@ -183,6 +183,10 @@ export const ArticlesService = {
       Vue.axios.defaults.headers.common.Authorization = `Bearer ${token}`
       return ApiService.post('register/calificacion/area', areasList)
     },
+    borrarDatosEntrenamiento (token) {
+      Vue.axios.defaults.headers.common.Authorization = `Bearer ${token}`
+      return ApiService.delete('register/calificacion/area/reset')
+    },
   }
 
   export const FeedbackService = {

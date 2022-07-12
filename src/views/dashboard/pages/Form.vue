@@ -33,7 +33,7 @@
                 @submit="execute"
               >
                 <FormulateInput
-                  v-if="processParameters.comision === '8'"
+                  v-if="processParameters.comite === '8'"
                   type="checkbox"
                   :value="processParameters.perfil_tecnologico"
                   name="perfil_tecnologico"
@@ -50,7 +50,7 @@
                   validation="required"
                 />
                 <FormulateInput
-                  v-if="processParameters.comision === '9'"
+                  v-if="processParameters.comite === '9'"
                   type="select"
                   :value="processParameters.subcomite"
                   name="subcomite"
@@ -60,7 +60,7 @@
                   validation="required"
                 />
                 <FormulateInput
-                  v-if="this.$route.params.idProcess === '22'"
+                  v-if="this.$route.params.idProcess === '22' || this.$route.params.idProcess === '18'"
                   type="submit"
                   label="Ejecutar"
                 />
