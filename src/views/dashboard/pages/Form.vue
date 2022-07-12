@@ -31,7 +31,34 @@
                 :schema="schema"
                 error-behavior="live"
                 @submit="execute"
-              />
+              >
+                <FormulateInput
+                  v-if="processParameters.comision === '8'"
+                  type="checkbox"
+                  name="perfil_tecnologico"
+                  label="Perfil Tecnológico"
+                  :value="false"
+                  validation="required"
+                />
+                <FormulateInput
+                  v-if="processParameters.comision === '21'"
+                  type="select"
+                  name="categoria_acreditacion"
+                  :options="{investigacion: 'Investigación', docencia: 'Docencia'}"
+                  placeholder="Selecciona una opción"
+                  label="Categoría de acreditación"
+                  validation="required"
+                />
+                <FormulateInput
+                  v-if="processParameters.comision === '9'"
+                  type="select"
+                  name="subcomite"
+                  :options="{1: 'Ciencias Sociales, Políticas y Comunicación', 2: 'Ciencias del Comportamiento',3: 'Biblioteconomía y Documentación',4: 'Estudios de Género',5: 'Antropología Social, Trabajo Social y Servicios Sociales e Historia del Pensamiento y de los Movimientos Sociales',6:'Otros'}"
+                  placeholder="Selecciona una opción"
+                  label="Subcomité"
+                  validation="required"
+                />
+              </FormulateForm>
               <div v-if="test">
                 <h3 class="mt-5">
                   Parameters
@@ -283,7 +310,6 @@
         dialog: false,
         dialogAlert: false,
         test: true,
-        schema: {},
         testSchema: {},
         jobData: {},
         code: {},
@@ -397,34 +423,66 @@
             label: 'Ejecutar',
           },
         ],
-        schemaTable: [
+        schema: [
           {
-            type: 'file',
-            name: 'file',
-            label: 'PDF with tables',
-            value: null,
+            type: 'text',
+            name: 'orcid',
+            label: 'Orcid',
           },
           {
-            type: 'group',
-            name: 'receivers',
-            validation: 'min:1,length',
-            repeatable: true,
-            'add-label': '+ Add receiver',
-            value: [{}],
-            children: [
-              {
-                type: 'text',
-                name: 'receiver',
-                label: 'Receiver',
-                validation: 'email',
-              },
-            ],
+            type: 'text',
+            name: 'personaref',
+            label: 'PersonaRef',
           },
           {
-            type: 'submit',
-            label: 'Ejecutar',
+            type: 'text',
+            name: 'email',
+            label: 'Email',
+            validation: 'optional|email',
+          },
+          {
+            type: 'select',
+            options: {
+              50: 'Titularidad',
+              51: 'Cátedra',
+            },
+            placeholder: 'Selecciona una acreditación',
+            name: 'tipo_acreditacion',
+            validation: 'required',
+            label: 'Acreditación',
+          },
+          {
+            type: 'select',
+            options: {
+              1: 'Matemáticas',
+              2: 'Física',
+              3: 'Química',
+              4: 'Ciencias de la naturaleza ',
+              5: 'Biología Celular y Molecular',
+              6: 'Ciencias biomédicas',
+              7: 'Medicina clínica y especialidades clínicas',
+              8: 'Otras especialidades sanitarias',
+              9: 'Ingeniería química, de los materiales y del medio natural',
+              10: 'Ingeniería mecánica y de la navegación',
+              11: 'Ingeniería eléctrica y de las telecomunicaciones',
+              12: 'Ingeniería informática',
+              13: 'Arquitectura, ingeniería civil, construcción y urbanismo',
+              14: 'Derecho',
+              15: 'Ciencias económicas y ciencias empresariales',
+              16: 'Ciencias económicas y ciencias empresariales',
+              17: 'Ciencias de la educación',
+              18: 'Ciencias del comportamiento',
+              19: 'Ciencias sociales',
+              20: 'Historia, filosofía y geografía - Historia del arte y expresión artística',
+              21: 'Filología y lingüística',
+            },
+            placeholder: 'Selecciona una comisión',
+            name: 'comision',
+            validation: 'required',
+            label: 'comisión de investigación',
           },
         ],
+
       }
     },
     mounted: function () {
@@ -440,7 +498,9 @@
       ProcessService.getForm(this.$route.params.idProcess)
         .then(response => {
           console.log(response.data)
-          this.schema = response.data
+          if (response.data.length !== 0) {
+            this.schema = response.data
+          }
         })
         .catch(error => {
           throw new Error(error)
