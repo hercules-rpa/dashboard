@@ -88,12 +88,12 @@
             value: 'process_name',
           },
           {
-            sortable: false,
+            sortable: true,
             text: 'Schedule',
             value: 'id_schedule',
           },
           {
-            sortable: false,
+            sortable: true,
             text: 'Log',
             value: 'id',
           },
@@ -108,12 +108,12 @@
             value: 'end_time',
           },
           {
-            sortable: false,
+            sortable: true,
             text: 'Robot',
             value: 'id_robot',
           },
           {
-            sortable: false,
+            sortable: true,
             text: 'Status',
             value: 'finished',
           },

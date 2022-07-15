@@ -55,6 +55,12 @@ export default new Router({
           path: 'pages/newprocess/:idProcess/form',
           component: () => import('@/views/dashboard/pages/Form'),
         },
+        // ProcessSettings
+        {
+          name: 'ProcessSettings',
+          path: 'pages/newprocess/:idProcess/settings',
+          component: () => import('@/views/dashboard/pages/ProcessSettings'),
+        },
         // Robots
         {
           name: 'Robots',
