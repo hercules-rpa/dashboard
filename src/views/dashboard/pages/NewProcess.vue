@@ -36,6 +36,18 @@
             </router-link>
           </div>
         </template>
+        <template v-slot:[`item.controls`]="{ item }">
+          <v-btn
+            class="ma-2"
+            outlined
+            x-small
+            fab
+            color="primary"
+            @click="goToProcessSettings(item)"
+          >
+            <v-icon>mdi-cog</v-icon>
+          </v-btn>
+        </template>
       </v-data-table>
     </base-material-card>
     <div class="py-3" />
@@ -65,6 +77,11 @@
             sortable: false,
             text: 'Capable Robots',
             value: 'capable_robots',
+          },
+          {
+            text: 'Settings',
+            value: 'controls',
+            sortable: false,
           },
         ],
         processes: [],
@@ -96,6 +113,10 @@
           .catch(error => {
             alert('Ha ocurrido un error', error)
           })
+      },
+      goToProcessSettings (p) {
+        console.log(p)
+        this.$router.push('/pages/newprocess/' + p.process_id + '/settings')
       },
       goToForm (value, data) {
         console.log(value)

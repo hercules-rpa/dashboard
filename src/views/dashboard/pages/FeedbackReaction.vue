@@ -1,64 +1,66 @@
 <template>
   <div class="app">
-    <div v-if="!error">
-      <h1>
-        Gracias por su participación
-      </h1>
-      <v-icon
-        color="green"
+    <div v-if="show">
+      <div v-if="!error">
+        <h1>
+          Gracias por su participación
+        </h1>
+        <v-icon
+          color="green"
+          class="mt-10"
+          size="70"
+        >
+          mdi-check-circle-outline
+        </v-icon>
+        <h4 class="mt-3">
+          La información se envío correctamente
+        </h4>
+        <h2
+          class="mt-10"
+        >
+          Su feedback es importante para alimentar al sistema de recomendación.
+        </h2>
+      </div>
+      <div v-else>
+        <h1>
+          Ha ocurrido un error
+        </h1>
+        <v-icon
+          color="red"
+          class="mt-10"
+          size="70"
+        >
+          mdi-alert-circle-outline
+        </v-icon>
+        <h2
+          class="mt-10"
+        >
+          Su feedback no ha podido registrarse o ya se registró anteriormente.
+        </h2>
+      </div>
+      <v-img
         class="mt-10"
-        size="70"
-      >
-        mdi-check-circle-outline
-      </v-icon>
-      <h4 class="mt-3">
-        La información se envío correctamente
-      </h4>
-      <h2
-        class="mt-10"
-      >
-        Su feedback es importante para alimentar al sistema de recomendación.
-      </h2>
-    </div>
-    <div v-else>
-      <h1>
-        Ha ocurrido un error
-      </h1>
-      <v-icon
-        color="red"
-        class="mt-10"
-        size="70"
-      >
-        mdi-alert-circle-outline
-      </v-icon>
-      <h2
-        class="mt-10"
-      >
-        Su feedback no ha podido registrarse o ya se registró anteriormente.
-      </h2>
-    </div>
-    <v-img
-      class="mt-10"
-      contain
-      src="../../../assets/hercules.png"
-      max-height="100"
-    />
-    <div v-if="conRating">
-      <h2 class="mt-10">
-        ¿ Qué le ha parecido la experiencia de usuario ?
-      </h2>
-      <vue-feedback-reaction
-        v-model="feedback"
-        class="feedback mt-10"
-        :labels="['Muy mala', 'Mala', 'Normal', 'Buena', 'Excelente']"
-        label-class="font-medium text-sm text-gray-800"
+        contain
+        src="../../../assets/hercules.png"
+        max-height="100"
       />
-      <v-btn
-        color="red"
-        class="mt-10"
-      >
-        Enviar
-      </v-btn>
+      <div v-if="conRating">
+        <h2 class="mt-10">
+          ¿ Qué le ha parecido la experiencia de usuario ?
+        </h2>
+        <vue-feedback-reaction
+          v-model="feedback"
+          class="feedback mt-10"
+          :labels="['Muy mala', 'Mala', 'Normal', 'Buena', 'Excelente']"
+          label-class="font-medium text-sm text-gray-800"
+        />
+        <v-btn
+          color="red"
+          class="mt-10"
+        >
+          Enviar
+        </v-btn>
+      </div>
     </div>
   </div>
 </template>
@@ -75,6 +77,7 @@
         disabled: false,
         error: false,
         conRating: false,
+        show: false,
       }
     },
     computed: {
@@ -94,14 +97,18 @@
         .then(response => {
           if (response.status === 200) {
             console.log(response.data)
+
             this.message = response.data
             this.error = false
+            this.show = true
           } else if (response.status === 400) {
             this.error = true
+            this.show = true
           }
         })
         .catch(error => {
           this.error = true
+          this.show = true
           throw new Error(error)
         })
     },
@@ -125,7 +132,7 @@ body
   height: 100vh
   align-items: center
   justify-content: center
-  background: #1194AA
+  background: #fff
   .feedback
     padding: 20px
     text-align: center
@@ -140,6 +147,6 @@ body
   font-weight: 500
 h1,
 h2
-  color: #fff
+  color: #bd2a33
   font-weight: 600
 </style>

@@ -19,7 +19,7 @@
         </v-card-title>
 
         <v-card-text v-if="codeDelete === 200">
-          Datos de entrenamiento borrados correctamente, se ha cargado el perfil base
+          Datos de entrenamiento borrados correctamente<span v-if="perfilBase">, se ha cargado el perfil base</span>s
         </v-card-text><v-card-text v-else>
           Ha ocurrido un error al realizar la petición -> codigo de error {{ codeDelete }}
         </v-card-text>
@@ -78,8 +78,7 @@
     >
       <v-card>
         <v-card-title>
-          ¿ Está seguro de que desea borrar todos los datos de entrenamiento y cargar el perfil base ?
-
+          {{ borrarDatosText }}
           <v-spacer />
 
           <v-icon
@@ -89,8 +88,16 @@
             mdi-close
           </v-icon>
         </v-card-title>
-
         <v-card-text class="pb-6 pt-12 text-center">
+          <v-row>
+            <v-col>
+              ¿ Cargar perfil base ? : <span v-if="!perfilBase">No</span><span v-else>Si</span>
+              <v-switch
+                v-model="perfilBase"
+                class="center"
+              />
+            </v-col>
+          </v-row>
           <v-btn
             class="mr-3"
             text
@@ -100,9 +107,9 @@
           </v-btn>
 
           <v-btn
-            color="success"
+            color="red"
             text
-            @click="borrarDatosEntrenamiento(token)"
+            @click="borrarDatosEntrenamiento(token,perfilBase)"
           >
             Sí
           </v-btn>
@@ -269,6 +276,7 @@
           },
         ],
         areastematicas: [],
+        borrarDatosText: '¿ Desea borrar todos los datos de entrenamiento?',
         areasTematicasIniciales: [],
         tree: [],
         rating: [],
@@ -279,6 +287,7 @@
         dialog: false,
         dialog3: false,
         dialog4: false,
+        perfilBase: false,
         token: '',
         codeDelete: '',
       }
@@ -410,11 +419,12 @@
         console.log(this.areasTematicasIniciales)
       },
       borrarDatosDialog () {
+        this.perfilBase = false
         this.dialog3 = true
       },
-      borrarDatosEntrenamiento (token) {
+      borrarDatosEntrenamiento (token, perfilBase) {
         this.dialog3 = false
-        ProfileRecommendationService.borrarDatosEntrenamiento(token)
+        ProfileRecommendationService.borrarDatosEntrenamiento(token, perfilBase)
           .then(response => {
             this.codeDelete = response.status
             console.log(response)
