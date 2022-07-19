@@ -128,6 +128,12 @@
           title: 'Problems',
           to: '/pages/problems',
         },
+        {
+          icon: 'mdi-cog',
+          title: 'Process Settings',
+          to: '/pages/settings',
+        },
+
         // {
         //   icon: 'mdi-account',
         //   title: 'user',

@@ -190,34 +190,11 @@
                 v-if="tree.length === 0"
                 key="title"
                 class="text-h4 font-weight-light pa-4 text-center"
-              >
-                <span>Rating : {{ rating }} </span>
-                <span>Tree : {{ tree }}</span>
-              </div>
-              <div><span>Tree : {{ tree }}</span></div>
-              <div><span>Tree : {{ itemsSelected.values() }}</span></div>
-              <div><span>Tree : {{ items.values() }}</span></div>
+              />
               <v-scroll-x-transition
                 group
                 hide-on-leave
-              >
-                <v-chip
-                  v-for="(selection, i) in tree"
-                  :key="i"
-                  color="grey"
-                  dark
-                  small
-                  class="ma-1"
-                >
-                  <v-icon
-                    left
-                    small
-                  >
-                    mdi-beer
-                  </v-icon>
-                  {{ selection.name }}
-                </v-chip>
-              </v-scroll-x-transition>
+              />
             </v-card-text>
           </v-col>
         </v-row>
