@@ -31,25 +31,6 @@ Vue.filter('error', ErrorFilter)
 
 ApiService.init()
 
-// Ensure we checked auth before each page load.
-// router.beforeEach((to, from, next) =>
-//   Promise.all([store.dispatch(CHECK_AUTH)]).then(next),
-// )
-
-// router.beforeEach((to, from) => {
-//         if (!store.getters.isLogged && to.name !== 'Login') {
-//           console.log(store.getters.isLogged)
-//           console.log(to.name)
-//           return { name: 'Login' }
-//         } else {
-//           console.log(store.getters.isLogged)
-//           console.log(to.name)
-//           return { name: to.name }
-//         }
-//         // console.log(this.$store.getters.isLogged)
-//         // console.log(to.name)
-// })
-
 new Vue({
   router,
   store,
@@ -60,19 +41,10 @@ new Vue({
 
 Vue.prototype.$orchestratorAddress = 'http://10.208.99.102:32656'
 
-// const axiosInstance = axios.create({
-//   baseURL: 'http://10.208.99.12:5000/api/orchestrator',
-// })
-
 Vue.use(VueFormGenerator)
 Vue.use(VueFeedbackReaction)
 
 Vue.use(VJsoneditor)
-
-// Vue.use(VueFormulate, {
-//   uploader: axiosInstance,
-//   uploadUrl: '/files',
-// })
 
 Vue.use(VueFormulate, {
   uploader: async function (file, progress, error, options) {
@@ -96,5 +68,3 @@ Vue.use(VueFormulate, {
 })
 
 Vue.use(FieldArray)
-// Vue.use(BootstrapVue)
-// Vue.use(IconsPlugin)
