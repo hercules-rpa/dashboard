@@ -136,6 +136,23 @@ export const ProcessService = {
     getForm (slug) {
         return ApiService.get('process/', slug + '/form')
     },
+
+}
+
+export const ProcessSettingsService = {
+  query () {
+      return ApiService.get('register/config')
+  },
+  editConfig (path, params) {
+      return ApiService.patch('register/config?path=' + path, params)
+  },
+  getConfig (path) {
+      console.log(path)
+      return ApiService.query('register/config?path=' + path)
+  },
+  resetConfig (path) {
+    return ApiService.post('register/config?path=' + path)
+  },
 }
 export const StatisticsService = {
   query () {

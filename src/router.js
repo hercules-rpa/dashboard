@@ -58,8 +58,13 @@ export default new Router({
         // ProcessSettings
         {
           name: 'ProcessSettings',
-          path: 'pages/newprocess/:idProcess/settings',
+          path: 'pages/settings/:configPath',
           component: () => import('@/views/dashboard/pages/ProcessSettings'),
+        },
+        {
+          name: 'Settings',
+          path: 'pages/settings',
+          component: () => import('@/views/dashboard/pages/Settings'),
         },
         // Robots
         {

@@ -94,6 +94,41 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-dialog
+      v-model="dialogReset"
+      max-width="300"
+    >
+      <v-card>
+        <v-card-title>
+          ¿ Desea resetear el configurador a su estado original ?
+          <v-spacer />
+
+          <v-icon
+            aria-label="Close"
+            @click="dialogReset = false"
+          >
+            mdi-close
+          </v-icon>
+        </v-card-title>
+        <v-card-text class="pb-6 pt-12 text-center">
+          <v-btn
+            class="mr-3"
+            text
+            @click="dialogReset = false"
+          >
+            No
+          </v-btn>
+
+          <v-btn
+            color="red"
+            text
+            @click="resetDefaultConfig()"
+          >
+            Sí
+          </v-btn>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
     <v-container
       id="form"
       fluid
@@ -105,7 +140,7 @@
         <v-card-title>
           <v-icon class="mr-3">
             mdi-cog
-          </v-icon>Process Settings - {{ processDesc.process_id }}:{{ processDesc.process_name }}
+          </v-icon>Process Settings - {{ this.$route.params.configPath.replaceAll('+', ' ') }}
         </v-card-title>
         <v-container
           class="py-0"
@@ -116,9 +151,6 @@
               cols="12"
               md="12"
             >
-              <span class="text-heading-6 font-weight-black black--text">
-                Comisiones
-              </span>
               <v-text-field
                 v-model="search"
                 class="mb-5 search-adjust"
@@ -138,6 +170,19 @@
                   dark
                 >
                   mdi-plus
+                </v-icon>
+              </v-btn>
+              <v-btn
+                color="#de9c18"
+                class="ma-2 white--text"
+                @click="dialogReset = true"
+              >
+                Congiuración por defecto
+                <v-icon
+                  right
+                  dark
+                >
+                  mdi-arrow-u-left-top
                 </v-icon>
               </v-btn>
               <v-data-table
@@ -167,87 +212,10 @@
         </v-container>
       </v-card>
     </v-container>
-    <v-dialog
-      v-model="dialog"
-      max-width="500"
-    >
-      <v-card class="text-center">
-        <v-card-title>
-          <span v-if="code === 201">Job Created successful</span><span v-else>Error creating process</span>
-
-          <v-spacer />
-
-          <v-icon
-            aria-label="Close"
-            @click="closeDialog"
-          >
-            mdi-close
-          </v-icon>
-        </v-card-title>
-
-        <v-card-text v-if="code === 201">
-          The process was created correctly, and schedule <router-link
-            class="blue--text text--darken-3"
-            :to="{ path: '/pages/executions/'+jobData.schedule_id }"
-          >
-            {{ jobData.schedule_id }}
-          </router-link> was assigned, do you want to go to the execution window ?
-        </v-card-text><v-card-text v-else>
-          Ha ocurrido un error el proceso no se ha podido crear correctamente codigo de error {{ code }}
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-
-          <v-btn
-            color="error"
-            text
-            @click="dialog = false"
-          >
-            Close
-          </v-btn>
-          <v-btn
-            color="green"
-            text
-            @click="goToExecution"
-          >
-            Yes
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <v-dialog
-      v-model="dialogAlert"
-      max-width="300"
-    >
-      <v-card>
-        <v-card-title>
-          There are no capable robots to execute this process
-
-          <v-spacer />
-
-          <v-icon
-            aria-label="Close"
-            @click="dialogAlert = false"
-          >
-            mdi-close
-          </v-icon>
-        </v-card-title>
-
-        <v-card-text class="pb-6 pt-12 text-center">
-          <v-btn
-            color="success"
-            text
-            @click="dialogAlert = false"
-          >
-            OK
-          </v-btn>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
   </div>
 </template>
 <script>
-  import { ProcessService, OrchestratorService } from '@/common/api.service'
+  import { ProcessSettingsService } from '@/common/api.service'
   export default {
     name: 'Form',
     data () {
@@ -258,6 +226,7 @@
         sortBy: 'created',
         sortDesc: true,
         dialogEditAll: false,
+        dialogReset: false,
         dialogEdit: false,
         generalOptions: { priority: 1 },
         timeSchedule: {},
@@ -296,7 +265,8 @@
             sortable: false,
           },
         ],
-        comisiones: {
+        comisiones: {},
+        comisionesAux: {
           1: {
             name: 'Matemáticas',
             autoria_orden: false,
@@ -1388,30 +1358,29 @@
       }
     },
     mounted: function () {
-      const it = Object.entries(this.comisiones)
-      it.forEach(resp => {
-        this.comisionesArray.push({ id: resp[0], value: resp[1] })
-      })
-      console.log(this.comisionesArray)
-      ProcessService.get(this.$route.params.idProcess)
+      console.log(this.$route.params.configPath)
+      ProcessSettingsService.getConfig(this.$route.params.configPath.replaceAll('+', '/'))
         .then(response => {
-          this.processDesc = response.data
+          this.comisiones = response.data
           console.log(this.processDesc)
+          const it = Object.entries(this.comisiones)
+          it.forEach(resp => {
+            this.comisionesArray.push({ id: resp[0], value: resp[1] })
+          })
+          console.log(this.comisionesArray)
           // this.processDesc.capable_robots.unshift('None')
         })
         .catch((error) => {
           throw new Error(error)
         })
-      ProcessService.getForm(this.$route.params.idProcess)
-        .then(response => {
-          console.log(response.data)
-          this.schema = response.data
-        })
-        .catch(error => {
-          throw new Error(error)
-        })
     },
     methods: {
+      crearArrayConfigs () {
+        const it = Object.entries(this.comisiones)
+        it.forEach(resp => {
+          this.comisionesArray.push({ id: resp[0], value: resp[1] })
+        })
+      },
       editCriterio (criterio) {
         this.criterioId = criterio.id
         this.json = this.comisiones[criterio.id]
@@ -1419,15 +1388,48 @@
       },
       guardarCriterio () {
         this.comisiones[this.criterioId] = this.json
+        ProcessSettingsService.editConfig(this.$route.params.configPath.replaceAll('+', '/'), this.comisiones)
+          .then(response => {
+            if (response.status === 200) {
+              console.log('modificado unitario correcto')
+            }
+          })
+          .catch((error) => {
+            throw new Error(error)
+          })
         this.dialogEdit = false
       },
       onErrorEditor () {
         console.log('Error editor')
       },
       guardarTodo () {
+        ProcessSettingsService.editConfig(this.$route.params.configPath.replaceAll('+', '/'), this.comisiones)
+          .then(response => {
+            if (response.status === 200) {
+              console.log('modificado correcto')
+            }
+          })
+          .catch((error) => {
+            throw new Error(error)
+          })
         console.log(this.comisiones)
         this.dialogEditAll = false
       },
+      resetDefaultConfig () {
+        ProcessSettingsService.resetConfig(this.$route.params.configPath.replaceAll('+', '/'))
+          .then(response => {
+            if (response.status === 200) {
+              console.log('reseteado correcto')
+              this.dialogReset = false
+            } else {
+              alert('Error')
+            }
+          })
+          .catch((error) => {
+            throw new Error(error)
+          })
+      },
+
       editarAMano () {
         this.dialogEditAll = true
       },
@@ -1452,36 +1454,6 @@
         this.tscheduleFormatted.category = 'asdf'
         console.log(this.tscheduleFormatted)
         return this.tscheduleFormatted
-      },
-      execute () {
-        if (this.processDesc.capable_robots.length === 0) {
-          this.dialogAlert = true
-        } else {
-          if (this.processParameters.file !== undefined) {
-            delete this.processParameters.file.context
-            this.processParameters.files = []
-            this.processParameters.file.files.forEach(element => {
-              this.processParameters.files.push(element.path)
-            })
-            delete this.processParameters.file
-          }
-          this.timeSchedule.mode === 'Instant' ? this.params.time_schedule = null : this.params.time_schedule = this.formatTimeSchedule()
-          this.params.process = this.generalOptions
-          this.params.process.parameters = this.schema === null ? null : this.processParameters
-          this.params.process.id_process = parseInt(this.$route.params.idProcess)
-          this.params.process.priority = this.generalOptions.priority
-          console.log(this.params)
-
-          // EJECUTAMOS PROCESO CON LOS PARAMETROS
-          console.log(this.params)
-          OrchestratorService.execute(this.params).then((response) => {
-            console.log(response.data)
-            // alert(response.data.description)
-            this.jobData = response.data
-            this.code = response.status
-            this.dialog = true
-          })
-        }
       },
     },
   }
