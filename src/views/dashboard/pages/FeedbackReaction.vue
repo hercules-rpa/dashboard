@@ -1,5 +1,17 @@
 <template>
   <div class="app">
+    <div v-if="!show">
+      <h1>
+        Cargando
+      </h1>
+      <v-progress-circular
+        class="mt-5"
+        :size="70"
+        :width="7"
+        color="#bd2a33"
+        indeterminate
+      />
+    </div>
     <div v-if="show">
       <div v-if="!error">
         <h1>
@@ -18,7 +30,7 @@
         <h2
           class="mt-10"
         >
-          Su feedback es importante para alimentar al sistema de recomendación.
+          Su feedback es importante para alimentar el sistema de recomendación.
         </h2>
       </div>
       <div v-else>
@@ -95,7 +107,7 @@
     mounted: function () {
       FeedbackService.query(this.$route.params.token, this.$route.params.idconvocatoria + '/' + this.$route.params.util)
         .then(response => {
-          if (response.status === 200) {
+          if (response.status === 201 || response.status === 200) {
             console.log(response.data)
 
             this.message = response.data
