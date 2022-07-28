@@ -74,7 +74,8 @@
     </v-dialog>
     <v-dialog
       v-model="dialog3"
-      max-width="300"
+      max-width="400"
+      height="500"
     >
       <v-card>
         <v-card-title>
@@ -89,12 +90,23 @@
           </v-icon>
         </v-card-title>
         <v-card-text class="pb-6 pt-12 text-center">
-          <v-row>
-            <v-col>
-              ¿ Cargar perfil base ? : <span v-if="!perfilBase">No</span><span v-else>Si</span>
+          <v-row
+            justify="center"
+          >
+            <v-col
+              cols="12"
+              md="6"
+              class="mt-4"
+            >
+              ¿ Cargar perfil base ?
+            </v-col>
+            <v-col
+              cols="12"
+              md="6"
+            >
               <v-switch
                 v-model="perfilBase"
-                class="center"
+                class="switch-center"
               />
             </v-col>
           </v-row>
@@ -441,7 +453,10 @@
   position:absolute;
   width:100%;
 }
-
+.switch-center {
+  display: flex;
+  justify-content: center;
+}
 .row {
   display: flex;
 }

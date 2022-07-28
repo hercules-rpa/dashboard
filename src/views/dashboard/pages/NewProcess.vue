@@ -78,11 +78,6 @@
             text: 'Capable Robots',
             value: 'capable_robots',
           },
-          {
-            text: 'Settings',
-            value: 'controls',
-            sortable: false,
-          },
         ],
         processes: [],
       }

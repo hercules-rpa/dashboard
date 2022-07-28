@@ -25,7 +25,7 @@
           mdi-check-circle-outline
         </v-icon>
         <h4 class="mt-3">
-          La información se envío correctamente
+          La información se envió correctamente
         </h4>
         <h2
           class="mt-10"
