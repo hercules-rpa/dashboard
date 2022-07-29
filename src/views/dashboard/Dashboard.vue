@@ -559,7 +559,7 @@
           console.log(this.monthlyExecutionsChart.data)
         })
         .catch(error => {
-          alert('Ha ocurrido un error', error)
+          throw new Error(error)
         })
       LogsService.query()
         .then(response => {
@@ -567,7 +567,7 @@
           this.executions = response.data
         })
         .catch(error => {
-          alert('Ha ocurrido un error', error)
+          throw new Error(error)
         })
     },
     methods: {
@@ -577,10 +577,10 @@
       getExecution (idExecution) {
         SchedulesService.getForm(idExecution)
           .then(response => {
-            alert('Nos vamos a la ventana de formulario')
+
           })
           .catch(error => {
-            alert('Ha ocurrido un error', error)
+            throw new Error(error)
           })
       },
       goToExecution (value, data) {
