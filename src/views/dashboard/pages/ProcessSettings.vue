@@ -164,7 +164,7 @@
                 class="ma-2 white--text"
                 @click="editarAMano()"
               >
-                EDITAR A MANO
+                EDICIÓN MANUAL
                 <v-icon
                   right
                   dark
