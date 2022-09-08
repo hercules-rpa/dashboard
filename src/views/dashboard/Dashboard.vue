@@ -215,71 +215,37 @@
           </template>
         </base-material-chart-card>
       </v-col>
+
       <v-col
         cols="12"
         lg="12"
       >
-        <base-material-chart-card
-          :data="activeProcessesChart.data"
-          :options="activeProcessesChart.options"
-          hover-reveal
-          color="#0e8c9c"
-          type="Line"
+        <v-card
+          class="px-5 py-3"
         >
-          <template v-slot:reveal-actions>
-            <v-tooltip bottom>
-              <template v-slot:activator="{ attrs, on }">
-                <v-btn
-                  v-bind="attrs"
-                  color="info"
-                  icon
-                  v-on="on"
-                >
-                  <v-icon
-                    color="info"
-                  >
-                    mdi-refresh
-                  </v-icon>
-                </v-btn>
-              </template>
-
-              <span>Refresh</span>
-            </v-tooltip>
-
-            <v-tooltip bottom>
-              <template v-slot:activator="{ attrs, on }">
-                <v-btn
-                  v-bind="attrs"
-                  light
-                  icon
-                  v-on="on"
-                >
-                  <v-icon>mdi-pencil</v-icon>
-                </v-btn>
-              </template>
-
-              <span>Change Date</span>
-            </v-tooltip>
-          </template>
-
-          <h3 class="card-title font-weight-light mt-2 ml-2">
-            Last month executions
-          </h3>
-
-          <p class="d-inline-flex font-weight-light ml-2 mt-1">
-            Total Executions last 30 days
-          </p>
-
-          <template v-slot:actions>
-            <v-icon
-              class="mr-1"
-              small
-            >
-              mdi-clock-outline
-            </v-icon>
-            <span class="text-caption grey--text font-weight-light">Just Updated</span>
-          </template>
-        </base-material-chart-card>
+          <v-card-title>
+            <v-icon class="mr-3">
+              mdi-chart-bar
+            </v-icon>Last Month Executions
+          </v-card-title>
+          <v-container
+            class="py-0"
+          >
+            <v-row class="mt-5 mb-5">
+              <v-col
+                cols="12"
+                md="12"
+              >
+                <apexchart
+                  height="300"
+                  type="line"
+                  :options="lastMonthChartApex.options"
+                  :series="lastMonthChartApex.series"
+                />
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card>
       </v-col>
 
       <v-col
@@ -413,6 +379,35 @@
               left: 0,
             },
           },
+        },
+        lastMonthChartApex: {
+          options: {
+            title: {
+              text: 'CPU USAGE',
+            },
+            chart: {
+              id: 'vuechart-example',
+            },
+            xaxis: {
+              categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'],
+            },
+            colors: ['#7d3c52'],
+            responsive: [
+              {
+                breakpoint: 480,
+                options: {
+                  legend: {
+                    show: true,
+                    position: 'bottom',
+                  },
+                },
+              },
+            ],
+          },
+          series: [{
+            name: 'cpu-usage',
+            data: [30, 40, 45, 50, 49, 60, 70, 91],
+          }],
         },
         monthlyExecutionsChart: {
           data: {
@@ -550,12 +545,17 @@
           this.itProblems = this.data.process_problems
           this.processesCompleted = this.data.process_completed
           this.schedulesActives = this.data.process_actives
+
           this.dailyExecutionsChart.data.series[0] = this.data.execution_day_week
           this.dailyExecutionsChart.options.high = Math.max.apply(null, this.data.execution_day_week)
+
           this.monthlyExecutionsChart.data.series[0] = this.data.execution_month_year
           this.monthlyExecutionsChart.options.high = Math.max.apply(null, this.data.execution_month_year)
+
           this.activeProcessesChart.data.series[0] = this.data.execution_day_month
           this.activeProcessesChart.options.high = Math.max.apply(null, this.data.execution_day_month)
+          this.lastMonthChartApex.series[0].data = this.data.execution_day_month.map(el => el.toFixed(1))
+
           console.log(this.monthlyExecutionsChart.data)
         })
         .catch(error => {

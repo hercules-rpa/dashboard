@@ -48,6 +48,7 @@ Vue.use(VueFeedbackReaction)
 
 Vue.use(VJsoneditor)
 Vue.use(VueApexCharts)
+Vue.component('apexchart', VueApexCharts)
 
 Vue.use(VueFormulate, {
   uploader: async function (file, progress, error, options) {

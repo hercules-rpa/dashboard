@@ -406,6 +406,7 @@
           </v-data-table>
         </v-container>
       </v-card>
+
       <v-card
         class="px-5 py-3"
         :class="[!robot.online ? 'pattern-ray' : '']"
@@ -423,199 +424,34 @@
               cols="12"
               md="4"
             >
-              <base-material-chart-card
-                :data="cpuChart.data"
-                :options="cpuChart.options"
-                color="#7d3c52"
-                hover-reveal
-                type="Line"
-              >
-                <template v-slot:reveal-actions>
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ attrs, on }">
-                      <v-btn
-                        v-bind="attrs"
-                        color="info"
-                        icon
-                        v-on="on"
-                      >
-                        <v-icon
-                          color="info"
-                        >
-                          mdi-refresh
-                        </v-icon>
-                      </v-btn>
-                    </template>
-
-                    <span>Refresh</span>
-                  </v-tooltip>
-
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ attrs, on }">
-                      <v-btn
-                        v-bind="attrs"
-                        light
-                        icon
-                        v-on="on"
-                      >
-                        <v-icon>mdi-pencil</v-icon>
-                      </v-btn>
-                    </template>
-
-                    <span>Change Date</span>
-                  </v-tooltip>
-                </template>
-
-                <h4 class="card-title font-weight-light mt-2 ml-2">
-                  CPU
-                </h4>
-
-                <p class="d-inline-flex font-weight-light ml-2 mt-1">
-                  Cpu usage last hour
-                </p>
-
-                <template v-slot:actions>
-                  <v-icon
-                    class="mr-1"
-                    small
-                  >
-                    mdi-clock-outline
-                  </v-icon>
-                  <span class="text-caption grey--text font-weight-light">updated just now</span>
-                </template>
-              </base-material-chart-card>
+              <apexchart
+                width="500"
+                type="line"
+                :options="cpuChartApex.options"
+                :series="cpuChartApex.series"
+              />
             </v-col>
             <v-col
               cols="12"
               md="4"
             >
-              <base-material-chart-card
-                :data="ramChart.data"
-                :options="ramChart.options"
-                color="#528254"
-                hover-reveal
-                type="Line"
-              >
-                <template v-slot:reveal-actions>
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ attrs, on }">
-                      <v-btn
-                        v-bind="attrs"
-                        color="info"
-                        icon
-                        v-on="on"
-                      >
-                        <v-icon
-                          color="info"
-                        >
-                          mdi-refresh
-                        </v-icon>
-                      </v-btn>
-                    </template>
-
-                    <span>Refresh</span>
-                  </v-tooltip>
-
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ attrs, on }">
-                      <v-btn
-                        v-bind="attrs"
-                        light
-                        icon
-                        v-on="on"
-                      >
-                        <v-icon>mdi-pencil</v-icon>
-                      </v-btn>
-                    </template>
-
-                    <span>Change Date</span>
-                  </v-tooltip>
-                </template>
-
-                <h4 class="card-title font-weight-light mt-2 ml-2">
-                  RAM
-                </h4>
-
-                <p class="d-inline-flex font-weight-light ml-2 mt-1">
-                  RAM usage last hour
-                </p>
-
-                <template v-slot:actions>
-                  <v-icon
-                    class="mr-1"
-                    small
-                  >
-                    mdi-clock-outline
-                  </v-icon>
-                  <span class="text-caption grey--text font-weight-light">updated just now</span>
-                </template>
-              </base-material-chart-card>
+              <apexchart
+                width="500"
+                type="line"
+                :options="ramChartApex.options"
+                :series="ramChartApex.series"
+              />
             </v-col>
             <v-col
               cols="12"
               md="4"
             >
-              <base-material-chart-card
-                :data="diskChart.data"
-                :options="diskChart.options"
-                color="#0e8c9c"
-                hover-reveal
-                type="Line"
-              >
-                <template v-slot:reveal-actions>
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ attrs, on }">
-                      <v-btn
-                        v-bind="attrs"
-                        color="info"
-                        icon
-                        v-on="on"
-                      >
-                        <v-icon
-                          color="info"
-                        >
-                          mdi-refresh
-                        </v-icon>
-                      </v-btn>
-                    </template>
-
-                    <span>Refresh</span>
-                  </v-tooltip>
-
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ attrs, on }">
-                      <v-btn
-                        v-bind="attrs"
-                        light
-                        icon
-                        v-on="on"
-                      >
-                        <v-icon>mdi-pencil</v-icon>
-                      </v-btn>
-                    </template>
-
-                    <span>Change Date</span>
-                  </v-tooltip>
-                </template>
-
-                <h4 class="card-title font-weight-light mt-2 ml-2">
-                  DISK
-                </h4>
-
-                <p class="d-inline-flex font-weight-light ml-2 mt-1">
-                  Disk usage last hour
-                </p>
-
-                <template v-slot:actions>
-                  <v-icon
-                    class="mr-1"
-                    small
-                  >
-                    mdi-clock-outline
-                  </v-icon>
-                  <span class="text-caption grey--text font-weight-light">updated just now</span>
-                </template>
-              </base-material-chart-card>
+              <apexchart
+                width="500"
+                type="line"
+                :options="diskChartApex.options"
+                :series="diskChartApex.series"
+              />
             </v-col>
           </v-row>
         </v-container>
@@ -639,6 +475,71 @@
           processId: '',
           processName: '',
           idLog: 0,
+        },
+        cpuChartApex: {
+          options: {
+            title: {
+              text: 'CPU USAGE',
+            },
+            chart: {
+              id: 'vuechart-example',
+            },
+            xaxis: {
+              categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60'],
+            },
+            colors: ['#7d3c52'],
+            responsive: [
+              {
+                breakpoint: 480,
+                options: {
+                  legend: {
+                    show: true,
+                    position: 'bottom',
+                  },
+                },
+              },
+            ],
+          },
+          series: [{
+            name: 'cpu-usage',
+            data: [30, 40, 45, 50, 49, 60, 70, 91],
+          }],
+        },
+        ramChartApex: {
+          options: {
+            title: {
+              text: 'RAM USAGE',
+            },
+            chart: {
+              id: 'vuechart-example',
+            },
+            xaxis: {
+              categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60'],
+            },
+            colors: ['#528254'],
+          },
+          series: [{
+            name: 'cpu-usage',
+            data: [30, 40, 45, 50, 49, 60, 70, 91],
+          }],
+        },
+        diskChartApex: {
+          options: {
+            title: {
+              text: 'DISK USAGE',
+            },
+            chart: {
+              id: 'vuechart-example',
+            },
+            xaxis: {
+              categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60'],
+            },
+            colors: ['#0e8c9c'],
+          },
+          series: [{
+            name: 'cpu-usage',
+            data: [30, 40, 45, 50, 49, 60, 70, 91],
+          }],
         },
         cpuChart: {
           data: {
@@ -765,6 +666,10 @@
           console.log(response.data)
           this.robot = response.data
           this.cpuChart.data.series[0] = this.robot.stats.cpu
+          this.cpuChartApex.series[0].data = this.robot.stats.cpu.map(el => el.toFixed(1))
+          this.ramChartApex.series[0].data = this.robot.stats.ram.map(el => el.toFixed(1))
+          this.diskChartApex.series[0].data = this.robot.stats.disk.map(el => el.toFixed(1))
+
           this.cpuChart.options.high = Math.max.apply(null, this.robot.stats.cpu)
           this.ramChart.data.series[0] = this.robot.stats.ram
           this.ramChart.options.high = Math.max.apply(null, this.robot.stats.ram)
