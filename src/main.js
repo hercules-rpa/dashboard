@@ -18,6 +18,8 @@ import 'vue-form-generator/dist/vfg-core.css'
 import VueFormulate from '@braid/vue-formulate'
 import VueFeedbackReaction from 'vue-feedback-reaction'
 import VJsoneditor from 'v-jsoneditor/src/index'
+import VueApexCharts from 'vue-apexcharts'
+
 // import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
@@ -45,6 +47,7 @@ Vue.use(VueFormGenerator)
 Vue.use(VueFeedbackReaction)
 
 Vue.use(VJsoneditor)
+Vue.use(VueApexCharts)
 
 Vue.use(VueFormulate, {
   uploader: async function (file, progress, error, options) {

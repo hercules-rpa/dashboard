@@ -38,6 +38,7 @@
         </template>
         <template v-slot:[`item.controls`]="{ item }">
           <v-btn
+            v-if="item.setting"
             class="ma-2"
             outlined
             x-small
@@ -69,6 +70,11 @@
             value: 'process_name',
           },
           {
+            sortable: true,
+            text: 'Process ID',
+            value: 'process_id',
+          },
+          {
             sortable: false,
             text: 'Description',
             value: 'process_description',
@@ -77,6 +83,11 @@
             sortable: false,
             text: 'Capable Robots',
             value: 'capable_robots',
+          },
+          {
+            text: '',
+            value: 'controls',
+            sortable: false,
           },
         ],
         processes: [],
@@ -111,7 +122,7 @@
       },
       goToProcessSettings (p) {
         console.log(p)
-        this.$router.push('/pages/newprocess/' + p.process_id + '/settings')
+        this.$router.push('/pages/settings')
       },
       goToForm (value, data) {
         console.log(value)

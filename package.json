@@ -15,6 +15,7 @@
   "dependencies": {
     "@braid/vue-formulate": "^2.5.2",
     "@popperjs/core": "^2.9.3",
+    "apexcharts": "^3.35.5",
     "axios": "^0.21.1",
     "bootstrap": "^5.1.0",
     "bootstrap-vue": "^2.21.2",
@@ -24,6 +25,7 @@
     "vfg-field-array": "0.0.6",
     "vue": "^2.6.11",
     "vue-ads-table-tree": "^2.4.2",
+    "vue-apexcharts": "^1.6.2",
     "vue-axios": "^3.2.4",
     "vue-feedback-reaction": "^1.2.0",
     "vue-form-generator": "^2.3.4",
