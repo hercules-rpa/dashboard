@@ -81,139 +81,69 @@
           />
         </v-hover>
       </v-col>
+
       <v-col
         cols="12"
         lg="6"
       >
-        <base-material-chart-card
-          :data="monthlyExecutionsChart.data"
-          :options="monthlyExecutionsChart.options"
-          :responsive-options="monthlyExecutionsChart.responsiveOptions"
-          color="#7d3c52"
-          hover-reveal
-          type="Bar"
+        <v-card
+          class="px-5 py-3"
         >
-          <template v-slot:reveal-actions>
-            <v-tooltip bottom>
-              <template v-slot:activator="{ attrs, on }">
-                <v-btn
-                  v-bind="attrs"
-                  color="info"
-                  icon
-                  v-on="on"
-                >
-                  <v-icon
-                    color="info"
-                  >
-                    mdi-refresh
-                  </v-icon>
-                </v-btn>
-              </template>
-
-              <span>Refresh</span>
-            </v-tooltip>
-
-            <v-tooltip bottom>
-              <template v-slot:activator="{ attrs, on }">
-                <v-btn
-                  v-bind="attrs"
-                  light
-                  icon
-                  v-on="on"
-                >
-                  <v-icon>mdi-pencil</v-icon>
-                </v-btn>
-              </template>
-
-              <span>Change Date</span>
-            </v-tooltip>
-          </template>
-
-          <h4 class="card-title font-weight-light mt-2 ml-2">
-            Monthly Executions
-          </h4>
-
-          <p class="d-inline-flex font-weight-light ml-2 mt-1">
-            Total executions by month
-          </p>
-
-          <template v-slot:actions>
-            <v-icon
-              class="mr-1"
-              small
-            >
-              mdi-clock-outline
-            </v-icon>
-            <span class="text-caption grey--text font-weight-light">updated 10 minutes ago</span>
-          </template>
-        </base-material-chart-card>
+          <v-card-title>
+            <v-icon class="mr-3">
+              mdi-chart-bar
+            </v-icon>Monthly Executions
+          </v-card-title>
+          <v-container
+            class="py-0"
+          >
+            <v-row class="mt-5 mb-5">
+              <v-col
+                cols="12"
+                md="12"
+              >
+                <apexchart
+                  height="300"
+                  type="bar"
+                  :options="monthlyExecutionsChartApex.options"
+                  :series="monthlyExecutionsChartApex.series"
+                />
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card>
       </v-col>
 
       <v-col
         cols="12"
         lg="6"
       >
-        <base-material-chart-card
-          :data="dailyExecutionsChart.data"
-          :options="dailyExecutionsChart.options"
-          color="#528254"
-          hover-reveal
-          type="Line"
+        <v-card
+          class="px-5 py-3"
         >
-          <template v-slot:reveal-actions>
-            <v-tooltip bottom>
-              <template v-slot:activator="{ attrs, on }">
-                <v-btn
-                  v-bind="attrs"
-                  color="info"
-                  icon
-                  v-on="on"
-                >
-                  <v-icon
-                    color="info"
-                  >
-                    mdi-refresh
-                  </v-icon>
-                </v-btn>
-              </template>
-
-              <span>Refresh</span>
-            </v-tooltip>
-
-            <v-tooltip bottom>
-              <template v-slot:activator="{ attrs, on }">
-                <v-btn
-                  v-bind="attrs"
-                  light
-                  icon
-                  v-on="on"
-                >
-                  <v-icon>mdi-pencil</v-icon>
-                </v-btn>
-              </template>
-
-              <span>Change Date</span>
-            </v-tooltip>
-          </template>
-
-          <h4 class="card-title font-weight-light mt-2 ml-2">
-            Daily Executions
-          </h4>
-
-          <p class="d-inline-flex font-weight-light ml-2 mt-1">
-            Total executions per week
-          </p>
-
-          <template v-slot:actions>
-            <v-icon
-              class="mr-1"
-              small
-            >
-              mdi-clock-outline
-            </v-icon>
-            <span class="text-caption grey--text font-weight-light">updated 4 minutes ago</span>
-          </template>
-        </base-material-chart-card>
+          <v-card-title>
+            <v-icon class="mr-3">
+              mdi-chart-bar
+            </v-icon>Daily executions
+          </v-card-title>
+          <v-container
+            class="py-0"
+          >
+            <v-row class="mt-5 mb-5">
+              <v-col
+                cols="12"
+                md="12"
+              >
+                <apexchart
+                  height="300"
+                  type="line"
+                  :options="dailyExecutionsChartApex.options"
+                  :series="dailyExecutionsChartApex.series"
+                />
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card>
       </v-col>
 
       <v-col
@@ -383,13 +313,84 @@
         lastMonthChartApex: {
           options: {
             title: {
-              text: 'CPU USAGE',
+              text: 'Last Month Executions',
             },
             chart: {
               id: 'vuechart-example',
             },
             xaxis: {
               categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'],
+            },
+            noData: {
+              text: 'Loading...',
+            },
+            colors: ['#0aaec2'],
+            responsive: [
+              {
+                breakpoint: 480,
+                options: {
+                  legend: {
+                    show: true,
+                    position: 'bottom',
+                  },
+                },
+              },
+            ],
+          },
+          series: [{
+            name: 'last-month-executions',
+            data: [30, 40, 45, 50, 49, 60, 70, 53, 30, 40, 45, 50, 12, 60, 70, 23, 30, 40, 45, 50, 49, 60, 10, 91, 30, 40, 45, 50, 49, 60],
+          }],
+        },
+        dailyExecutionsChartApex: {
+          options: {
+            title: {
+              text: 'Daily Executions',
+            },
+            chart: {
+              id: 'vuechart-example',
+            },
+            xaxis: {
+              categories: ['L', 'M', 'X', 'J', 'V', 'S', 'D'],
+            },
+            colors: ['#528254'],
+            responsive: [
+              {
+                breakpoint: 480,
+                options: {
+                  legend: {
+                    show: true,
+                    position: 'bottom',
+                  },
+                },
+              },
+            ],
+          },
+          series: [{
+            name: 'daily-executions',
+            data: [10, 2, 4, 25, 13, 17, 5],
+          }],
+        },
+        monthlyExecutionsChartApex: {
+          options: {
+            title: {
+              text: 'Monthly Executions',
+            },
+            chart: {
+              id: 'vuechart-example',
+            },
+            xaxis: {
+              categories: ['Ja', 'Fe', 'Ma', 'Ap', 'Mai', 'Ju', 'Jul', 'Au', 'Se', 'Oc', 'No', 'De'],
+            },
+            tools: {
+              download: true,
+              selection: true,
+              zoom: true,
+              zoomin: true,
+              zoomout: true,
+              pan: true,
+              reset: true | '<img src="/static/icons/reset.png" width="20">',
+              customIcons: [],
             },
             colors: ['#7d3c52'],
             responsive: [
@@ -405,14 +406,14 @@
             ],
           },
           series: [{
-            name: 'cpu-usage',
-            data: [30, 40, 45, 50, 49, 60, 70, 91],
+            name: 'monthly-executions',
+            data: [30, 40, 45, 50, 49, 60, 70, 91, 3, 4, 1, 12],
           }],
         },
         monthlyExecutionsChart: {
           data: {
             labels: ['Ja', 'Fe', 'Ma', 'Ap', 'Mai', 'Ju', 'Jul', 'Au', 'Se', 'Oc', 'No', 'De'],
-            series: [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
+            series: [[0, 24, 2, 12, 16, 1, 28, 40, 10, 12, 7, 4]],
           },
           options: {
             axisX: {
@@ -548,15 +549,18 @@
 
           this.dailyExecutionsChart.data.series[0] = this.data.execution_day_week
           this.dailyExecutionsChart.options.high = Math.max.apply(null, this.data.execution_day_week)
+          this.dailyExecutionsChartApex.series[0].data = this.data.execution_day_week.map(el => el.toFixed(1))
+          console.log(this.dailyExecutionsChartApex.series[0].data)
 
           this.monthlyExecutionsChart.data.series[0] = this.data.execution_month_year
           this.monthlyExecutionsChart.options.high = Math.max.apply(null, this.data.execution_month_year)
+          this.monthlyExecutionsChartApex.series[0].data = this.data.execution_month_year.map(el => el.toFixed(1))
+          console.log(this.monthlyExecutionsChartApex.series[0].data)
 
           this.activeProcessesChart.data.series[0] = this.data.execution_day_month
           this.activeProcessesChart.options.high = Math.max.apply(null, this.data.execution_day_month)
           this.lastMonthChartApex.series[0].data = this.data.execution_day_month.map(el => el.toFixed(1))
-
-          console.log(this.monthlyExecutionsChart.data)
+          console.log(this.lastMonthChartApex.series[0].data)
         })
         .catch(error => {
           throw new Error(error)
