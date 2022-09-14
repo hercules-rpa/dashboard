@@ -129,9 +129,14 @@
           to: '/pages/problems',
         },
         {
-          icon: 'mdi-cog',
+          icon: 'mdi-cog-play-outline',
           title: 'Process Settings',
           to: '/pages/settings',
+        },
+        {
+          icon: 'mdi-cog',
+          title: 'Global Settings',
+          to: '/pages/globalsettings',
         },
 
         // {

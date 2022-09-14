@@ -64,7 +64,7 @@
           md="auto"
         >
           <v-img
-            class="mt-1 mr-10"
+            class="mt-5 mr-10"
             src="../../../../assets/logo-union-europea.png"
             max-height="300"
             max-width="70"
@@ -75,7 +75,7 @@
           md="auto"
         >
           <v-img
-            class="mr-2"
+            class="mr-2 mt-4"
             src="../../../../assets/logos-ministerio-hecules.jpg"
             max-width="200"
           />

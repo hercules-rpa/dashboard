@@ -160,7 +160,7 @@
             <v-card class="pa-6">
               <v-chip
                 :color="timeline.color"
-                class="overline mb-3"
+                class="text-overline mb-3"
                 small
               >
                 {{ timeline.chip }}
@@ -172,7 +172,7 @@
               />
 
               <div
-                class="text-uppercase body-2"
+                class="text-uppercase text-body-2"
                 v-text="timeline.subtext"
               />
 

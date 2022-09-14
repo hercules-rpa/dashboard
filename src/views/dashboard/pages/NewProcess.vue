@@ -6,7 +6,7 @@
   >
     <base-material-card
       icon="mdi-clipboard-text"
-      title="Avaiable Processes"
+      :title="this.$i18n.t('avaiableprocess')"
       class="px-5 py-3"
     >
       <v-text-field

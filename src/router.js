@@ -66,6 +66,11 @@ export default new Router({
           path: 'pages/settings',
           component: () => import('@/views/dashboard/pages/Settings'),
         },
+        {
+          name: 'GlobalSettings',
+          path: 'pages/globalsettings',
+          component: () => import('@/views/dashboard/pages/GlobalSettings'),
+        },
         // Robots
         {
           name: 'Robots',
