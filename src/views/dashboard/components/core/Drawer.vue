@@ -31,7 +31,7 @@
           contain
         >
           <v-img
-            src="https://cdn.iconscout.com/icon/free/png-256/robot-130-530368.png"
+            src="../../../../../public/oldother/logo-hercules.png"
             max-height="30"
           />
         </v-list-item-avatar>

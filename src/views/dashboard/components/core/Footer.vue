@@ -34,6 +34,53 @@
           </div>
         </v-col>
       </v-row>
+      <v-row
+        align="center"
+        no-gutters
+      >
+        <v-col
+          class="text-center ml-3 mt-5"
+          cols="auto"
+        >
+          <v-img
+            src="../../../../assets/hercules-crue.png"
+            max-height="500"
+            max-width="200"
+          />
+        </v-col>
+        <v-col
+          class="text-center ml-3 mt-5"
+          cols="auto"
+        >
+          <v-img
+            src="../../../../assets/lema.jpg"
+            max-width="230"
+          />
+        </v-col>
+
+        <v-spacer class="hidden-sm-and-down" />
+        <v-col
+          cols="12"
+          md="auto"
+        >
+          <v-img
+            class="mt-1 mr-10"
+            src="../../../../assets/logo-union-europea.png"
+            max-height="300"
+            max-width="70"
+          />
+        </v-col>
+        <v-col
+          cols="12"
+          md="auto"
+        >
+          <v-img
+            class="mr-2"
+            src="../../../../assets/logos-ministerio-hecules.jpg"
+            max-width="200"
+          />
+        </v-col>
+      </v-row>
     </v-container>
   </v-footer>
 </template>
