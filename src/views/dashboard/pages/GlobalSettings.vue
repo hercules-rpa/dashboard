@@ -18,72 +18,134 @@
               cols="12"
               md="12"
             >
-              <FormulateForm
-                v-model="generalOptions"
-                class="mt-5"
-                error-behavior="live"
-                @submit="execute"
-              >
-                <FormulateInput
-                  type="text"
-                  name="EDMA_URL"
-                  label="EDMA URL"
-                  default="edma.gnoss.com"
-                  :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}/],['required']]"
-                />
-                <FormulateInput
-                  type="text"
-                  name="EDMA_PORT"
-                  label="EDMA PORT"
-                  default="8080"
-                  :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/],['required']]"
-                />
-                <FormulateInput
-                  type="text"
-                  name="SGI_URL"
-                  label="SGI URL"
-                  default="sgi.um.es"
-                  :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}/],['required']]"
-                />
-                <FormulateInput
-                  type="text"
-                  name="SGI_PORT"
-                  label="SGI PORT"
-                  default="8080"
-                  :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/],['required']]"
-                />
-                <FormulateInput
-                  type="text"
-                  name="DATABASE_IP"
-                  label="DATABASE IP"
-                  default="sgi.um.es"
-                  :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}/],['required']]"
-                />
-                <FormulateInput
-                  type="text"
-                  name="DATABASE_PORT"
-                  label="DATABASE PORT"
-                  default="5432"
-                  :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/],['required']]"
-                />
-                <FormulateInput
-                  type="submit"
-                  label="Guardar"
-                />
-              </FormulateForm>
+              <FormulateInput
+                v-model="settingsType"
+                type="select"
+                :options="{global: 'Global Settings', orchestrator: 'Orchestrator Settings'}"
+                label="Settings Type"
+              />
+              <div v-if="settingsType=='global'">
+                <FormulateForm
+                  v-model="globalSettings"
+                  class="mt-5"
+                  error-behavior="live"
+                  @submit="execute"
+                >
+                  <FormulateInput
+                    type="text"
+                    name="EDMA_URL"
+                    label="EDMA URL"
+                    default="edma.gnoss.com"
+                    :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}/],['required']]"
+                  />
+                  <FormulateInput
+                    type="text"
+                    name="EDMA_PORT"
+                    label="EDMA PORT"
+                    default="8080"
+                    :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/],['required']]"
+                  />
+                  <FormulateInput
+                    type="text"
+                    name="SGI_URL"
+                    label="SGI URL"
+                    default="sgi.um.es"
+                    :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}/],['required']]"
+                  />
+                  <FormulateInput
+                    type="text"
+                    name="SGI_PORT"
+                    label="SGI PORT"
+                    default="8080"
+                    :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/],['required']]"
+                  />
+                  <FormulateInput
+                    type="text"
+                    name="DATABASE_IP"
+                    label="DATABASE IP"
+                    default="sgi.um.es"
+                    :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}/],['required']]"
+                  />
+                  <FormulateInput
+                    type="text"
+                    name="DATABASE_PORT"
+                    label="DATABASE PORT"
+                    default="5432"
+                    :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/],['required']]"
+                  />
+                  <FormulateInput
+                    type="submit"
+                    label="Guardar"
+                  />
+                </FormulateForm>
+              </div>
+              <div v-if="settingsType=='orchestrator'">
+                <FormulateForm
+                  v-model="orchestratorSettings"
+                  class="mt-5"
+                  error-behavior="live"
+                  @submit="execute"
+                >
+                  <div class="text-heading-6 font-weight-black black--text">
+                    AMQP Settings
+                  </div>
+                  <FormulateInput
+                    class="mt-5"
+                    type="text"
+                    name="user"
+                    label="AMQP user"
+                  />
+                  <FormulateInput
+                    class="mt-5"
+                    type="text"
+                    name="password"
+                    label="AMQP password"
+                  />
+                  <FormulateInput
+                    class="mt-5"
+                    type="text"
+                    name="host"
+                    label="AMQP host"
+                  />
+                  <FormulateInput
+                    class="mt-5"
+                    type="text"
+                    name="port"
+                    label="AMQP port"
+                    :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/],['required']]"
+                  />
+                  <FormulateInput
+                    class="mt-5"
+                    type="text"
+                    name="exchange_name"
+                    label="AMQP exchange name"
+                  />
+                  <FormulateInput
+                    class="mt-5"
+                    type="text"
+                    name="queue_name"
+                    label="AMQP queue name"
+                  />
+
+                  <FormulateInput
+                    type="submit"
+                    label="Guardar"
+                  />
+                </FormulateForm>
+              </div>
 
               <div v-if="test">
                 <h3 class="mt-5">
-                  generalOptions
-                  {{ generalOptions }}
+                  globalSettings
+                  {{ globalSettings }}
                 </h3>
                 <h3 class="mt-5">
-                  timeSchedule
-                  {{ timeSchedule }}
+                  orchestratorSettings
+                  {{ orchestratorSettings }}
                 </h3>
                 <h3 class="mt-5">
-                  timeScheduleFormatted
-                  {{ tscheduleFormatted }}
+                  settingsType
+                  {{ settingsType }}
                 </h3>
                 <v-btn
                   color="blue"
@@ -187,7 +249,9 @@
     name: 'Form',
     data () {
       return {
-        generalOptions: { priority: 1 },
+        globalSettings: {},
+        orchestratorSettings: {},
+        settingsType: {},
         timeSchedule: {},
         foreverValue: false,
         concreteValue: false,
