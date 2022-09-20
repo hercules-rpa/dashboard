@@ -21,7 +21,7 @@
               <FormulateInput
                 v-model="settingsType"
                 type="select"
-                :options="{global: 'Global Settings', orchestrator: 'Orchestrator Settings'}"
+                :options="{global: 'Global Settings', amqp: 'AMQP Settings'}"
                 label="Settings Type"
               />
               <div v-if="settingsType=='global'">
@@ -29,59 +29,62 @@
                   v-model="globalSettings"
                   class="mt-5"
                   error-behavior="live"
-                  @submit="execute"
+                  @submit="editGlobalSettings"
                 >
                   <FormulateInput
                     type="text"
-                    name="EDMA_URL"
-                    label="EDMA URL"
-                    default="edma.gnoss.com"
-                    :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}/],['required']]"
+                    name="edma_ip"
+                    hint="Introduce IP or Domain"
+                    label="EDMA IP"
+                    :placeholder="globalSettings.edma_url"
+                    :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/],['required']]"
                   />
                   <FormulateInput
                     type="text"
-                    name="EDMA_PORT"
+                    name="edma_port"
                     label="EDMA PORT"
-                    default="8080"
+                    :placeholder="globalSettings.edma_port"
                     :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/],['required']]"
                   />
                   <FormulateInput
                     type="text"
-                    name="SGI_URL"
-                    label="SGI URL"
-                    default="sgi.um.es"
-                    :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}/],['required']]"
+                    name="sgi_ip"
+                    label="SGI IP"
+                    :placeholder="globalSettings.sgi_url"
+                    :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/],['required']]"
                   />
                   <FormulateInput
                     type="text"
-                    name="SGI_PORT"
+                    name="sgi_port"
                     label="SGI PORT"
                     default="8080"
+                    :placeholder="globalSettings.sgi_port"
                     :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/],['required']]"
                   />
                   <FormulateInput
                     type="text"
-                    name="DATABASE_IP"
+                    name="database_ip"
                     label="DATABASE IP"
-                    default="sgi.um.es"
-                    :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}/],['required']]"
+                    :placeholder="globalSettings.database_ip"
+                    :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/],['required']]"
                   />
                   <FormulateInput
                     type="text"
-                    name="DATABASE_PORT"
+                    name="database_port"
                     label="DATABASE PORT"
-                    default="5432"
+                    :placeholder="globalSettings.database_port"
                     :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/],['required']]"
                   />
                   <FormulateInput
                     type="submit"
-                    label="Guardar"
+                    :disabled="isLoading"
+                    :label="isLoading ? 'Loading...' : 'Save'"
                   />
                 </FormulateForm>
               </div>
-              <div v-if="settingsType=='orchestrator'">
+              <div v-if="settingsType=='amqp'">
                 <FormulateForm
-                  v-model="orchestratorSettings"
+                  v-model="amqpSettings"
                   class="mt-5"
                   error-behavior="live"
                   @submit="execute"
@@ -89,6 +92,14 @@
                   <div class="text-heading-6 font-weight-black black--text">
                     AMQP Settings
                   </div>
+                  <FormulateInput
+                    type="text"
+                    name="edma_ip"
+                    hint="Introduce IP or Domain"
+                    label="EDMA IP"
+                    :placeholder="globalSettings.edma_url"
+                    :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/],['required']]"
+                  />
                   <FormulateInput
                     class="mt-5"
                     type="text"
@@ -244,7 +255,7 @@
   </div>
 </template>
 <script>
-  import { ProcessService } from '@/common/api.service'
+  import { GlobalSettingsService } from '@/common/api.service'
   export default {
     name: 'Form',
     data () {
@@ -266,141 +277,34 @@
         testSchema: {},
         jobData: {},
         code: {},
-        days: {
-          monday: 'monday',
-          tuesday: 'tuesday',
-          wednesday: 'wednesday',
-          thurdsday: 'thurdsday',
-          friday: 'friday',
-          saturday: 'saturday',
-          sunday: 'sunday',
-          week: 'week',
-          day: 'day',
-        },
-        units: {
-          seconds: 'seconds',
-          minutes: 'minutes',
-          hours: 'hours',
-          days: 'days',
-          weeks: 'weeks',
-        },
-        schemaMail: [
-          {
-            type: 'text',
-            name: 'user',
-            label: 'User',
-            validation: 'required|email',
-          },
-          {
-            type: 'password',
-            name: 'password',
-            label: 'Password',
-            validation: 'required',
-          },
-          {
-            type: 'text',
-            name: 'smtp_server',
-            label: 'Smtp Server',
-            validation: 'required',
-          },
-          {
-            type: 'group',
-            name: 'receivers',
-            validation: 'min:1,length',
-            repeatable: true,
-            'add-label': '+ Add receiver',
-            value: [{}],
-            children: [
-              {
-                type: 'text',
-                name: 'receiver',
-                label: 'Receiver',
-                validation: 'email',
-              },
-              {
-                type: 'text',
-                name: 'subject',
-                label: 'Subject',
-                validation: 'required',
-              },
-              {
-                type: 'textarea',
-                name: 'body',
-                label: 'Body',
-                validation: 'required',
-              },
-              {
-                type: 'file',
-                name: 'attached',
-                label: 'Attach a file',
-                value: null,
-              },
-            ],
-          },
-          {
-            type: 'submit',
-            label: 'Ejecutar',
-          },
-        ],
-        schemaSearch: [
-          {
-            type: 'textarea',
-            name: 'topic_sentence',
-            label: 'Search',
-            validation: 'required',
-          },
-          {
-            type: 'group',
-            name: 'receivers',
-            validation: 'min:1,length',
-            repeatable: true,
-            'add-label': '+ Add receiver',
-            value: [{}],
-            children: [
-              {
-                type: 'text',
-                name: 'receiver',
-                label: 'Receiver',
-                validation: 'email',
-              },
-            ],
-          },
-          {
-            type: 'number',
-            name: 'topk',
-            label: 'topk',
-            value: null,
-          },
-          {
-            type: 'submit',
-            label: 'Ejecutar',
-          },
-        ],
-        schema: [
-        ],
-
+        schema: [],
       }
     },
     mounted: function () {
-      ProcessService.get(this.$route.params.idProcess)
+      GlobalSettingsService.query()
         .then(response => {
-          this.processDesc = response.data
+          this.globalSettings = response.data
           console.log(this.processDesc)
           // this.processDesc.capable_robots.unshift('None')
         })
         .catch((error) => {
           throw new Error(error)
         })
-      ProcessService.getForm(this.$route.params.idProcess)
-        .then(response => {
-          console.log(response.data)
-          this.schema = response.data
-        })
-        .catch(error => {
-          throw new Error(error)
-        })
     },
     methods: {
+      async editGlobalSettings () {
+        GlobalSettingsService.editSettings(this.globalSettings)
+          .then(response => {
+            if (response.status === 200) {
+              console.log('modificado settings correcto')
+              alert('Thank you, settings modified correctly')
+            }
+          })
+          .catch((error) => {
+            alert('Error modifying settings')
+            throw new Error(error)
+          })
+      },
       closeDialog () {
         // TODO 1:Revisar esto
         this.dialog = false

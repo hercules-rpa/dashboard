@@ -154,6 +154,15 @@ export const ProcessSettingsService = {
     return ApiService.post('register/config?path=' + path)
   },
 }
+
+export const GlobalSettingsService = {
+  query () {
+      return ApiService.get('global_settings')
+  },
+  editSettings (params) {
+      return ApiService.patch('global_settings', params)
+  },
+}
 export const StatisticsService = {
   query () {
       return ApiService.query('statistics/maindashboard')
