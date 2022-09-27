@@ -155,12 +155,42 @@ export const ProcessSettingsService = {
   },
 }
 
-export const GlobalSettingsService = {
-  query () {
+export const SettingsService = {
+  getGlobalSettings () {
       return ApiService.get('global_settings')
   },
-  editSettings (params) {
+  editGlobalSettings (params) {
       return ApiService.patch('global_settings', params)
+  },
+    getAMQPSettings () {
+      return ApiService.get('amqp_settings')
+  },
+  editAMQPSettings (params) {
+      return ApiService.patch('amqp_settings', params)
+  },
+    getDBProcessSettings () {
+      return ApiService.get('dbprocess_settings')
+  },
+  editDBProcessSettings (params) {
+      return ApiService.patch('dbprocess_settings', params)
+  },
+    getDBPersistenceSettings () {
+      return ApiService.get('dbpersistence_settings')
+  },
+  editDBPersistenceSettings (params) {
+      return ApiService.patch('dbpersistence_settings', params)
+  },
+    getDBBISettings () {
+      return ApiService.get('dbbi_settings')
+  },
+  editDBBISettings (params) {
+      return ApiService.patch('dbbi_settings', params)
+  },
+    getOrchestratorSettings () {
+      return ApiService.get('orchestrator_settings')
+  },
+  editOrchestratorSettings (params) {
+      return ApiService.patch('orchestrator_settings', params)
   },
 }
 export const StatisticsService = {
