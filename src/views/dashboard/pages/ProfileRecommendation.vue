@@ -129,7 +129,7 @@
       </v-card>
     </v-dialog>
     <v-container
-      id="new-process"
+      id="profile-recomendation"
       fluid
       tag="section"
     >
@@ -231,6 +231,18 @@
           <v-btn
             :disabled="error"
             class="white--text"
+            color="blue darken-1"
+            depressed
+            @click="exportarPDF()"
+          >
+            Descargar
+            <v-icon right>
+              mdi-download
+            </v-icon>
+          </v-btn>
+          <v-btn
+            :disabled="error"
+            class="white--text"
             color="green darken-1"
             depressed
             @click="save()"
@@ -248,6 +260,7 @@
 
 <script>
   import { ProfileRecommendationService } from '@/common/api.service'
+  import html2pdf from 'html2pdf.js'
   export default {
     name: 'ProfileRecommendation',
     data () {
@@ -288,6 +301,12 @@
     },
 
     methods: {
+      exportarPDF () {
+        html2pdf(document.getElementById('profile-recomendation'), {
+          margin: 1,
+          filename: 'i-was-html.pdf',
+        })
+      },
       loadData () {
         this.token = this.$route.params.token
         ProfileRecommendationService.query(this.$route.params.token)
