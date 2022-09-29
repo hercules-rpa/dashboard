@@ -128,6 +128,38 @@
         </v-card-text>
       </v-card>
     </v-dialog>
+    <vue-html2pdf
+      ref="html2Pdf"
+      :show-layout="false"
+      :float-layout="true"
+      :enable-download="false"
+      :preview-modal="true"
+      :paginate-elements-by-height="1400"
+      :pdf-quality="2"
+      :manual-pagination="false"
+      pdf-format="a4"
+      pdf-orientation="landscape"
+
+      pdf-content-width="800px"
+      @progress="onProgress($event)"
+      @hasStartedGeneration="hasStartedGeneration()"
+      @hasGenerated="hasGenerated($event)"
+    >
+      <section slot="pdf-content">
+        <!-- PDF Content Here -->
+
+        <h1 class="title-header">
+          REPORTE SOBRE ÁREAS SELECCIONADAS:
+        </h1>
+        <br>
+        <li
+          v-for="item in areasToPrint"
+          :key="item"
+        >
+          {{ item.nombre }}, puntuación: {{ item.puntuacion }}
+        </li>
+      </section>
+    </vue-html2pdf>
     <v-container
       id="profile-recomendation"
       fluid
@@ -233,7 +265,7 @@
             class="white--text"
             color="blue darken-1"
             depressed
-            @click="exportarPDF()"
+            @click="downloadPdf()"
           >
             Descargar
             <v-icon right>
@@ -260,7 +292,6 @@
 
 <script>
   import { ProfileRecommendationService } from '@/common/api.service'
-  import html2pdf from 'html2pdf.js'
   export default {
     name: 'ProfileRecommendation',
     data () {
@@ -292,20 +323,54 @@
         perfilBase: false,
         token: '',
         codeDelete: '',
+        contentRendered: false,
+        progress: 0,
+        generatingPdf: false,
+        pdfDownloaded: false,
+        areasToPrint: [],
       }
     },
     computed: {
+
     },
     mounted: function () {
       this.loadData()
     },
 
     methods: {
-      exportarPDF () {
-        html2pdf(document.getElementById('profile-recomendation'), {
-          margin: 1,
-          filename: 'i-was-html.pdf',
-        })
+      async downloadPdf () {
+        console.log('ITEMSINICIAL : ', this.items)
+        const areasList = []
+        this.buildResponse(this.items[0].children, areasList)
+        this.areasToPrint = areasList
+        console.log('AREASLIST : ', areasList)
+        // if (!(await this.validateControlValue())) return
+        this.$refs.html2Pdf.generatePdf()
+      },
+      // validateControlValue () {
+      //   if (this.controlValue.pdfQuality > 2) {
+      //     alert('pdf-quality value should only be 0 - 2')
+      //     this.controlValue.pdfQuality = 2
+      //     return false
+      //   }
+      // },
+      onProgress (progress) {
+        this.progress = progress
+        console.log(`PDF generation progress: ${progress}%`)
+      },
+      startPagination () {
+        console.log('PDF has started pagination')
+      },
+      hasPaginated () {
+        console.log('PDF has been paginated')
+      },
+      async beforeDownload ({ html2pdf, options, pdfContent }) {
+        console.log('On Before PDF Generation')
+      },
+      hasDownloaded (blobPdf) {
+        console.log('PDF has downloaded yehey')
+        this.pdfDownloaded = true
+        console.log(blobPdf)
       },
       loadData () {
         this.token = this.$route.params.token
@@ -387,7 +452,7 @@
       buildResponse (array, areasList) {
         array.forEach(area => {
           if (area.rating > 0) {
-            areasList.push({ idarea: area.id, puntuacion: area.rating })
+            areasList.push({ idarea: area.id, puntuacion: area.rating, nombre: area.name })
           }
           if (area.children.length > 0) {
             this.buildResponse(area.children, areasList)
