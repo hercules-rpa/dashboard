@@ -11,7 +11,7 @@
         <v-card-title>
           <v-icon class="mr-3">
             mdi-update
-          </v-icon>Execution Info - {{ schedule.id }}
+          </v-icon>Información de Ejecución - {{ schedule.id }}
         </v-card-title>
         <v-container
           class="py-0"
@@ -22,28 +22,28 @@
               md="6"
             >
               <div class="text-subtitle-1 font-weight-medium mb-2">
-                Schedule Info:
+                Información de planificación:
               </div>
               <div v-if="schedule.time_schedule != null">
                 <div>
-                  <span class="text-subtitle-1 font-weight-light">Every: </span>
+                  <span class="text-subtitle-1 font-weight-light">Cada: </span>
                   <span class="text-subtitle-1 font-weight-thin">{{ schedule.time_schedule.every[0] }} {{ schedule.time_schedule.every[1] }}</span>
                 </div>
                 <div>
-                  <span class="text-subtitle-1 font-weight-light">at: </span>
+                  <span class="text-subtitle-1 font-weight-light">a: </span>
                   <span class="text-subtitle-1 font-weight-thin">{{ schedule.time_schedule.at }}</span>
                 </div>
                 <div>
-                  <span class="text-subtitle-1 font-weight-light">forever: </span>
+                  <span class="text-subtitle-1 font-weight-light">Repetir: </span>
                   <span class="text-subtitle-1 font-weight-thin">{{ schedule.time_schedule.forever }}</span>
                 </div>
                 <div>
-                  <span class="text-subtitle-1 font-weight-light">description: </span>
+                  <span class="text-subtitle-1 font-weight-light">Descripción: </span>
                   <span class="text-subtitle-1 font-weight-thin">{{ schedule.time_schedule.tag }}</span>
                 </div>
               </div><div v-else>
                 <div>
-                  <span class="text-subtitle-1 font-weight-light">description: </span>
+                  <span class="text-subtitle-1 font-weight-light">Descripción: </span>
                   <span class="text-subtitle-1 font-weight-thin">Instantaneo</span>
                 </div>
               </div>
@@ -52,10 +52,10 @@
                 <span
                   class="text-subtitle-1 font-weight-normal"
                   :class="[schedule.active ? 'green--text' : 'red--text']"
-                >{{ schedule.active == true ? 'ACTIVE' : 'INACTIVE' }}</span>
+                >{{ schedule.active == true ? 'ACTIVO' : 'INACTIVO' }}</span>
               </div>
               <div>
-                <span class="text-subtitle-1 font-weight-light">Schedule ID: </span>
+                <span class="text-subtitle-1 font-weight-light">ID de Planificación: </span>
                 <router-link
                   class="blue--text text--darken-3"
                   :to="{ path: '/pages/executions/'+schedule.id }"
@@ -69,10 +69,10 @@
               md="6"
             >
               <div class="text-subtitle-1 font-weight-medium mb-2">
-                Process Log Info:
+                Información de Log de Proceso:
               </div>
               <div>
-                <span class="text-subtitle-1 font-weight-light">Log ID: </span>
+                <span class="text-subtitle-1 font-weight-light">ID de Log: </span>
                 <router-link
                   class="blue--text text--darken-3"
                   :to="{ path: '/pages/logs/'+log.id }"
@@ -90,15 +90,15 @@
                 </router-link>
               </div>
               <div>
-                <span class="text-subtitle-1 font-weight-light">Started: </span>
+                <span class="text-subtitle-1 font-weight-light">Inicio: </span>
                 <span class="text-subtitle-1 font-weight-thin">{{ log.start_time | date }}</span>
               </div>
               <div>
-                <span class="text-subtitle-1 font-weight-light">Finished: </span>
+                <span class="text-subtitle-1 font-weight-light">Fin: </span>
                 <span class="text-subtitle-1 font-weight-thin">{{ log.end_time | date }}</span>
               </div>
               <div>
-                <span class="text-subtitle-1 font-weight-light">Result: </span>
+                <span class="text-subtitle-1 font-weight-light">Resultado: </span>
                 <span
                   class="text-subtitle-1 font-weight-normal"
                   :class="[log.state == 'ERROR' ? 'red--text' : 'green--text']"
@@ -149,7 +149,7 @@
                     v-model="search"
                     class="mb-5 search-adjust"
                     append-icon="mdi-magnify"
-                    label="Search"
+                    label="Buscar"
                     single-line
                     hide-details
                   />
@@ -276,17 +276,17 @@
         headers: [
           {
             sortable: true,
-            text: 'Process',
+            text: 'Proceso',
             value: 'process_name',
           },
           {
             sortable: false,
-            text: 'Started',
+            text: 'Inicio',
             value: 'start_time',
           },
           {
             sortable: true,
-            text: 'Ended',
+            text: 'Fin',
             value: 'end_time',
           },
           {
@@ -296,7 +296,7 @@
           },
           {
             sortable: false,
-            text: 'Result',
+            text: 'Resultado',
             value: 'state',
           },
         ],

@@ -6,7 +6,7 @@
     >
       <v-card class="text-center">
         <v-card-title>
-          {{ lData.robot }} Running Process
+          {{ lData.robot }} Ejecutando proceso
 
           <v-spacer />
 
@@ -38,14 +38,14 @@
             text
             @click="dialog = false"
           >
-            Download
+            Descargar
           </v-btn>
           <v-btn
             color="primary"
             text
             @click="dialog = false"
           >
-            Close
+            Cerrar
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -87,19 +87,19 @@
           style="color: green"
           class="text-h5 font-weight-light"
         >
-          Running Process...
+          Ejecutando proceso...
         </span><span
           v-else-if="!online"
           style="color: red"
           class="text-h5 font-weight-light"
         >
-          ATTEMPING TO RECONNECT...
+          INTENTANDO RECONECTAR...
         </span><span
           v-else
           style="color: orange"
           class="text-h5 font-weight-light"
         >
-          IDLE
+          LIBRE
         </span>
       </v-col>
       <v-col
@@ -107,7 +107,7 @@
         class="pb-5"
       >
         <span v-if="process !== null && online">
-          Process {{ process.id }}: {{ process.name }}
+          Proceso {{ process.id }}: {{ process.name }}
           <v-btn
             color="blue"
             class="ml-5"
@@ -115,7 +115,7 @@
             x-small
             @click="getLog(process.id_log)"
           >
-            show log
+            mostrar log
             <v-icon
               class="ml-1"
             >
@@ -123,9 +123,9 @@
             </v-icon>
           </v-btn>
         </span><span v-else-if="process === null && online">
-          Waiting for processes
+          Esperando nuevos procesos
         </span><span v-else>
-          Last seen : {{ lastSeen | date }}
+          Última vez online : {{ lastSeen | date }}
         </span>
       </v-col>
       <v-col

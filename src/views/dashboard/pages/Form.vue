@@ -11,7 +11,7 @@
         <v-card-title>
           <v-icon class="mr-3">
             mdi-form-select
-          </v-icon>New Process - {{ processDesc.process_id }}:{{ processDesc.process_name }}
+          </v-icon>Nuevo Proceso - {{ processDesc.process_id }}:{{ processDesc.process_name }}
         </v-card-title>
         <v-container
           class="py-0"
@@ -23,7 +23,7 @@
               md="6"
             >
               <span class="text-heading-6 font-weight-black black--text">
-                Process Options
+                Opciones de proceso
               </span>
               <FormulateForm
                 v-model="processParameters"
@@ -67,7 +67,7 @@
               </FormulateForm>
               <div v-if="test">
                 <h3 class="mt-5">
-                  Parameters
+                  Parámetros
                   {{ processParameters }}
                 </h3>
               </div>
@@ -77,7 +77,7 @@
               md="6"
             >
               <div class="text-heading-6 font-weight-black black--text">
-                General Options
+                Opciones generales
               </div>
               <FormulateForm
                 v-model="generalOptions"
@@ -89,21 +89,21 @@
                   type="select"
                   name="id_robot"
                   label="Robot"
-                  placeholder="Select a robot"
+                  placeholder="Selecciona un robot"
                   :value="null"
                   :options="processDesc.capable_robots"
                 />
                 <FormulateInput
                   type="number"
                   name="priority"
-                  label="Process priority"
+                  label="Prioridad"
                   default="1"
                   validation="required"
                 />
               </FormulateForm>
 
               <div class="mt-5 text-heading-6 font-weight-black black--text">
-                Schedule Options
+                Opciones de planificacion
               </div>
 
               <FormulateForm
@@ -114,21 +114,21 @@
                 <FormulateInput
                   type="select"
                   name="mode"
-                  label="Execution mode"
-                  :options="{ Instant: 'Instanteous', Schedule: 'Schedule'}"
+                  label="Modo de Ejecución"
+                  :options="{ Instant: 'Instantáneo', Schedule: 'Planificado'}"
                 />
                 <div v-if="timeSchedule.mode == 'Schedule'">
                   <FormulateInput
                     v-model="concreteValue"
                     type="checkbox"
                     name="concrete"
-                    label="concrete day and hour"
+                    label="Día y hora concreto"
                   />
                   <FormulateInput
                     v-if="concreteValue"
                     type="datetime-local"
                     name="concreteDayHour"
-                    label="Concrete day and hour"
+                    label="Día y hora concreto"
                     placeholder="Sample datetime-local placeholder"
                     validation="required"
                   />
@@ -140,7 +140,7 @@
                       type="number"
                       name="every_number"
                       :value="null"
-                      label="every"
+                      label="cada"
                     />
                     <div
                       v-if="timeSchedule.every_number == null || timeSchedule.every_number == ''"
@@ -148,14 +148,14 @@
                       <FormulateInput
                         type="select"
                         name="every_unit"
-                        label="time unit"
+                        label="Unidad de tiempo"
                         :options="days"
                       />
                     </div><div v-else>
                       <FormulateInput
                         type="select"
                         name="every_unit"
-                        label="time unit"
+                        label="Unidad de tiempo"
                         :options="units"
                       />
                     </div>
@@ -163,7 +163,7 @@
                       class="mt-5"
                       type="time"
                       name="at"
-                      label="at"
+                      label="a"
                       :value="null"
                       placeholder="at"
                     />
@@ -171,14 +171,14 @@
                       v-model="foreverValue"
                       type="checkbox"
                       name="forever"
-                      label="forever"
+                      label="Repetir"
                     />
                   </div>
                   <FormulateInput
                     class="mt-5"
                     type="text"
                     name="tag"
-                    label="tag"
+                    label="Etiqueta"
                     :value="!concreteValue ? timeSchedule.concreteDayHour : timeSchedule.concreteDayHour"
                     validation="required"
                   />
@@ -225,7 +225,7 @@
     >
       <v-card class="text-center">
         <v-card-title>
-          <span v-if="code === 201">Job Created successful</span><span v-else>Error creating process</span>
+          <span v-if="code === 201">Trabajo creado satisfactoriamente</span><span v-else>Error creando proceso</span>
 
           <v-spacer />
 
@@ -238,12 +238,12 @@
         </v-card-title>
 
         <v-card-text v-if="code === 201">
-          The process was created correctly, and schedule <router-link
+          El proceso se ha creado correctamente, y su planificación <router-link
             class="blue--text text--darken-3"
             :to="{ path: '/pages/executions/'+jobData.schedule_id }"
           >
             {{ jobData.schedule_id }}
-          </router-link> was assigned, do you want to go to the execution window ?
+          </router-link> ha sido asignada, ¿ Desea ir a la ventana de ejecución ?
         </v-card-text><v-card-text v-else>
           Ha ocurrido un error el proceso no se ha podido crear correctamente codigo de error {{ code }}
         </v-card-text>
@@ -273,7 +273,7 @@
     >
       <v-card>
         <v-card-title>
-          There are no capable robots to execute this process
+          No hay robots capaces de ejecutar este proceso
 
           <v-spacer />
 
@@ -320,22 +320,22 @@
         jobData: {},
         code: {},
         days: {
-          monday: 'monday',
-          tuesday: 'tuesday',
-          wednesday: 'wednesday',
-          thurdsday: 'thurdsday',
-          friday: 'friday',
-          saturday: 'saturday',
-          sunday: 'sunday',
-          week: 'week',
-          day: 'day',
+          monday: 'lunes',
+          tuesday: 'martes',
+          wednesday: 'miércoles',
+          thurdsday: 'jueves',
+          friday: 'viernes',
+          saturday: 'sábado',
+          sunday: 'domingo',
+          week: 'semana',
+          day: 'día',
         },
         units: {
-          seconds: 'seconds',
-          minutes: 'minutes',
-          hours: 'hours',
-          days: 'days',
-          weeks: 'weeks',
+          seconds: 'segundos',
+          minutes: 'minutos',
+          hours: 'horas',
+          days: 'días',
+          weeks: 'semanas',
         },
         schemaMail: [
           {

@@ -18,7 +18,7 @@
             title="Robots Online"
             :value="robotsOnline"
             sub-icon="mdi-clock"
-            sub-text="Just Updated"
+            sub-text="Recién actualizado"
             @click.native="$router.push(`/pages/robots/`)"
           />
         </v-hover>
@@ -33,10 +33,10 @@
           <base-material-stats-card
             color="primary"
             icon="mdi-cog-sync-outline"
-            title="Processes completed"
+            title="Procesos completados"
             :value="processesCompleted"
             sub-icon="mdi-calendar"
-            sub-text="Last 24 hours"
+            sub-text="Últimas 24 horas"
             hover
             @click.native="$router.push(`/pages/executions/`)"
           />
@@ -52,10 +52,10 @@
           <base-material-stats-card
             color="success"
             icon="mdi-calendar-check"
-            title="Schedules Actives"
+            title="Planificaciones Activas"
             :value="schedulesActives"
             sub-icon="mdi-clock"
-            sub-text="Just Updated"
+            sub-text="recién actualizado"
             hover
             @click.native="$router.push(`/pages/schedules/`)"
           />
@@ -71,11 +71,11 @@
           <base-material-stats-card
             color="error"
             icon="mdi-alert"
-            title="IT Problems"
+            title="Problemas técnicos"
             :value="itProblems"
             sub-icon="mdi-flash"
             sub-icon-color="red"
-            sub-text="low impact"
+            sub-text="bajo impacto"
             hover
             @click.native="$router.push(`/pages/problems/`)"
           />
@@ -92,7 +92,7 @@
           <v-card-title>
             <v-icon class="mr-3">
               mdi-chart-bar
-            </v-icon>Monthly Executions
+            </v-icon>Ejecuciones Mensuales
           </v-card-title>
           <v-container
             class="py-0"
@@ -124,7 +124,7 @@
           <v-card-title>
             <v-icon class="mr-3">
               mdi-chart-bar
-            </v-icon>Daily executions
+            </v-icon>Ejecuciones Diarias
           </v-card-title>
           <v-container
             class="py-0"
@@ -156,7 +156,7 @@
           <v-card-title>
             <v-icon class="mr-3">
               mdi-chart-bar
-            </v-icon>Last Month Executions
+            </v-icon>Ejecuciones últimos 30 días
           </v-card-title>
           <v-container
             class="py-0"
@@ -188,11 +188,11 @@
         >
           <template v-slot:heading>
             <div class="text-h3 font-weight-light">
-              Recent Executions
+              Ejecuciones recientes
             </div>
 
             <div class="text-subtitle-1 font-weight-light">
-              last robot process executions
+              últimas ejecuciones en robots
             </div>
           </template>
           <v-card-text>
@@ -237,7 +237,7 @@
               </template>
               <template v-slot:[`item.finished`]="{ item }">
                 <div :class="[item.finished ? 'green--text' : 'yellow--text']">
-                  {{ item.finished ? 'FINISHED' : 'RUNNING' }}
+                  {{ item.finished ? 'FINALIZADO' : 'EJECUTANDO' }}
                 </div>
               </template>
               <template v-slot:[`item.state`]="{ item }">
@@ -313,7 +313,7 @@
         lastMonthChartApex: {
           options: {
             title: {
-              text: 'Last Month Executions',
+              text: 'Ejecuciones últimos 30 días',
             },
             chart: {
               id: 'vuechart-example',
@@ -322,7 +322,7 @@
               categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'],
             },
             noData: {
-              text: 'Loading...',
+              text: 'Cargando...',
             },
             colors: ['#0aaec2'],
             responsive: [
@@ -345,7 +345,7 @@
         dailyExecutionsChartApex: {
           options: {
             title: {
-              text: 'Daily Executions',
+              text: 'Ejecuciones diarias',
             },
             chart: {
               id: 'vuechart-example',
@@ -374,13 +374,13 @@
         monthlyExecutionsChartApex: {
           options: {
             title: {
-              text: 'Monthly Executions',
+              text: 'Ejecuciones mensuales',
             },
             chart: {
               id: 'vuechart-example',
             },
             xaxis: {
-              categories: ['Ja', 'Fe', 'Ma', 'Ap', 'Mai', 'Ju', 'Jul', 'Au', 'Se', 'Oc', 'No', 'De'],
+              categories: ['En', 'Fe', 'Ma', 'Ab', 'Ma', 'Ju', 'Jul', 'Ag', 'Se', 'Oc', 'No', 'Di'],
             },
             tools: {
               download: true,
@@ -410,44 +410,15 @@
             data: [30, 40, 45, 50, 49, 60, 70, 91, 3, 4, 1, 12],
           }],
         },
-        monthlyExecutionsChart: {
-          data: {
-            labels: ['Ja', 'Fe', 'Ma', 'Ap', 'Mai', 'Ju', 'Jul', 'Au', 'Se', 'Oc', 'No', 'De'],
-            series: [[0, 24, 2, 12, 16, 1, 28, 40, 10, 12, 7, 4]],
-          },
-          options: {
-            axisX: {
-              showGrid: false,
-            },
-            low: 0,
-            high: 1000,
-            chartPadding: {
-              top: 0,
-              right: 5,
-              bottom: 0,
-              left: 0,
-            },
-          },
-          responsiveOptions: [
-            ['screen and (max-width: 640px)', {
-              seriesBarDistance: 5,
-              axisX: {
-                labelInterpolationFnc: function (value) {
-                  return value[0]
-                },
-              },
-            }],
-          ],
-        },
         headers: [
           {
             sortable: true,
-            text: 'Process',
+            text: 'Proceso',
             value: 'process_name',
           },
           {
             sortable: true,
-            text: 'Schedule',
+            text: 'Planificación',
             value: 'id_schedule',
           },
           {
@@ -457,12 +428,12 @@
           },
           {
             sortable: false,
-            text: 'Started',
+            text: 'Inicio',
             value: 'start_time',
           },
           {
             sortable: true,
-            text: 'Ended',
+            text: 'Fin',
             value: 'end_time',
           },
           {
@@ -472,61 +443,17 @@
           },
           {
             sortable: true,
-            text: 'Status',
+            text: 'Estado',
             value: 'finished',
           },
           {
             sortable: true,
-            text: 'Result',
+            text: 'Resultado',
             value: 'state',
           },
         ],
         executions: [],
         tabs: 0,
-        tasks: {
-          0: [
-            {
-              text: 'Firmar contrato "What are conference organizers afraid of?"',
-              value: true,
-            },
-            {
-              text: 'Lines From Great Russian Literature? Or E-mails From My Boss?',
-              value: false,
-            },
-            {
-              text: 'Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit',
-              value: false,
-            },
-            {
-              text: 'Create 4 Invisible User Experiences you Never Knew About',
-              value: true,
-            },
-          ],
-          1: [
-            {
-              text: 'Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit',
-              value: true,
-            },
-            {
-              text: 'Sign contract for "What are conference organizers afraid of?"',
-              value: false,
-            },
-          ],
-          2: [
-            {
-              text: 'Lines From Great Russian Literature? Or E-mails From My Boss?',
-              value: false,
-            },
-            {
-              text: 'Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit',
-              value: true,
-            },
-            {
-              text: 'Sign contract for "What are conference organizers afraid of?"',
-              value: true,
-            },
-          ],
-        },
         list: {
           0: false,
           1: false,

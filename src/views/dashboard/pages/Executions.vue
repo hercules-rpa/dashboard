@@ -6,14 +6,14 @@
   >
     <base-material-card
       icon="mdi-clipboard-text"
-      title="Execution History"
+      title="Historial de Ejecuciones"
       class="px-5 py-3"
     >
       <v-text-field
         v-model="search"
         class="mb-5 search-adjust"
         append-icon="mdi-magnify"
-        label="Search"
+        label="Buscar"
         single-line
         hide-details
       />
@@ -58,7 +58,7 @@
         </template>
         <template v-slot:[`item.finished`]="{ item }">
           <div :class="[item.finished ? 'green--text' : 'yellow--text']">
-            {{ item.finished ? 'FINISHED' : 'RUNNING' }}
+            {{ item.finished ? 'FINALIZADO' : 'EJECUTANDO' }}
           </div>
         </template>
         <template v-slot:[`item.state`]="{ item }">
@@ -84,12 +84,12 @@
         headers: [
           {
             sortable: true,
-            text: 'Process',
+            text: 'Proceso',
             value: 'process_name',
           },
           {
             sortable: true,
-            text: 'Schedule',
+            text: 'Planificación',
             value: 'id_schedule',
           },
           {
@@ -99,12 +99,12 @@
           },
           {
             sortable: false,
-            text: 'Started',
+            text: 'Inicio',
             value: 'start_time',
           },
           {
             sortable: true,
-            text: 'Ended',
+            text: 'Fin',
             value: 'end_time',
           },
           {
@@ -114,12 +114,12 @@
           },
           {
             sortable: true,
-            text: 'Status',
+            text: 'Estado',
             value: 'finished',
           },
           {
             sortable: true,
-            text: 'Result',
+            text: 'Resultado',
             value: 'state',
           },
         ],

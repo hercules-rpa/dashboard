@@ -105,7 +105,7 @@
         },
         {
           icon: 'mdi-plus',
-          title: 'New Process',
+          title: 'Nuevo proceso',
           to: '/pages/newprocess',
         },
         {
@@ -115,27 +115,27 @@
         },
         {
           icon: 'mdi-cog-sync-outline',
-          title: 'Executions',
+          title: 'Ejecuciones',
           to: '/pages/executions',
         },
         {
           icon: 'mdi-calendar-check',
-          title: 'Schedules',
+          title: 'Planificaciones',
           to: '/pages/schedules',
         },
         {
           icon: 'mdi-flash',
-          title: 'Problems',
+          title: 'Problemas',
           to: '/pages/problems',
         },
         {
           icon: 'mdi-cog-play-outline',
-          title: 'Process Settings',
+          title: 'Preferencias de proceso',
           to: '/pages/settings',
         },
         {
           icon: 'mdi-cog',
-          title: 'Global Settings',
+          title: 'Preferencias globales',
           to: '/pages/globalsettings',
         },
 

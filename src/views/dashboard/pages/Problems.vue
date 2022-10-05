@@ -6,14 +6,14 @@
   >
     <base-material-card
       icon="mdi-clipboard-text"
-      title="Execution Problems"
+      title="Problemas de ejecución"
       class="px-5 py-3"
     >
       <v-text-field
         v-model="search"
         class="mb-5 search-adjust"
         append-icon="mdi-magnify"
-        label="Search"
+        label="Buscar"
         single-line
         hide-details
       />
@@ -82,12 +82,12 @@
         headers: [
           {
             sortable: true,
-            text: 'Process',
+            text: 'Proceso',
             value: 'process_name',
           },
           {
             sortable: false,
-            text: 'Schedule',
+            text: 'Planificación',
             value: 'execution_id',
           },
           {
@@ -107,7 +107,7 @@
           },
           {
             sortable: false,
-            text: 'time',
+            text: 'tiempo',
             value: 'ts',
           },
         ],

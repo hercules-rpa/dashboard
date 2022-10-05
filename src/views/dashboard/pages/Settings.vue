@@ -6,14 +6,14 @@
   >
     <base-material-card
       icon="mdi-cog"
-      title="Process Settings"
+      title="Preferencias de proceso"
       class="px-5 py-3"
     >
       <v-text-field
         v-model="search"
         class="mb-5 search-adjust"
         append-icon="mdi-magnify"
-        label="Search"
+        label="Buscar"
         single-line
         hide-details
       />
@@ -65,21 +65,21 @@
         headers: [
           {
             sortable: true,
-            text: 'Process',
+            text: 'Proceso',
             value: 'proceso',
           },
           {
             sortable: false,
-            text: 'Configurator',
+            text: 'Configurador',
             value: 'configurador',
           },
           {
             sortable: false,
-            text: 'Path',
+            text: 'Ruta',
             value: 'path',
           },
           {
-            text: 'Settings',
+            text: 'Ajustes',
             value: 'controls',
             sortable: false,
           },

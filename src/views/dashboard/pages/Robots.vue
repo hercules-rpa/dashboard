@@ -6,7 +6,7 @@
   >
     <v-checkbox
       v-model="showOffline"
-      :label="`Show Offline Robots`"
+      :label="`Mostrar robots Offline`"
     />
     <v-row>
       <v-col

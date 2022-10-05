@@ -7,14 +7,14 @@
     >
       <base-material-card
         icon="mdi-calendar-check"
-        title="Schedules Actives"
+        title="Planificaciones Activas"
         class="px-5 py-3"
       >
         <v-text-field
           v-model="search"
           class="mb-5 search-adjust"
           append-icon="mdi-magnify"
-          label="Search"
+          label="Buscar"
           single-line
           hide-details
         />
@@ -35,7 +35,7 @@
             >
               {{ item.id_robot }}
             </router-link><span v-else>
-              No robot attached
+              Ningún robot asignado
             </span>
           </template>
           <template v-slot:[`item.id`]="{ item }">
@@ -87,7 +87,7 @@
     >
       <v-card>
         <v-card-title>
-          Are you sure?
+          Estás segur@?
 
           <v-spacer />
 
@@ -113,7 +113,7 @@
             text
             @click="deleteSchedule(scheduleId)"
           >
-            Yes
+            Sí
           </v-btn>
         </v-card-text>
       </v-card>
@@ -140,32 +140,32 @@
         headers: [
           {
             sortable: true,
-            text: 'Schedule',
+            text: 'ID Planificación',
             value: 'id',
           },
           {
             sortable: false,
-            text: 'Process',
+            text: 'Proceso',
             value: 'process_name',
           },
           {
             sortable: false,
-            text: 'Description',
+            text: 'Descripción',
             value: 'description',
           },
           {
             sortable: false,
-            text: 'Created',
+            text: 'Creado',
             value: 'created',
           },
           {
             sortable: false,
-            text: 'Next Run',
+            text: 'Siguiente ejecución',
             value: 'next_run',
           },
           {
             sortable: false,
-            text: 'Time Schedule',
+            text: 'Planificación',
             value: 'time_schedule',
           },
           {

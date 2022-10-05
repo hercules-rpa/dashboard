@@ -11,7 +11,7 @@
         <v-card-title>
           <v-icon class="mr-3">
             mdi-information
-          </v-icon>Log Info
+          </v-icon>Información de Log
         </v-card-title>
         <v-container
           class="py-0"
@@ -22,10 +22,10 @@
               md="6"
             >
               <div class="text-subtitle-1 font-weight-medium mb-2">
-                Execution Info:
+                Información de ejecución:
               </div>
               <div>
-                <span class="text-subtitle-1 font-weight-light">Process: </span>
+                <span class="text-subtitle-1 font-weight-light">Proceso: </span>
                 <span class="text-subtitle-1 font-weight-thin">{{ log.process_name }}</span>
               </div>
               <div>
@@ -43,17 +43,17 @@
                 <span
                   class="text-subtitle-1 font-weight-normal"
                   :class="[log.finished ? 'green--text' : 'yellow--text']"
-                >{{ log.finished=true ? 'FINISHED' : 'IN PROGRESS' }}</span>
+                >{{ log.finished=true ? 'FINALIZADO' : 'EN PROGRESO' }}</span>
               </div>
               <div>
-                <span class="text-subtitle-1 font-weight-light">Result: </span>
+                <span class="text-subtitle-1 font-weight-light">Resultado: </span>
                 <span
                   class="text-subtitle-1 font-weight-normal"
                   :class="[log.state == 'ERROR' ? 'red--text' : 'green--text']"
                 >{{ log.state }}</span>
               </div>
               <div>
-                <span class="text-subtitle-1 font-weight-light">Schedule ID: </span>
+                <span class="text-subtitle-1 font-weight-light">ID de Planificación: </span>
                 <router-link
                   class="blue--text text--darken-3"
                   :to="{ path: '/pages/executions/'+log.id_schedule }"
@@ -67,7 +67,7 @@
               md="6"
             >
               <div class="text-subtitle-1 font-weight-medium mb-2">
-                Process Info:
+                Información de proceso:
               </div>
               <div>
                 <span class="text-subtitle-1 font-weight-light">Log ID: </span>
@@ -83,11 +83,11 @@
                 </router-link>
               </div>
               <div>
-                <span class="text-subtitle-1 font-weight-light">Started: </span>
+                <span class="text-subtitle-1 font-weight-light">Inicio: </span>
                 <span class="text-subtitle-1 font-weight-thin">{{ log.start_time | date }}</span>
               </div>
               <div>
-                <span class="text-subtitle-1 font-weight-light">Finished: </span>
+                <span class="text-subtitle-1 font-weight-light">Fin: </span>
                 <span class="text-subtitle-1 font-weight-thin">{{ log.end_time | date }}</span>
               </div>
             </v-col>
@@ -102,7 +102,7 @@
                   outlined
                   readonly
                   name="input-7-4"
-                  :label="'Process : ' + log.process_name"
+                  :label="'Proceso : ' + log.process_name"
                   :value="log.data.replace(/(\\r)*\\n/g, '\n')"
                 />
               </div>
@@ -115,7 +115,7 @@
                 dark
                 @click="downloadLog(lData)"
               >
-                Download Log<v-icon class="ml-3">
+                Descargar Log<v-icon class="ml-3">
                   mdi-download
                 </v-icon>
               </v-btn>

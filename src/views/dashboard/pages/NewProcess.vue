@@ -13,7 +13,7 @@
         v-model="search"
         class="mb-5 search-adjust"
         append-icon="mdi-magnify"
-        label="Search"
+        label="Buscar"
         single-line
         hide-details
       />
@@ -66,22 +66,22 @@
         headers: [
           {
             sortable: true,
-            text: 'Process',
+            text: 'Proceso',
             value: 'process_name',
           },
           {
             sortable: true,
-            text: 'Process ID',
+            text: 'ID Proceso',
             value: 'process_id',
           },
           {
             sortable: false,
-            text: 'Description',
+            text: 'Descripción',
             value: 'process_description',
           },
           {
             sortable: false,
-            text: 'Capable Robots',
+            text: 'Robot Disponible',
             value: 'capable_robots',
           },
           {

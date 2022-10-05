@@ -21,8 +21,8 @@
               <FormulateInput
                 v-model="settingsType"
                 type="select"
-                :options="{global: 'Global Settings', amqp: 'AMQP Settings', dbpersistence: 'DB Persistence', dbprocess: 'DB Process', dbbi: 'DBBI Settings', orch: 'Orchestrator Settings'}"
-                label="Settings Type"
+                :options="{global: 'Ajustes globales', amqp: 'Ajustes AMQP', dbpersistence: 'BBDD persistencia', dbprocess: 'BBDD Procesos ', dbbi: 'Ajustes BBDD BI', orch: 'Ajustes del Orquestador'}"
+                label="Tipo de ajustes"
               />
               <div v-if="settingsType=='global'">
                 <FormulateForm

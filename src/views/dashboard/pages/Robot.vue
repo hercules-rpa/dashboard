@@ -6,7 +6,7 @@
     >
       <v-card class="text-center">
         <v-card-title>
-          {{ lData.robot }} Running Process
+          {{ lData.robot }} Ejecutando proceso
 
           <v-spacer />
 
@@ -26,7 +26,7 @@
               outlined
               readonly
               name="input-7-4"
-              :label="'Process : ' + lData.processName"
+              :label="'Proceso : ' + lData.processName"
               :value="lData.logText"
             />
           </div>
@@ -38,14 +38,14 @@
             text
             @click="downloadLog(lData)"
           >
-            Download
+            Descargar
           </v-btn>
           <v-btn
             color="primary"
             text
             @click="dialog = false"
           >
-            Close
+            Cerrar
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -84,7 +84,7 @@
             v-if="!robot.online"
             class="red--text pt-3"
           >
-            Reconnecting... <v-progress-circular
+            Reconectando... <v-progress-circular
               v-if="!robot.online"
               indeterminate
               class="ml-2 mb-1"
@@ -103,7 +103,7 @@
               md="3"
             >
               <div class="text-subtitle-1 font-weight-medium mb-2">
-                Technical data:
+                Datos técnicos:
               </div>
               <div>
                 <span class="text-subtitle-1 font-weight-light">IP Address: </span>
@@ -127,7 +127,7 @@
               md="3"
             >
               <div class="text-subtitle-1 font-weight-medium mb-2">
-                Registrations:
+                Localizaciones:
               </div>
               <div>
                 <span class="text-subtitle-1 font-weight-light">{{ robot.registrations }}</span>
@@ -138,7 +138,7 @@
               md="3"
             >
               <div class="text-subtitle-1 font-weight-medium mb-2">
-                Status:
+                Estado:
               </div>
               <div>
                 <v-icon
@@ -161,7 +161,7 @@
               md="3"
             >
               <div class="text-subtitle-1 font-weight-medium mb-2">
-                Problems:
+                Problemas:
               </div>
               <div
                 v-for="problem in robot.problems"
@@ -201,7 +201,7 @@
         <v-card-title>
           <v-icon class="mr-3">
             mdi-monitor
-          </v-icon>Live Status
+          </v-icon>Estado actual
         </v-card-title>
         <v-container
           class="py-0"
@@ -216,17 +216,17 @@
                 :to="{ path: '/pages/robot/'+robot.id+'/executions' }"
                 class="text-subtitle-1 font-weight-medium black--text"
               >
-                Process Running:
+                Ejecutando proceso:
               </router-link><span
                 v-else
                 class="text-subtitle-1 font-weight-medium black--text"
               >
-                Process Running:
+                Ejecutando proceso:
               </span>
               <div class="mt-5">
                 <div v-if="robot.process_running !== null">
                   <div>
-                    <span class="text-subtitle-1 font-weight-light">Process: </span>
+                    <span class="text-subtitle-1 font-weight-light">Proceso: </span>
                     <span class="text-subtitle-1 font-weight-thin">{{ robot.process_running !== null ? robot.process_running.name : '' }}</span>
                   </div>
                   <div v-if="robot.process_running !== null">
@@ -249,7 +249,7 @@
                       rounded
                       @click="getLog(robot.process_running.id_log)"
                     >
-                      show log
+                      mostrar log
                       <v-icon
                         class="ml-1"
                       >
@@ -259,9 +259,9 @@
                   </div>
                 </div>
                 <div v-else>
-                  <span class="text-subtitle-1 font-weight-light">No process running</span>
+                  <span class="text-subtitle-1 font-weight-light">Ningún proceso en cola</span>
                   <div v-if="robot.online">
-                    <span class="green--text text-subtitle-1 font-weight-light">waiting for new process...</span>
+                    <span class="green--text text-subtitle-1 font-weight-light">esperando nuevos procesos...</span>
                   </div><div v-else>
                     <span class="red--text text-subtitle-1 font-weight-light">robot offline</span>
                   </div>
@@ -276,7 +276,7 @@
                 :to="{ path: '/pages/robot/'+robot.id+'/executions' }"
                 class="text-subtitle-1 font-weight-medium black--text"
               >
-                Robot queue:
+                Procesos en cola:
               </router-link>
               <div class="mt-5">
                 <div
@@ -311,7 +311,7 @@
                 :to="{ path: '/pages/robot/'+robot.id+'/executions' }"
                 class="text-subtitle-1 font-weight-medium black--text"
               >
-                Last Executions:
+                Últimas ejecuciones:
               </router-link>
               <div class="mt-5">
                 <div
@@ -356,7 +356,7 @@
         <v-card-title>
           <v-icon class="mr-3">
             mdi-chart-bar
-          </v-icon>Robot History
+          </v-icon>Historial del robot
         </v-card-title>
         <v-container
           class="px-5 py-3"
@@ -395,7 +395,7 @@
             </template>
             <template v-slot:[`item.finished`]="{ item }">
               <div :class="[item.finished ? 'green--text' : 'yellow--text']">
-                {{ item.finished ? 'FINISHED' : 'RUNNING' }}
+                {{ item.finished ? 'FINALIZADO' : 'EJECUTANDO' }}
               </div>
             </template>
             <template v-slot:[`item.state`]="{ item }">
@@ -414,7 +414,7 @@
         <v-card-title>
           <v-icon class="mr-3">
             mdi-chart-bar
-          </v-icon>Real Time Charts
+          </v-icon>Estadísticas
         </v-card-title>
         <v-container
           class="py-0"
@@ -479,7 +479,7 @@
         cpuChartApex: {
           options: {
             title: {
-              text: 'CPU USAGE',
+              text: 'Uso de CPU',
             },
             chart: {
               id: 'vuechart-example',
@@ -508,7 +508,7 @@
         ramChartApex: {
           options: {
             title: {
-              text: 'RAM USAGE',
+              text: 'Uso de Memoria(RAM)',
             },
             chart: {
               id: 'vuechart-example',
@@ -526,7 +526,7 @@
         diskChartApex: {
           options: {
             title: {
-              text: 'DISK USAGE',
+              text: 'Uso de disco',
             },
             chart: {
               id: 'vuechart-example',
@@ -612,12 +612,12 @@
         headers: [
           {
             sortable: true,
-            text: 'Process',
+            text: 'Proceso',
             value: 'process_name',
           },
           {
             sortable: false,
-            text: 'Schedule',
+            text: 'Planificación',
             value: 'id_schedule',
           },
           {
@@ -627,12 +627,12 @@
           },
           {
             sortable: false,
-            text: 'Started',
+            text: 'Inicio',
             value: 'start_time',
           },
           {
             sortable: true,
-            text: 'Ended',
+            text: 'Fin',
             value: 'end_time',
           },
           {
@@ -642,19 +642,19 @@
           },
           {
             sortable: false,
-            text: 'Status',
+            text: 'Estado',
             value: 'finished',
           },
           {
             sortable: true,
-            text: 'Result',
+            text: 'Resultado',
             value: 'state',
           },
         ],
         queueHeaders: [
           {
             sortable: true,
-            text: 'Process',
+            text: 'Proceso',
             value: 'process_name',
           },
         ],
