@@ -1,6 +1,10 @@
 <template>
   <v-footer
     id="dashboard-core-footer"
+    inset
+    padless
+    absolute
+    width="auto"
   >
     <v-container>
       <v-row

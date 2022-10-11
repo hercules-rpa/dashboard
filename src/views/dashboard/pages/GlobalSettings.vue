@@ -47,6 +47,20 @@
                     :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/]]"
                   />
                   <FormulateInput
+                    class="mt-5"
+                    type="text"
+                    name="sgi_user"
+                    label="user"
+                    :placeholder="globalSettings.sgi_user"
+                  />
+                  <FormulateInput
+                    class="mt-5"
+                    type="text"
+                    name="sgi_password"
+                    label="password"
+                    :placeholder="globalSettings.sgi_password"
+                  />
+                  <FormulateInput
                     type="text"
                     name="sgi_ip"
                     label="SGI IP"
@@ -571,7 +585,7 @@
     },
     methods: {
       async editGlobalSettings () {
-        SettingsService.editSettings(this.globalSettings)
+        SettingsService.editGlobalSettings(this.globalSettings)
           .then(response => {
             if (response.status === 200) {
               console.log('modificado settings correcto')
