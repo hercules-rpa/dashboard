@@ -192,40 +192,6 @@
         link.click()
         document.body.removeChild(link)
       },
-      async downloadPdf () {
-        console.log('ITEMSINICIAL : ', this.items)
-        const areasList = []
-        this.buildResponse(this.items[0].children, areasList)
-        this.areasToPrint = areasList
-        console.log('AREASLIST : ', areasList)
-        // if (!(await this.validateControlValue())) return
-        this.$refs.html2Pdf.generatePdf()
-      },
-      // validateControlValue () {
-      //   if (this.controlValue.pdfQuality > 2) {
-      //     alert('pdf-quality value should only be 0 - 2')
-      //     this.controlValue.pdfQuality = 2
-      //     return false
-      //   }
-      // },
-      onProgress (progress) {
-        this.progress = progress
-        console.log(`PDF generation progress: ${progress}%`)
-      },
-      startPagination () {
-        console.log('PDF has started pagination')
-      },
-      hasPaginated () {
-        console.log('PDF has been paginated')
-      },
-      async beforeDownload ({ html2pdf, options, pdfContent }) {
-        console.log('On Before PDF Generation')
-      },
-      hasDownloaded (blobPdf) {
-        console.log('PDF has downloaded yehey')
-        this.pdfDownloaded = true
-        console.log(blobPdf)
-      },
       loadData () {
         this.token = this.$route.params.token
         ProfileRecommendationService.getAllProfiles()
@@ -249,20 +215,6 @@
       },
       fillItemsNew (areasTematicas) {
         const children = areasTematicas.map(areatematica => ({
-          id: areatematica.id,
-          name: areatematica.descripcion,
-          children: this.getChildren(areatematica),
-          rating: areatematica.puntuacion,
-          fuente: areatematica.fuente,
-        }))
-        return [{
-          id: 0,
-          name: 'Áreas Temáticas',
-          children,
-        }]
-      },
-      fillItems () {
-        const children = this.areastematicas.map(areatematica => ({
           id: areatematica.id,
           name: areatematica.descripcion,
           children: this.getChildren(areatematica),
@@ -302,19 +254,6 @@
           return false
         }
       },
-      selectItem (item) {
-        if (!this.isInAnyChildren(item)) {
-          this.itemsSelected.set(item.id, item)
-          // item.select()
-
-          this.fillChildrenRecursive(item)
-
-          // this.tree.push(this.item)
-          console.log(this.items)
-          console.log('ITEM :', item)
-          console.log(this.itemsSelected)
-        }
-      },
       buildResponse (array, areasList) {
         array.forEach(area => {
           if (area.rating > 0) {
@@ -325,60 +264,6 @@
           }
         })
       },
-      cerrarDialog () {
-        this.dialog = false
-      },
-      cerrarDialogEntrenamiento () {
-        this.dialog4 = false
-        this.$router.go()
-      },
-      save () {
-        console.log('ITEMSINICIAL : ', this.items)
-        const areasList = []
-        this.buildResponse(this.items[0].children, areasList)
-        console.log('AREASLIST : ', areasList)
-        ProfileRecommendationService.register(this.$route.params.token, areasList)
-          .then(response => {
-            this.code = response.status
-            console.log(response)
-            if (this.response.status === 201) {
-              this.dialog = true
-            } else {
-              this.dialog = true
-            }
-          }).catch(error => {
-            this.dialog = true
-            throw new Error(error)
-          })
-      },
-      initialize () {
-        this.areastematicas = this.areasTematicasIniciales
-        this.items = this.fillItems()
-        console.log(this.areastematicas)
-        console.log(this.areasTematicasIniciales)
-      },
-      borrarDatosDialog () {
-        this.perfilBase = false
-        this.dialog3 = true
-      },
-      borrarDatosEntrenamiento (token, perfilBase) {
-        this.dialog3 = false
-        ProfileRecommendationService.borrarDatosEntrenamiento(token, perfilBase)
-          .then(response => {
-            this.codeDelete = response.status
-            console.log(response)
-            if (this.response.status === 200) {
-              this.dialog4 = true
-            } else {
-              this.dialog4 = true
-            }
-            this.loadData()
-          }).catch(error => {
-            this.dialog4 = true
-            throw new Error(error)
-          })
-      },
-
       getChildren (areatematica) {
         const areasHijos = []
         if (areatematica[areatematica.id].length > 0) {
