@@ -21,7 +21,7 @@
               <FormulateInput
                 v-model="settingsType"
                 type="select"
-                :options="{global: 'Ajustes globales', amqp: 'Ajustes AMQP', dbpersistence: 'BBDD persistencia', dbprocess: 'BBDD Procesos ', dbbi: 'Ajustes BBDD BI', orch: 'Ajustes del Orquestador'}"
+                :options="{global: 'Ajustes globales',process: 'Ajustes de procesos', amqp: 'Ajustes AMQP', dbprocess: 'BBDD Procesos ', dbbi: 'Ajustes BBDD BI', orch: 'Ajustes del Orquestador'}"
                 label="Tipo de ajustes"
               />
               <div v-if="settingsType=='global'">
@@ -29,23 +29,33 @@
                   v-model="globalSettings"
                   class="mt-5"
                   error-behavior="live"
+                  name="global"
                   @submit="editGlobalSettings"
                 >
                   <FormulateInput
                     type="text"
-                    name="edma_ip"
+                    name="edma_host_sparql"
                     hint="Introduce IP or Domain"
-                    label="EDMA IP"
-                    :placeholder="globalSettings.edma_url"
+                    label="EDMA HOST SPARQL"
+                    :placeholder="globalSettings.edma_host_sparql"
                     :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/]]"
                   />
                   <FormulateInput
                     type="text"
-                    name="edma_port"
-                    label="EDMA PORT"
-                    :placeholder="globalSettings.edma_port"
+                    name="edma_puerto_sparql"
+                    label="EDMA PUERTO SPARQL"
+                    :placeholder="globalSettings.edma_puerto_sparql"
                     :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/]]"
                   />
+                  <FormulateInput
+                    type="text"
+                    name="edma_host_servicios"
+                    hint="Introduce IP or Domain"
+                    label="EDMA host servicios"
+                    :placeholder="globalSettings.edma_host_servicios"
+                    :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/]]"
+                  />
+
                   <FormulateInput
                     class="mt-5"
                     type="text"
@@ -92,7 +102,63 @@
                   <FormulateInput
                     type="submit"
                     :disabled="isLoading"
-                    :label="isLoading ? 'Loading...' : 'Save'"
+                    :label="isLoading ? 'Cargando...' : 'Guardar'"
+                  />
+                </FormulateForm>
+              </div>
+              <div v-if="settingsType=='process'">
+                <FormulateForm
+                  v-model="pSettings"
+                  name="process"
+                  class="mt-5"
+                  error-behavior="live"
+                  @submit="editPSettings"
+                >
+                  <FormulateInput
+                    type="text"
+                    name="salaprensa_url"
+                    hint="Introduce IP or Domain"
+                    label="Sala prensa URL"
+                    :placeholder="pSettings.salaprensa_url"
+                    :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/]]"
+                  />
+                  <FormulateInput
+                    type="text"
+                    name="ucc_url"
+                    hint="Introduce IP or Domain"
+                    label="UCC URL"
+                    :placeholder="pSettings.ucc_url"
+                    :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/]]"
+                  />
+                  <FormulateInput
+                    type="text"
+                    name="boe_url"
+                    hint="Introduce IP or Domain"
+                    label="BOE URL"
+                    :placeholder="pSettings.boe_url"
+                    :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/]]"
+                  />
+                  <FormulateInput
+                    type="text"
+                    name="bdns_url"
+                    hint="Introduce IP or Domain"
+                    label="BDNS URL"
+                    :placeholder="pSettings.bdns_url"
+                    :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/]]"
+                  />
+                  <FormulateInput
+                    type="text"
+                    name="europe_url"
+                    hint="Introduce IP or Domain"
+                    label="EUROPE URL"
+                    :placeholder="pSettings.europe_url"
+                    :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/]]"
+                  />
+
+                  <FormulateInput
+                    type="submit"
+                    :disabled="isLoading"
+                    :label="isLoading ? 'Cargando...' : 'Guardar'"
                   />
                 </FormulateForm>
               </div>
@@ -100,6 +166,7 @@
                 <FormulateForm
                   v-model="amqpSettings"
                   class="mt-5"
+                  name="amqp"
                   error-behavior="live"
                   @submit="editAMQPSettings"
                 >
@@ -109,9 +176,9 @@
                   <FormulateInput
                     class="mt-5"
                     type="text"
-                    name="username"
-                    label="username"
-                    :placeholder="amqpSettings.username"
+                    name="user"
+                    label="user"
+                    :placeholder="amqpSettings.user"
                   />
                   <FormulateInput
                     class="mt-5"
@@ -178,62 +245,10 @@
                   />
                 </FormulateForm>
               </div>
-              <div v-if="settingsType=='dbpersistence'">
-                <FormulateForm
-                  v-model="dbpersistenceSettings"
-                  class="mt-5"
-                  error-behavior="live"
-                  @submit="editDBPersistenceSettings"
-                >
-                  <div class="text-heading-6 font-weight-black black--text">
-                    DB Persistence Settings
-                  </div>
-                  <FormulateInput
-                    class="mt-5"
-                    type="text"
-                    name="username"
-                    label="username"
-                    :placeholder="dbpersistenceSettings.username"
-                  />
-                  <FormulateInput
-                    class="mt-5"
-                    type="text"
-                    name="password"
-                    label="password"
-                    :placeholder="dbpersistenceSettings.password"
-                  />
-                  <FormulateInput
-                    type="text"
-                    name="host"
-                    hint="Introduce host"
-                    label="host"
-                    :placeholder="dbpersistenceSettings.host"
-                    :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/]]"
-                  />
-                  <FormulateInput
-                    class="mt-5"
-                    type="text"
-                    name="port"
-                    label="port"
-                    :placeholder="dbpersistenceSettings.port"
-                    :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/]]"
-                  />
-                  <FormulateInput
-                    class="mt-5"
-                    type="text"
-                    name="database"
-                    label="Database"
-                    :placeholder="dbpersistenceSettings.database"
-                  />
-                  <FormulateInput
-                    type="submit"
-                    label="Guardar"
-                  />
-                </FormulateForm>
-              </div>
               <div v-if="settingsType=='dbprocess'">
                 <FormulateForm
                   v-model="dbprocessSettings"
+                  name="dbprocess"
                   class="mt-5"
                   error-behavior="live"
                   @submit="editDBProcessSettings"
@@ -244,9 +259,9 @@
                   <FormulateInput
                     class="mt-5"
                     type="text"
-                    name="username"
-                    label="username"
-                    :placeholder="dbprocessSettings.username"
+                    name="user"
+                    label="user"
+                    :placeholder="dbprocessSettings.user"
                   />
                   <FormulateInput
                     class="mt-5"
@@ -290,6 +305,7 @@
                   v-model="dbbiSettings"
                   class="mt-5"
                   error-behavior="live"
+                  name="dbbi"
                   @submit="editDBBISettings"
                 >
                   <div class="text-heading-6 font-weight-black black--text">
@@ -298,9 +314,9 @@
                   <FormulateInput
                     class="mt-5"
                     type="text"
-                    name="username"
-                    label="username"
-                    :placeholder="dbbiSettings.username"
+                    name="user"
+                    label="user"
+                    :placeholder="dbbiSettings.user"
                   />
                   <FormulateInput
                     class="mt-5"
@@ -342,6 +358,7 @@
               <div v-if="settingsType=='orch'">
                 <FormulateForm
                   v-model="orchestratorSettings"
+                  name="orch"
                   class="mt-5"
                   error-behavior="live"
                   @submit="editOrchestratorSettings"
@@ -392,10 +409,6 @@
                 <h3 class="mt-5">
                   amqpSettings
                   {{ amqpSettings }}
-                </h3>
-                <h3 class="mt-5">
-                  dbpersistenceSettings
-                  {{ dbpersistenceSettings }}
                 </h3>
                 <h3 class="mt-5">
                   dbprocessSettings
@@ -516,12 +529,14 @@
     data () {
       return {
         globalSettings: {},
+        pSettings: {},
         amqpSettings: {},
         dbprocessSettings: {},
         dbpersistenceSettings: {},
         dbbiSettings: {},
         orchestratorSettings: {},
         settingsType: {},
+        settingsItems: { global: 'Ajustes globales', process: 'Ajustes de procesos', amqp: 'Ajustes AMQP', dbprocess: 'BBDD Procesos ', dbbi: 'Ajustes BBDD BI', orch: 'Ajustes del Orquestador' },
         timeSchedule: {},
         foreverValue: false,
         concreteValue: false,
@@ -532,7 +547,7 @@
         tscheduleFormatted: {},
         dialog: false,
         dialogAlert: false,
-        test: false,
+        test: true,
         testSchema: {},
         jobData: {},
         code: {},
@@ -543,6 +558,13 @@
       SettingsService.getGlobalSettings()
         .then(response => {
           this.globalSettings = response.data
+        })
+        .catch((error) => {
+          throw new Error(error)
+        })
+      SettingsService.getPSettings()
+        .then(response => {
+          this.pSettings = response.data
         })
         .catch((error) => {
           throw new Error(error)
@@ -589,11 +611,24 @@
           .then(response => {
             if (response.status === 200) {
               console.log('modificado settings correcto')
-              alert('Thank you, settings modified correctly')
+              alert('Gracias, los ajustes se han modificado correctamente')
             }
           })
           .catch((error) => {
-            alert('Error modifying settings')
+            alert('Error modificando ajustes')
+            throw new Error(error)
+          })
+      },
+      async editPSettings () {
+        SettingsService.editPSettings(this.pSettings)
+          .then(response => {
+            if (response.status === 200) {
+              console.log('modificado settings correcto')
+              alert('Gracias, los ajustes se han modificado correctamente')
+            }
+          })
+          .catch((error) => {
+            alert('Error modificando ajustes')
             throw new Error(error)
           })
       },
@@ -602,11 +637,11 @@
           .then(response => {
             if (response.status === 200) {
               console.log('modificado settings correcto')
-              alert('Thank you, settings modified correctly')
+              alert('Gracias, los ajustes se han modificado correctamente')
             }
           })
           .catch((error) => {
-            alert('Error modifying settings')
+            alert('Error modificando ajustes')
             throw new Error(error)
           })
       },
@@ -615,11 +650,11 @@
           .then(response => {
             if (response.status === 200) {
               console.log('modificado settings correcto')
-              alert('Thank you, settings modified correctly')
+              alert('Gracias, los ajustes se han modificado correctamente')
             }
           })
           .catch((error) => {
-            alert('Error modifying settings')
+            alert('Error modificando ajustes')
             throw new Error(error)
           })
       },
@@ -628,11 +663,11 @@
           .then(response => {
             if (response.status === 200) {
               console.log('modificado settings correcto')
-              alert('Thank you, settings modified correctly')
+              alert('Gracias, los ajustes se han modificado correctamente')
             }
           })
           .catch((error) => {
-            alert('Error modifying settings')
+            alert('Error modificando ajustes')
             throw new Error(error)
           })
       },
@@ -641,11 +676,11 @@
           .then(response => {
             if (response.status === 200) {
               console.log('modificado settings correcto')
-              alert('Thank you, settings modified correctly')
+              alert('Gracias, los ajustes se han modificado correctamente')
             }
           })
           .catch((error) => {
-            alert('Error modifying settings')
+            alert('Error modificando ajustes')
             throw new Error(error)
           })
       },
@@ -654,11 +689,11 @@
           .then(response => {
             if (response.status === 200) {
               console.log('modificado settings correcto')
-              alert('Thank you, settings modified correctly')
+              alert('Gracias, los ajustes se han modificado correctamente')
             }
           })
           .catch((error) => {
-            alert('Error modifying settings')
+            alert('Error modificando ajustes')
             throw new Error(error)
           })
       },

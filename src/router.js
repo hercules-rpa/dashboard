@@ -22,6 +22,11 @@ export default new Router({
           component: () => import('@/views/dashboard/pages/ProfileRecommendation'),
         },
         {
+          name: 'ProfileReport',
+          path: '/p/profileReport/',
+          component: () => import('@/views/dashboard/pages/ProfileReport'),
+        },
+        {
           name: 'FeedbackResearcher',
           path: '/p/feedback/:token/:idconvocatoria/:util',
           component: () => import('@/views/dashboard/pages/FeedbackReaction'),

@@ -162,6 +162,12 @@ export const SettingsService = {
   editGlobalSettings (params) {
       return ApiService.patch('global_settings', params)
   },
+  getPSettings () {
+      return ApiService.get('process_settings')
+  },
+  editPSettings (params) {
+      return ApiService.patch('process_settings', params)
+  },
     getAMQPSettings () {
       return ApiService.get('amqp_settings')
   },
@@ -242,6 +248,9 @@ export const ArticlesService = {
     borrarDatosEntrenamiento (token, perfilBase) {
       Vue.axios.defaults.headers.common.Authorization = `Bearer ${token}`
       return ApiService.delete('register/calificacion/area/reset', perfilBase)
+    },
+    getAllProfiles () {
+      return ApiService.query('register/profile/investigadores')
     },
   }
 

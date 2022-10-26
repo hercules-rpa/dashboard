@@ -20,6 +20,7 @@ import VueFeedbackReaction from 'vue-feedback-reaction'
 import VJsoneditor from 'v-jsoneditor/src/index'
 import VueApexCharts from 'vue-apexcharts'
 import VueHtml2pdf from 'vue-html2pdf'
+import excel from 'vue-excel-export'
 
 // import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
@@ -51,6 +52,7 @@ Vue.use(VJsoneditor)
 Vue.use(VueApexCharts)
 Vue.component('apexchart', VueApexCharts)
 Vue.use(VueHtml2pdf)
+Vue.use(excel)
 
 Vue.use(VueFormulate, {
   uploader: async function (file, progress, error, options) {
