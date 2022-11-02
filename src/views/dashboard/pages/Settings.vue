@@ -92,14 +92,6 @@
 
     },
     mounted: function () {
-      ProcessService.query()
-        .then(response => {
-          console.log(response.data)
-          this.processes = response.data
-        })
-        .catch(error => {
-          throw new Error(error)
-        })
       ProcessSettingsService.query()
         .then(response => {
           console.log(response.data)

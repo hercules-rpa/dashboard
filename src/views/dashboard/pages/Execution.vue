@@ -307,6 +307,7 @@
         .then(response => {
           console.log(response.data)
           this.schedule = response.data
+          this.getLogSimple(this.schedule.logs[0])
         })
         .catch(error => {
           throw new Error(error)
@@ -314,8 +315,15 @@
     },
     methods: {
       getLog (value, event) {
-        console.log(event)
         event.select(true)
+        LogsService.get(value.id).then((response) => {
+          this.log = response.data
+        })
+          .catch((error) => {
+            throw new Error(error)
+          })
+      },
+      getLogSimple (value) {
         LogsService.get(value.id).then((response) => {
           this.log = response.data
         })

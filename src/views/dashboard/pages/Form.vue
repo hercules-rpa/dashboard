@@ -258,6 +258,7 @@
             Close
           </v-btn>
           <v-btn
+            v-if="code===201"
             color="green"
             text
             @click="goToExecution"
@@ -502,7 +503,13 @@
             // alert(response.data.description)
             this.jobData = response.data
             this.code = response.status
+            console.log(this.code)
             this.dialog = true
+          }).catch(error => {
+            console.log(error)
+            this.code = error.status
+            this.dialog = true
+            throw new Error(error)
           })
         }
       },
