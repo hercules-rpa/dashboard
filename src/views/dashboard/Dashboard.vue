@@ -295,10 +295,7 @@
               },
             ],
           },
-          series: [{
-            name: 'last-month-executions',
-            data: [30, 40, 45, 50, 49, 60, 70, 53, 30, 40, 45, 50, 12, 60, 70, 23, 30, 40, 45, 50, 49, 60, 10, 91, 30, 40, 45, 50, 49, 60],
-          }],
+          series: [],
         },
         dailyExecutionsChartApex: {
           options: {
@@ -324,10 +321,7 @@
               },
             ],
           },
-          series: [{
-            name: 'daily-executions',
-            data: [10, 2, 4, 25, 13, 17, 5],
-          }],
+          series: [],
         },
         monthlyExecutionsChartApex: {
           options: {
@@ -363,10 +357,7 @@
               },
             ],
           },
-          series: [{
-            name: 'monthly-executions',
-            data: [30, 40, 45, 50, 49, 60, 70, 91, 3, 4, 1, 12],
-          }],
+          series: [],
         },
         headers: [
           {
@@ -432,20 +423,23 @@
           this.processesCompleted = this.data.process_completed
           this.schedulesActives = this.data.process_actives
 
-          this.dailyExecutionsChart.data.series[0] = this.data.execution_day_week
-          this.dailyExecutionsChart.options.high = Math.max.apply(null, this.data.execution_day_week)
-          this.dailyExecutionsChartApex.series[0].data = this.data.execution_day_week.map(el => el.toFixed(1))
-          console.log(this.dailyExecutionsChartApex.series[0].data)
+          // this.dailyExecutionsChartApex.series[0].data = this.data.execution_day_week.map(el => el.toFixed(1))
+          this.dailyExecutionsChartApex.series.push({
+            name: 'daily-executions',
+            data: this.data.execution_day_week.map(el => el.toFixed(1)),
+          })
 
-          this.monthlyExecutionsChart.data.series[0] = this.data.execution_month_year
-          this.monthlyExecutionsChart.options.high = Math.max.apply(null, this.data.execution_month_year)
-          this.monthlyExecutionsChartApex.series[0].data = this.data.execution_month_year.map(el => el.toFixed(1))
-          console.log(this.monthlyExecutionsChartApex.series[0].data)
+          // this.monthlyExecutionsChartApex.series[0].data.push(this.data.execution_month_year.map(el => el.toFixed(1)))
+          this.monthlyExecutionsChartApex.series.push({
+            name: 'monthly-executions',
+            data: this.data.execution_month_year.map(el => el.toFixed(1)),
+          })
 
-          this.activeProcessesChart.data.series[0] = this.data.execution_day_month
-          this.activeProcessesChart.options.high = Math.max.apply(null, this.data.execution_day_month)
-          this.lastMonthChartApex.series[0].data = this.data.execution_day_month.map(el => el.toFixed(1))
-          console.log(this.lastMonthChartApex.series[0].data)
+          // this.lastMonthChartApex.series[0].data = this.data.execution_day_month.map(el => el.toFixed(1))
+          this.lastMonthChartApex.series.push({
+            name: 'last-month-executions',
+            data: this.data.execution_day_month.map(el => el.toFixed(1)),
+          })
         })
         .catch(error => {
           throw new Error(error)

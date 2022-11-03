@@ -493,14 +493,14 @@
             text
             @click="dialog = false"
           >
-            Close
+            Cerrar
           </v-btn>
           <v-btn
             color="green"
             text
             @click="goToExecution"
           >
-            Yes
+            Si
           </v-btn>
         </v-card-actions>
       </v-card>

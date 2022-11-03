@@ -230,7 +230,7 @@
             text
             @click="dialog = false"
           >
-            Yes
+            Si
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -363,7 +363,7 @@
             text
             @click="dialog3 = false"
           >
-            Yes
+            Si
           </v-btn>
         </v-card-text>
       </v-card>

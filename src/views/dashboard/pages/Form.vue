@@ -255,7 +255,7 @@
             text
             @click="dialog = false"
           >
-            Close
+            Cerrar
           </v-btn>
           <v-btn
             v-if="code===201"
@@ -263,7 +263,7 @@
             text
             @click="goToExecution"
           >
-            Yes
+            Si
           </v-btn>
         </v-card-actions>
       </v-card>
