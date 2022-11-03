@@ -98,11 +98,20 @@
                 <span class="text-subtitle-1 font-weight-thin">{{ log.end_time | date }}</span>
               </div>
               <div>
-                <span class="text-subtitle-1 font-weight-light">Resultado: </span>
+                <span class="text-subtitle-1 font-weight-light">Estado: </span>
                 <span
                   class="text-subtitle-1 font-weight-normal"
-                  :class="[log.state == 'ERROR' ? 'red--text' : 'green--text']"
-                >{{ log.state }}</span>
+                  :class="[log.finished ? 'green--text' : 'yellow--text']"
+                >{{ log.finished=true ? 'FINALIZADO' : 'EN PROGRESO' }}</span>
+              </div>
+              <div>
+                <div>
+                  <span class="text-subtitle-1 font-weight-light">Resultado: </span>
+                  <span
+                    class="text-subtitle-1 font-weight-normal"
+                    :class="[log.state == 'ERROR' ? 'red--text' : 'green--text']"
+                  >{{ log.state }}</span>
+                </div>
               </div>
             </v-col>
           </v-row>
@@ -313,7 +322,26 @@
           throw new Error(error)
         })
     },
+    created () {
+      this.pollData()
+    },
+    beforeDestroy () {
+      clearInterval(this.polling)
+    },
     methods: {
+      pollData () {
+        this.polling = setInterval(() => {
+          SchedulesService.get(this.$route.params.idSchedule)
+            .then(response => {
+              console.log(response.data)
+              this.schedule = response.data
+              this.getLogSimple(this.schedule.logs[0])
+            })
+            .catch(error => {
+              throw new Error(error)
+            })
+        }, 1000)
+      },
       getLog (value, event) {
         event.select(true)
         LogsService.get(value.id).then((response) => {

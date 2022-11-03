@@ -42,9 +42,9 @@
                   />
                   <FormulateInput
                     type="text"
-                    name="edma_puerto_sparql"
+                    name="edma_port_sparql"
                     label="EDMA PUERTO SPARQL"
-                    :placeholder="globalSettings.edma_puerto_sparql"
+                    :placeholder="globalSettings.edma_port_sparql"
                     :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/]]"
                   />
                   <FormulateInput
@@ -60,14 +60,14 @@
                     class="mt-5"
                     type="text"
                     name="sgi_user"
-                    label="user"
+                    label="SGI user"
                     :placeholder="globalSettings.sgi_user"
                   />
                   <FormulateInput
                     class="mt-5"
                     type="text"
                     name="sgi_password"
-                    label="password"
+                    label="SGI password"
                     :placeholder="globalSettings.sgi_password"
                   />
                   <FormulateInput
@@ -98,6 +98,20 @@
                     label="DATABASE PORT"
                     :placeholder="globalSettings.database_port"
                     :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/]]"
+                  />
+                  <FormulateInput
+                    class="mt-5"
+                    type="text"
+                    name="ftp_user"
+                    label="ftp user"
+                    :placeholder="globalSettings.ftp_user"
+                  />
+                  <FormulateInput
+                    class="mt-5"
+                    type="text"
+                    name="ftp_password"
+                    label="ftp password"
+                    :placeholder="globalSettings.ftp_password"
                   />
                   <FormulateInput
                     type="submit"

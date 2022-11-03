@@ -165,16 +165,14 @@
     methods: {
       pollData () {
         this.polling = setInterval(() => {
-          if (!this.log.finished) {
-            LogsService.get(this.$route.params.idLog)
-              .then(response => {
-                console.log(response.data)
-                this.log = response.data
-              })
-              .catch(error => {
-                throw new Error(error)
-              })
-          }
+          LogsService.get(this.$route.params.idLog)
+            .then(response => {
+              console.log(response.data)
+              this.log = response.data
+            })
+            .catch(error => {
+              throw new Error(error)
+            })
         }, 1000)
       },
       getLog (idLog) {
