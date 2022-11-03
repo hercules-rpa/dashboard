@@ -268,48 +268,6 @@
         processesCompleted: 0,
         schedulesActives: 0,
         itProblems: 0,
-        dailyExecutionsChart: {
-          data: {
-            labels: ['L', 'M', 'X', 'J', 'V', 'S', 'D'],
-            series: [
-              [0, 0, 0, 0, 0, 0, 0],
-            ],
-          },
-          options: {
-            lineSmooth: this.$chartist.Interpolation.cardinal({
-              tension: 0,
-            }),
-            low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-            chartPadding: {
-              top: 0,
-              right: 0,
-              bottom: 0,
-              left: 0,
-            },
-          },
-        },
-        activeProcessesChart: {
-          data: {
-            labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'],
-            series: [
-              [230, 750, 450, 300, 280, 240, 200, 190],
-            ],
-          },
-          options: {
-            lineSmooth: this.$chartist.Interpolation.cardinal({
-              tension: 0,
-            }),
-            low: 0,
-            high: 0, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-            chartPadding: {
-              top: 0,
-              right: 0,
-              bottom: 0,
-              left: 0,
-            },
-          },
-        },
         lastMonthChartApex: {
           options: {
             title: {
