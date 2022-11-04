@@ -135,7 +135,7 @@ export const ProcessService = {
         return ApiService.get('process', slug)
     },
     getForm (slug) {
-        return ApiService.get('process/', slug + '/form')
+        return ApiService.get('process', slug + '/form')
     },
 
 }
@@ -180,12 +180,6 @@ export const SettingsService = {
   },
   editDBProcessSettings (params) {
       return ApiService.patch('dbprocess_settings', params)
-  },
-    getDBPersistenceSettings () {
-      return ApiService.get('dbpersistence_settings')
-  },
-  editDBPersistenceSettings (params) {
-      return ApiService.patch('dbpersistence_settings', params)
   },
     getDBBISettings () {
       return ApiService.get('dbbi_settings')

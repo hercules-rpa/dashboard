@@ -114,6 +114,14 @@
                     :placeholder="globalSettings.ftp_password"
                   />
                   <FormulateInput
+                    class="mt-5"
+                    type="text"
+                    name="ftp_port"
+                    label="ftp port"
+                    :placeholder="globalSettings.port"
+                    :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/]]"
+                  />
+                  <FormulateInput
                     type="submit"
                     :disabled="isLoading"
                     :label="isLoading ? 'Cargando...' : 'Guardar'"
@@ -546,7 +554,6 @@
         pSettings: {},
         amqpSettings: {},
         dbprocessSettings: {},
-        dbpersistenceSettings: {},
         dbbiSettings: {},
         orchestratorSettings: {},
         settingsType: {},
@@ -586,13 +593,6 @@
       SettingsService.getAMQPSettings()
         .then(response => {
           this.amqpSettings = response.data
-        })
-        .catch((error) => {
-          throw new Error(error)
-        })
-      SettingsService.getDBPersistenceSettings()
-        .then(response => {
-          this.dbpersistenceSettings = response.data
         })
         .catch((error) => {
           throw new Error(error)
@@ -648,19 +648,6 @@
       },
       async editAMQPSettings () {
         SettingsService.editAMQPSettings(this.amqpSettings)
-          .then(response => {
-            if (response.status === 200) {
-              console.log('modificado settings correcto')
-              alert('Gracias, los ajustes se han modificado correctamente')
-            }
-          })
-          .catch((error) => {
-            alert('Error modificando ajustes')
-            throw new Error(error)
-          })
-      },
-      async editDBPersistenceSettings () {
-        SettingsService.editDBPersistenceSettings(this.dbpersistenceSettings)
           .then(response => {
             if (response.status === 200) {
               console.log('modificado settings correcto')
