@@ -2,12 +2,12 @@ import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import JwtService from '@/common/jwt.service'
-import { SALI_URL } from './config'
+import API_URL from './config'
 
 const ApiService = {
   init () {
     Vue.use(VueAxios, axios)
-    Vue.axios.defaults.baseURL = SALI_URL
+    Vue.axios.defaults.baseURL = API_URL
     this.setHeader()
   },
 
