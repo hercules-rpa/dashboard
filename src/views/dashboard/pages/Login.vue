@@ -31,12 +31,12 @@
                     v-model="valid"
                   >
                     <v-text-field
-                      v-model="email"
+                      v-model="user"
                       prepend-icon="mdi-account"
-                      name="email"
-                      :rules="emailRules"
-                      label="Email"
-                      type="email"
+                      name="user"
+                      :rules="userRules"
+                      label="Usuario"
+                      type="string"
                       required
                     />
                     <v-text-field
@@ -44,7 +44,7 @@
                       v-model="password"
                       prepend-icon="mdi-lock"
                       name="password"
-                      label="Password"
+                      label="Contraseña"
                       type="password"
                     />
                   </v-form>
@@ -52,7 +52,7 @@
                     v-if="loginError"
                     class="red--text"
                   >
-                    *Email o contraseña incorrectos
+                    *Usuario o contraseña incorrectos
                   </div>
                 </v-card-text>
                 <v-card-actions>
@@ -60,7 +60,7 @@
                   <v-btn
                     :disabled="!valid"
                     color="#A22C2E"
-                    @click="loginMock"
+                    @click="login"
                   >
                     Login
                   </v-btn>
@@ -88,10 +88,13 @@
         password: '',
         params: null,
         token: '',
+        user: '',
         loginError: false,
         emailRules: [
-          v => !!v || 'E-mail is required',
-          v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+          v => !!v || 'E-mail es requerido',
+          v => /.+@.+\..+/.test(v) || 'El E-mail tiene que ser válido',
+        ],
+        userRules: [
         ],
       }
     },
@@ -114,19 +117,19 @@
         this.loginError = false
       },
       login () {
-        console.log(this.email + this.password)
-        LoginService.login(this.email, this.password)
+        console.log(this.user + this.password)
+        LoginService.login(this.user, this.password)
           .then(response => {
             console.log(response.data)
             if (response.status === 200) {
-              this.token = response.data.data.value
+              this.token = response.data.Auth
               // saveToken(this.token)
               const parameters = {}
               parameters.token = this.token
               this.$store.dispatch('loginAction', parameters)
               // EventBus.$emit('logged')
               this.$router.push({ name: 'Dashboard' })
-              this.$router.go()
+              // this.$router.go()
 
               console.log('Authorized')
               this.loginError = false
@@ -137,7 +140,7 @@
             }
           })
           .catch(error => {
-            console.log(this.email + this.password)
+            console.log(this.user + this.password)
             this.loginError = true
             throw new Error(error)
           })

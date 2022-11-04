@@ -2,17 +2,18 @@ import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import JwtService from '@/common/jwt.service'
-import { API_URL } from '@/common/config'
+import { SALI_URL } from './config'
 
 const ApiService = {
   init () {
     Vue.use(VueAxios, axios)
-    Vue.axios.defaults.baseURL = API_URL
+    Vue.axios.defaults.baseURL = SALI_URL
+    this.setHeader()
   },
 
   setHeader () {
     Vue.axios.defaults.headers.common.AccessControlAllowOrigin = '*'
-    Vue.axios.defaults.headers.common.Authorization = `Token ${JwtService.getToken()}`
+    Vue.axios.defaults.headers.common.Authorization = `Bearer ${JwtService.getToken()}`
   },
 
   query (resource, params) {
@@ -262,7 +263,7 @@ export const ArticlesService = {
 }
 
 export const LoginService = {
-  login (email, password) {
-      return ApiService.post('login', { email: email, password: password })
+  login (user, password) {
+      return ApiService.post('login', { username: user, password: password })
     },
 }
