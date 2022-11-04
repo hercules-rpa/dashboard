@@ -95,16 +95,28 @@
               </div>
               <div>
                 <span class="text-subtitle-1 font-weight-light">Fin: </span>
-                <span class="text-subtitle-1 font-weight-thin">{{ log.end_time | date }}</span>
+                <span class="text-subtitle-1 font-weight-thin">{{ !log.finished ? '------' : formatDate(log.end_time) }}</span>
               </div>
               <div>
                 <span class="text-subtitle-1 font-weight-light">Estado: </span>
                 <span
                   class="text-subtitle-1 font-weight-normal"
                   :class="[log.finished ? 'green--text' : 'yellow--text']"
-                >{{ log.finished=true ? 'FINALIZADO' : 'EN PROGRESO' }}</span>
+                >{{ log.finished ? 'FINALIZADO' : 'EN PROGRESO' }}</span>
               </div>
               <div>
+                <v-progress-linear
+                  v-model="log.completed"
+                  height="20"
+                  width="10"
+                  :color="log.finished ? 'green' : 'yellow'"
+                  readonly
+                  class="mt-2 v-progress-linear"
+                >
+                  <strong>{{ Math.ceil(log.finished ? 100 : log.completed) }}%</strong>
+                </v-progress-linear>
+              </div>
+              <div class="mt-2">
                 <div>
                   <span class="text-subtitle-1 font-weight-light">Resultado: </span>
                   <span
@@ -203,6 +215,7 @@
 </template>
 <script>
   import { LogsService, SchedulesService } from '@/common/api.service'
+  import moment from 'moment'
   export default {
     name: 'Robot',
     data () {
@@ -215,73 +228,7 @@
         log: {
           data: '',
         },
-        alog: {
-          id: null,
-          id_process: null,
-          id_robot: '',
-          log_file_path: '18-05-2021-14:25:00ProcessHolaMundo.log',
-          process_name: '',
-          data: '',
-          start_time: null,
-          data_listener: null,
-          end_time: null,
-          state: null,
-          finished: true,
-        },
         schedule: {},
-        aschedule: {
-          id: '0d6d91d4b7d411eb8b33433d08e87ab',
-          active: true,
-          time_schedule: {
-            every: [10, 'seconds'],
-            at: null,
-            forever: false,
-            tag: 'cada 10 segundos',
-            category: 'robot1',
-          },
-          logs: [
-            {
-              id: '94166',
-              id_robot: 'robotedu1',
-              process_name: 'Hola Mundo',
-              id_process: '1',
-              state: 'FINISHED',
-              start_time: 1621340701.475856,
-              end_time: 1621340713.8564677,
-              finished: true,
-            },
-            {
-              id: '10811',
-              id_robot: 'robotedu1',
-              process_name: 'Send Mail',
-              id_process: '1',
-              state: 'RUNNING',
-              start_time: 1621340701.475856,
-              end_time: 1621340713.8564677,
-              finished: true,
-            },
-            {
-              id: '34483',
-              id_robot: 'robotedu1',
-              process_name: 'Hola Mundo',
-              id_process: '1',
-              state: 'FINISHED',
-              start_time: 1621340701.475856,
-              end_time: 1621340713.8564677,
-              finished: true,
-            },
-            {
-              id: '91775',
-              id_robot: 'robotedu1',
-              process_name: 'Hola Mundo',
-              id_process: '1',
-              state: 'FINISHED',
-              start_time: 1621340701.475856,
-              end_time: 1621340713.8564677,
-              finished: true,
-            },
-          ],
-        },
         headers: [
           {
             sortable: true,
@@ -336,6 +283,7 @@
               console.log(response.data)
               this.schedule = response.data
               this.getLogSimple(this.schedule.logs[0])
+              console.log(this.schedule.logs[0].finished)
             })
             .catch(error => {
               throw new Error(error)
@@ -363,6 +311,9 @@
         console.log(value)
         console.log(data)
         this.$router.push('/pages/logs/' + data.item.id)
+      },
+      formatDate (time) {
+        return moment(time * 1000).format('DD/MM/YYYY HH:mm:ss')
       },
       downloadLog (log) {
         const link = document.createElement('a')

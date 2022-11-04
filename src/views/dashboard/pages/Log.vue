@@ -33,6 +33,7 @@
                   v-model="log.completed"
                   height="25"
                   readonly
+                  :color="log.finished ? 'green' : 'yellow'"
                   class="mt-2 v-progress-linear"
                 >
                   <strong>{{ Math.ceil(log.finished ? 100 : log.completed) }}%</strong>
@@ -43,7 +44,7 @@
                 <span
                   class="text-subtitle-1 font-weight-normal"
                   :class="[log.finished ? 'green--text' : 'yellow--text']"
-                >{{ log.finished=true ? 'FINALIZADO' : 'EN PROGRESO' }}</span>
+                >{{ log.finished ? 'FINALIZADO' : 'EN PROGRESO' }}</span>
               </div>
               <div>
                 <span class="text-subtitle-1 font-weight-light">Resultado: </span>
@@ -88,7 +89,7 @@
               </div>
               <div>
                 <span class="text-subtitle-1 font-weight-light">Fin: </span>
-                <span class="text-subtitle-1 font-weight-thin">{{ log.end_time | date }}</span>
+                <span class="text-subtitle-1 font-weight-thin">{{ !log.finished ? '------' : formatDate(log.end_time) }}</span>
               </div>
             </v-col>
           </v-row>
@@ -128,6 +129,7 @@
 </template>
 <script>
   import { LogsService } from '@/common/api.service'
+  import moment from 'moment'
   export default {
     name: 'Robot',
     data () {
@@ -174,6 +176,9 @@
               throw new Error(error)
             })
         }, 1000)
+      },
+      formatDate (time) {
+        return moment(time * 1000).format('DD/MM/YYYY HH:mm:ss')
       },
       getLog (idLog) {
         this.dialog = true
