@@ -21,21 +21,9 @@
         :headers="headers"
         :items="configs"
         :search="search"
-        @dblclick:row="goToForm"
+        loading-text="Cargando datos...por favor espere"
+        @dblclick:row="goToConfig"
       >
-        <template v-slot:[`item.capable_robots`]="{ item }">
-          <div
-            v-for="robot in item.capable_robots"
-            :key="robot"
-          >
-            <router-link
-              class="blue--text text--darken-3"
-              :to="{ path: '/pages/robots/'+robot }"
-            >
-              {{ robot }}
-            </router-link>
-          </div>
-        </template>
         <template v-slot:[`item.controls`]="{ item }">
           <v-btn
             class="ma-2"
@@ -119,10 +107,10 @@
         console.log(p)
         this.$router.push('/pages/settings/' + p.path.replaceAll('/', '+'))
       },
-      goToForm (value, data) {
-        console.log(value)
+      goToConfig (event, data) {
         console.log(data)
-        this.$router.push('/pages/newprocess/' + data.item.process_id + '/form')
+        console.log(event)
+        this.$router.push('/pages/settings/' + data.item.path.replaceAll('/', '+'))
       },
     },
   }

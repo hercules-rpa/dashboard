@@ -45,7 +45,7 @@
             text
             @click="goToLog(lData)"
           >
-            Descargar
+            Ir al Log
           </v-btn>
           <v-btn
             color="primary"
@@ -528,7 +528,7 @@
             colors: ['#528254'],
           },
           series: [{
-            name: 'cpu-usage',
+            name: 'ram-usage',
             data: [30, 40, 45, 50, 49, 60, 70, 91],
           }],
         },
@@ -547,7 +547,7 @@
             colors: ['#0e8c9c'],
           },
           series: [{
-            name: 'cpu-usage',
+            name: 'disk-usage',
             data: [30, 40, 45, 50, 49, 60, 70, 91],
           }],
         },
