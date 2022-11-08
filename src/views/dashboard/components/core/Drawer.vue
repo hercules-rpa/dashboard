@@ -51,8 +51,6 @@
       expand
       nav
     >
-      <!-- Style cascading bug  -->
-      <!-- https://github.com/vuetifyjs/vuetify/pull/8574 -->
       <div />
 
       <template v-for="(item, i) in computedItems">
@@ -71,8 +69,6 @@
         />
       </template>
 
-      <!-- Style cascading bug  -->
-      <!-- https://github.com/vuetifyjs/vuetify/pull/8574 -->
       <div />
     </v-list>
 
@@ -138,22 +134,6 @@
           title: 'Preferencias globales',
           to: '/pages/globalsettings',
         },
-
-        // {
-        //   icon: 'mdi-account',
-        //   title: 'user',
-        //   to: '/pages/user',
-        // },
-        // {
-        //   title: 'google',
-        //   icon: 'mdi-map-marker',
-        //   to: '/maps/google-maps',
-        // },
-        // {
-        //   title: 'notifications',
-        //   icon: 'mdi-bell',
-        //   to: '/components/notifications',
-        // },
       ],
     }),
 

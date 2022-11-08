@@ -1,4 +1,3 @@
-// import { default as format } from 'date-fns/format'
 import moment from 'moment'
 
 export default date => {

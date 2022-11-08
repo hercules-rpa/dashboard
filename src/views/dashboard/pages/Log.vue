@@ -200,7 +200,6 @@
               })
           } else {
             clearInterval(this.timerid)
-            // this.modFiles();
           }
         }, 1000)
       },

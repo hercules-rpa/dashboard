@@ -45,7 +45,6 @@
 </template>
 
 <script>
-  // Utilities
   import kebabCase from 'lodash/kebabCase'
   import { mapState } from 'vuex'
 

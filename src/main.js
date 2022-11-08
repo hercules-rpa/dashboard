@@ -7,7 +7,6 @@ import './plugins/chartist'
 import './plugins/vee-validate'
 import vuetify from './plugins/vuetify'
 import i18n from './i18n'
-// import axios from 'axios'
 
 import ApiService from './common/api.service'
 import DateFilter from './common/date.filter'
@@ -20,12 +19,6 @@ import VueFeedbackReaction from 'vue-feedback-reaction'
 import VJsoneditor from 'v-jsoneditor/src/index'
 import VueApexCharts from 'vue-apexcharts'
 import VueHtml2pdf from 'vue-html2pdf'
-
-// import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-
-// Import Bootstrap an BootstrapVue CSS files (order is important)
-// import 'bootstrap/dist/css/bootstrap.css'
-// import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.config.productionTip = false
 
@@ -66,7 +59,6 @@ Vue.use(VueFormulate, {
     const data = await result.json()
     console.log(data)
     return data
-    // return await result.json()
   } catch (err) {
     error('Unable to upload file')
   }

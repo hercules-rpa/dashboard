@@ -155,7 +155,6 @@
       downloadSingleReport () {
         const link = document.createElement('a')
         var strContent = ''
-        // const blob = new Blob([this.log.data.replace(/(\\r)*\\n/g, '\n')], { type: 'application/txt' })
 
         for (var j = 0; j < this.selectedInvestigador.areasToPrint.length; j++) {
           const a = this.selectedInvestigador.areasToPrint[j]
@@ -173,7 +172,6 @@
       printToCSV () {
         const link = document.createElement('a')
         var strContent = ''
-        // const blob = new Blob([this.log.data.replace(/(\\r)*\\n/g, '\n')], { type: 'application/txt' })
         for (var i = 0; i < this.arrayInvestigadores.length; i++) {
           const inv = this.arrayInvestigadores[i]
           console.log('INV', inv)

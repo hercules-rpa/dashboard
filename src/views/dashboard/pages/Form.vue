@@ -440,7 +440,6 @@
         .then(response => {
           this.processDesc = response.data
           console.log(this.processDesc)
-          // this.processDesc.capable_robots.unshift('None')
         })
         .catch((error) => {
           throw new Error(error)
@@ -456,7 +455,6 @@
     },
     methods: {
       closeDialog () {
-        // TODO 1:Revisar esto
         this.dialog = false
         this.$router.push('/pages/newprocess/')
       },
@@ -468,8 +466,6 @@
       },
       formatTimeSchedule () {
         this.tscheduleFormatted.every = [this.timeSchedule.every_number === undefined ? null : this.timeSchedule.every_number, this.timeSchedule.every_unit]
-        // this.tscheduleFormatted.every[0] = this.timeSchedule.every_number
-        // this.tscheduleFormatted.every[1] = this.timeSchedule.every_unit
         this.tscheduleFormatted.at = this.timeSchedule.at
         this.tscheduleFormatted.forever = this.timeSchedule.forever
         this.tscheduleFormatted.tag = this.timeSchedule.tag
@@ -496,11 +492,9 @@
           this.params.process.priority = this.generalOptions.priority
           console.log(this.params)
 
-          // EJECUTAMOS PROCESO CON LOS PARAMETROS
           console.log(this.params)
           OrchestratorService.execute(this.params).then((response) => {
             console.log(response.data)
-            // alert(response.data.description)
             this.jobData = response.data
             this.code = response.status
             console.log(this.code)

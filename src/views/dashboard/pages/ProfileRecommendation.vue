@@ -344,16 +344,8 @@
         this.buildResponse(this.items[0].children, areasList)
         this.areasToPrint = areasList
         console.log('AREASLIST : ', areasList)
-        // if (!(await this.validateControlValue())) return
         this.$refs.html2Pdf.generatePdf()
       },
-      // validateControlValue () {
-      //   if (this.controlValue.pdfQuality > 2) {
-      //     alert('pdf-quality value should only be 0 - 2')
-      //     this.controlValue.pdfQuality = 2
-      //     return false
-      //   }
-      // },
       onProgress (progress) {
         this.progress = progress
         console.log(`PDF generation progress: ${progress}%`)
@@ -439,11 +431,9 @@
       selectItem (item) {
         if (!this.isInAnyChildren(item)) {
           this.itemsSelected.set(item.id, item)
-          // item.select()
 
           this.fillChildrenRecursive(item)
 
-          // this.tree.push(this.item)
           console.log(this.items)
           console.log('ITEM :', item)
           console.log(this.itemsSelected)

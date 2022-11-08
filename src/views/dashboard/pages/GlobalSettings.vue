@@ -699,7 +699,6 @@
           })
       },
       closeDialog () {
-        // TODO 1:Revisar esto
         this.dialog = false
         this.$router.push('/pages/newprocess/')
       },
@@ -711,8 +710,6 @@
       },
       formatTimeSchedule () {
         this.tscheduleFormatted.every = [this.timeSchedule.every_number === undefined ? null : this.timeSchedule.every_number, this.timeSchedule.every_unit]
-        // this.tscheduleFormatted.every[0] = this.timeSchedule.every_number
-        // this.tscheduleFormatted.every[1] = this.timeSchedule.every_unit
         this.tscheduleFormatted.at = this.timeSchedule.at
         this.tscheduleFormatted.forever = this.timeSchedule.forever
         this.tscheduleFormatted.tag = this.timeSchedule.tag

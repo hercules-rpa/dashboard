@@ -77,7 +77,6 @@
 <script>
   import Vue from 'vue'
   import { LoginService } from '@/common/api.service'
-  // import { saveToken } from '@/common/jwt.service'
   export default {
     name: 'Login',
     data () {

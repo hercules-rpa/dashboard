@@ -103,7 +103,6 @@
           RobotsService.query().then(response => {
             console.log(response.data)
             this.robots = response.data
-            // TODO: mejorar esto por que es una mierda
             this.robotsOnline = []
             this.robotsOffline = []
             this.robots.forEach(robot => {

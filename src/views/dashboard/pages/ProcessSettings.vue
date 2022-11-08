@@ -288,7 +288,6 @@
             this.comisionesArray.push({ id: resp[0], value: resp[1] })
           })
           console.log(this.comisionesArray)
-          // this.processDesc.capable_robots.unshift('None')
         })
         .catch((error) => {
           throw new Error(error)

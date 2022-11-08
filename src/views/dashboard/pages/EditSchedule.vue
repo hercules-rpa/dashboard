@@ -244,13 +244,11 @@
         .then(response => {
           console.log('SCHEDULE' + response.data)
           this.schedule = response.data
-          // this.processDesc.capable_robots.unshift('None')
 
           ProcessService.get(this.schedule.id_process)
             .then(response => {
               console.log('PROCESO' + response.data)
               this.processDesc = response.data
-              // this.processDesc.capable_robots.unshift('None')
             })
             .catch((error) => {
               throw new Error(error)
@@ -267,8 +265,6 @@
       },
       formatTimeSchedule () {
         this.tscheduleFormatted.every = [this.timeSchedule.every_number === undefined ? null : this.timeSchedule.every_number, this.timeSchedule.every_unit]
-        // this.tscheduleFormatted.every[0] = this.timeSchedule.every_number
-        // this.tscheduleFormatted.every[1] = this.timeSchedule.every_unit
         this.tscheduleFormatted.at = this.timeSchedule.at
         this.tscheduleFormatted.forever = this.timeSchedule.forever
         this.tscheduleFormatted.tag = this.timeSchedule.tag
@@ -285,7 +281,6 @@
         console.log(this.params)
         SchedulesService.modify(this.schedule.id, this.params).then((response) => {
           console.log(response.data)
-          // alert(response.data.description)
           this.jobData = response.data
           this.code = response.status
           console.log(this.code)
