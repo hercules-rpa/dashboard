@@ -4,13 +4,19 @@ import VueAxios from 'vue-axios'
 import JwtService from '@/common/jwt.service'
 import API_URL from './config'
 
-const ApiService = {
+export const ApiService = {
   init () {
     Vue.use(VueAxios, axios)
     Vue.axios.defaults.baseURL = API_URL
     this.setHeader()
   },
 
+  updateToken (token) {
+    Vue.axios.defaults.headers.common.Authorization = `Bearer ${JwtService.getToken()}`
+  },
+  destroyToken () {
+    Vue.axios.defaults.headers.common.Authorization = 'null'
+  },
   setHeader () {
     Vue.axios.defaults.headers.common.AccessControlAllowOrigin = '*'
     Vue.axios.defaults.headers.common.Authorization = `Bearer ${JwtService.getToken()}`
@@ -260,4 +266,15 @@ export const LoginService = {
   login (user, password) {
       return ApiService.post('login', { username: user, password: password })
     },
+}
+
+export const ComisionesService = {
+  getComisiones () {
+    return ApiService.query('acreditaciones/comisiones')
+  },
+}
+export const ComitesService = {
+  getComites () {
+    return ApiService.query('sexenios/comites')
+  },
 }

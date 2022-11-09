@@ -24,7 +24,7 @@
                   <v-toolbar-title>Hercules RPA Dashboard - Login</v-toolbar-title>
                 </v-toolbar>
                 <v-img
-                  src="https://www.um.es/image/journal/article?img_id=27599116&t=1656572736918"
+                  src="../../../assets/article.png"
                 />
                 <v-card-text>
                   <v-form
@@ -116,7 +116,6 @@
         this.loginError = false
       },
       login () {
-        console.log(this.user + this.password)
         LoginService.login(this.user, this.password)
           .then(response => {
             console.log(response.data)
@@ -129,7 +128,6 @@
               // EventBus.$emit('logged')
               this.$router.push({ name: 'Dashboard' })
               // this.$router.go()
-
               console.log('Authorized')
               this.loginError = false
             } else {

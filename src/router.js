@@ -8,11 +8,6 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      name: 'Login',
-      path: '/login',
-      component: () => import('@/views/dashboard/pages/Login'),
-    },
-    {
       path: '/p',
       component: () => import('@/views/dashboard/NormalIndex'),
       children: [
@@ -39,13 +34,18 @@ export default new Router({
       ],
     },
     {
+      name: 'Login',
+      path: '',
+      component: () => import('@/views/dashboard/pages/Login'),
+    },
+    {
       path: '/',
       component: () => import('@/views/dashboard/Index'),
       children: [
         // Dashboard
         {
           name: 'Dashboard',
-          path: '',
+          path: 'dashboard',
           component: () => import('@/views/dashboard/Dashboard'),
         },
         // NewProcess

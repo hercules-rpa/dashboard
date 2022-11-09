@@ -300,7 +300,7 @@
   </div>
 </template>
 <script>
-  import { ProcessService, OrchestratorService } from '@/common/api.service'
+  import { ProcessService, OrchestratorService, ComisionesService, ComitesService } from '@/common/api.service'
   export default {
     name: 'Form',
     data () {
@@ -309,6 +309,8 @@
         timeSchedule: {},
         foreverValue: false,
         concreteValue: false,
+        comites: {},
+        comisiones: {},
         processParameters: {},
         capableRobots: {},
         processDesc: {},
@@ -436,6 +438,21 @@
       }
     },
     mounted: function () {
+      ComisionesService.getComisiones()
+        .then(response => {
+          console.log(response.data)
+          const array = Array.from(response.data, ([name, value]) => ({ name, value }))
+
+          console.log(array)
+        }).catch((error) => {
+          throw new Error(error)
+        })
+      ComitesService.getComites()
+        .then(response => {
+          console.log(response.data)
+        }).catch((error) => {
+          throw new Error(error)
+        })
       ProcessService.get(this.$route.params.idProcess)
         .then(response => {
           this.processDesc = response.data
