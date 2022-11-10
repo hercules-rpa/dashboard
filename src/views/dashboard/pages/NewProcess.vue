@@ -1,6 +1,6 @@
 <template>
   <v-container
-    id="new-process"
+    id="nuevo-proceso"
     fluid
     tag="section"
   >
@@ -58,7 +58,7 @@
 <script>
   import { ProcessService } from '@/common/api.service'
   export default {
-    name: 'NewProcess',
+    name: 'NuevoProcess',
 
     data () {
       return {

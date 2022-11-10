@@ -40,27 +40,6 @@
 
     <v-spacer />
 
-    <v-text-field
-      :label="$t('search')"
-      color="secondary"
-      hide-details
-      style="max-width: 165px;"
-    >
-      <template
-        v-if="$vuetify.breakpoint.mdAndUp"
-        v-slot:append-outer
-      >
-        <v-btn
-          class="mt-n2"
-          elevation="1"
-          fab
-          small
-        >
-          <v-icon>mdi-magnify</v-icon>
-        </v-btn>
-      </template>
-    </v-text-field>
-
     <div class="mx-3" />
 
     <v-btn
@@ -93,7 +72,7 @@
             bordered
           >
             <template v-slot:badge>
-              <span>5</span>
+              <span>0</span>
             </template>
 
             <v-icon>mdi-bell</v-icon>
@@ -190,15 +169,8 @@
 
     data: () => ({
       notifications: [
-        'El robot remoteedu1 se ha conectado',
-        'El robot remoteMacbook se ha desconectado',
-        'You\'re now friends with Andrew',
-        'Another Notification',
-        'Another one',
-        'El robot 5 ha sido actualizado',
       ],
       items: [
-        { title: 'Preferencias' },
         { title: 'Logout' },
       ],
     }),
