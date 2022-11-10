@@ -136,7 +136,10 @@ export const ProblemsService = {
 export const ProcessService = {
     query () {
         return ApiService.query('process')
-    },
+  },
+  getProcessVisible () {
+    return ApiService.query('process?visible=true')
+  },
     get (slug) {
         return ApiService.get('process', slug)
     },
@@ -213,26 +216,6 @@ export const FilesService = {
     return ApiService.post('files', blob)
   },
 }
-
-export const ArticlesService = {
-    query (type, params) {
-      return ApiService.query('articles' + (type === 'feed' ? '/feed' : ''), {
-        params: params,
-      })
-    },
-    get (slug) {
-      return ApiService.get('articles', slug)
-    },
-    create (params) {
-      return ApiService.post('articles', { article: params })
-    },
-    update (slug, params) {
-      return ApiService.update('articles', slug, { article: params })
-    },
-    destroy (slug) {
-      return ApiService.delete(`articles/${slug}`)
-    },
-  }
 
   export const ProfileRecommendationService = {
     query (params) {

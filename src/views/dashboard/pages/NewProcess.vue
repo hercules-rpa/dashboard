@@ -97,7 +97,7 @@
 
     },
     mounted: function () {
-      ProcessService.query()
+      ProcessService.getProcessVisible()
         .then(response => {
           console.log(response.data)
           this.processes = response.data
