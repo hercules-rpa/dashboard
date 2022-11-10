@@ -260,3 +260,8 @@ export const ComitesService = {
     return ApiService.query('sexenios/comites')
   },
 }
+export const EventsService = {
+  query () {
+    return ApiService.query('events')
+  },
+}
