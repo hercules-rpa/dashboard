@@ -278,16 +278,14 @@
       }
     },
     mounted: function () {
-      console.log(this.$route.params.configPath)
       ProcessSettingsService.getConfig(this.$route.params.configPath.replaceAll('+', '/'))
         .then(response => {
           this.comisiones = response.data
-          console.log(this.processDesc)
+
           const it = Object.entries(this.comisiones)
           it.forEach(resp => {
             this.comisionesArray.push({ id: resp[0], value: resp[1] })
           })
-          console.log(this.comisionesArray)
         })
         .catch((error) => {
           throw new Error(error)
@@ -310,7 +308,7 @@
         ProcessSettingsService.editConfig(this.$route.params.configPath.replaceAll('+', '/'), this.comisiones)
           .then(response => {
             if (response.status === 200) {
-              console.log('modificado unitario correcto')
+
             }
           })
           .catch((error) => {
@@ -319,26 +317,25 @@
         this.dialogEdit = false
       },
       onErrorEditor () {
-        console.log('Error editor')
+
       },
       guardarTodo () {
         ProcessSettingsService.editConfig(this.$route.params.configPath.replaceAll('+', '/'), this.comisiones)
           .then(response => {
             if (response.status === 200) {
-              console.log('modificado correcto')
+
             }
           })
           .catch((error) => {
             throw new Error(error)
           })
-        console.log(this.comisiones)
+
         this.dialogEditAll = false
       },
       resetDefaultConfig () {
         ProcessSettingsService.resetConfig(this.$route.params.configPath.replaceAll('+', '/'))
           .then(response => {
             if (response.status === 200) {
-              console.log('reseteado correcto')
               this.dialogReset = false
             } else {
               alert('Error')

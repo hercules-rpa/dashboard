@@ -151,7 +151,6 @@
     mounted: function () {
       LogsService.get(this.$route.params.idLog)
         .then(response => {
-          console.log(response.data)
           this.log = response.data
         })
         .catch(error => {
@@ -169,7 +168,6 @@
         this.polling = setInterval(() => {
           LogsService.get(this.$route.params.idLog)
             .then(response => {
-              console.log(response.data)
               this.log = response.data
             })
             .catch(error => {
@@ -193,7 +191,6 @@
                 this.lData.processName = response.data.process_name
                 this.lData.processId = response.data.id_process
                 this.lData.idLog = idLog
-                console.log(response.data)
               })
               .catch((error) => {
                 throw new Error(error)

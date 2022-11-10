@@ -157,7 +157,6 @@ export const ProcessSettingsService = {
       return ApiService.patch('register/config?path=' + path, params)
   },
   getConfig (path) {
-      console.log(path)
       return ApiService.query('register/config?path=' + path)
   },
   resetConfig (path) {

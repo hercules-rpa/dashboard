@@ -339,39 +339,34 @@
 
     methods: {
       async downloadPdf () {
-        console.log('ITEMSINICIAL : ', this.items)
         const areasList = []
         this.buildResponse(this.items[0].children, areasList)
         this.areasToPrint = areasList
-        console.log('AREASLIST : ', areasList)
+
         this.$refs.html2Pdf.generatePdf()
       },
       onProgress (progress) {
         this.progress = progress
-        console.log(`PDF generation progress: ${progress}%`)
       },
       startPagination () {
-        console.log('PDF has started pagination')
+
       },
       hasPaginated () {
-        console.log('PDF has been paginated')
+
       },
       async beforeDownload ({ html2pdf, options, pdfContent }) {
-        console.log('On Before PDF Generation')
+
       },
       hasDownloaded (blobPdf) {
-        console.log('PDF has downloaded yehey')
         this.pdfDownloaded = true
-        console.log(blobPdf)
       },
       loadData () {
         this.token = this.$route.params.token
         ProfileRecommendationService.query(this.$route.params.token)
           .then(response => {
             this.code = response.status
-            console.log(response.status)
+
             if (response.status === 200) {
-              console.log(response.data)
               this.areastematicas = response.data
               this.areasTematicasIniciales = response.data
               this.items = this.fillItems()
@@ -383,7 +378,7 @@
           .catch(error => {
             this.error = true
             this.code = error
-            console.log(error)
+
             throw new Error(error)
           })
       },
@@ -402,7 +397,7 @@
         }]
       },
       fillChildrenRecursive (padre) {
-        // console.log('recursive')
+        //
         if (padre.children.length > 0) {
           padre.children.forEach(hijo => {
             hijo.rating = padre.rating
@@ -433,10 +428,6 @@
           this.itemsSelected.set(item.id, item)
 
           this.fillChildrenRecursive(item)
-
-          console.log(this.items)
-          console.log('ITEM :', item)
-          console.log(this.itemsSelected)
         }
       },
       buildResponse (array, areasList) {
@@ -457,14 +448,13 @@
         this.$router.go()
       },
       save () {
-        console.log('ITEMSINICIAL : ', this.items)
         const areasList = []
         this.buildResponse(this.items[0].children, areasList)
-        console.log('AREASLIST : ', areasList)
+
         ProfileRecommendationService.register(this.$route.params.token, areasList)
           .then(response => {
             this.code = response.status
-            console.log(response)
+
             if (this.response.status === 201) {
               this.dialog = true
             } else {
@@ -478,8 +468,6 @@
       initialize () {
         this.areastematicas = this.areasTematicasIniciales
         this.items = this.fillItems()
-        console.log(this.areastematicas)
-        console.log(this.areasTematicasIniciales)
       },
       borrarDatosDialog () {
         this.perfilBase = false
@@ -490,7 +478,7 @@
         ProfileRecommendationService.borrarDatosEntrenamiento(token, perfilBase)
           .then(response => {
             this.codeDelete = response.status
-            console.log(response)
+
             if (this.response.status === 200) {
               this.dialog4 = true
             } else {

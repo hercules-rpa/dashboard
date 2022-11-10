@@ -101,7 +101,7 @@
       // if (this.$store.getters.isLogged) {
       //   this.$router.push('pages/dashboard')
       // }
-      // console.log('mounted')
+      //
     },
     methods: {
       loginMock () {
@@ -112,13 +112,11 @@
         // EventBus.$emit('logged')
         this.$router.push({ name: 'Dashboard' })
 
-        console.log('Authorized')
         this.loginError = false
       },
       login () {
         LoginService.login(this.user, this.password)
           .then(response => {
-            console.log(response.data)
             if (response.status === 200) {
               this.token = response.data.Auth
               // saveToken(this.token)
@@ -128,16 +126,14 @@
               // EventBus.$emit('logged')
               this.$router.push({ name: 'Dashboard' })
               // this.$router.go()
-              console.log('Authorized')
+
               this.loginError = false
             } else {
-              console.log('Authorization ERROR')
               Vue.prototype.$logged = false
               this.loginError = true
             }
           })
           .catch(error => {
-            console.log(this.user + this.password)
             this.loginError = true
             throw new Error(error)
           })

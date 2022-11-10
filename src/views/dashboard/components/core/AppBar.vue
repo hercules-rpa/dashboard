@@ -210,12 +210,10 @@
     methods: {
       selectSection (item) {
         if (item.title === 'Logout') {
-          console.log('nos deslogueamos')
           this.$store.dispatch('logoutAction')
           this.$router.push({ path: '/' })
         }
         if (item.title === 'Preferencias') {
-          console.log('vamos a settings')
           this.$router.push({ path: '/pages/user' })
         }
       },

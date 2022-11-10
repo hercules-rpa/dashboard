@@ -673,7 +673,6 @@
     mounted: function () {
       RobotsService.get(this.$route.params.idRobot)
         .then(response => {
-          console.log(response.data)
           this.robot = response.data
           this.cpuChart.data.series[0] = this.robot.stats.cpu
           this.cpuChartApex.series[0].data = this.robot.stats.cpu.map(el => el.toFixed(1))
@@ -708,7 +707,6 @@
         this.polling = setInterval(() => {
           RobotsService.get(this.$route.params.idRobot)
             .then(response => {
-              console.log(response.data)
               this.robot = response.data
             })
             .catch(error => {
@@ -730,7 +728,6 @@
                 this.lData.processName = response.data.process_name
                 this.lData.processId = response.data.id_process
                 this.lData.idLog = idLog
-                console.log(response.data)
               })
               .catch((error) => {
                 this.dialog = false
@@ -753,8 +750,6 @@
         document.body.removeChild(link)
       },
       goToExecution (value, data) {
-        console.log(value)
-        console.log(data)
         this.$router.push('/pages/logs/' + data.item.id)
       },
       getErrorLine (msg) {

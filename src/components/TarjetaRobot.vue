@@ -228,7 +228,6 @@
                 this.lData.robot = response.data.id_robot
                 this.lData.processName = response.data.process_name
                 this.lData.processId = response.data.id_process
-                console.log(response.data)
               })
               .catch((error) => {
                 throw new Error(error)

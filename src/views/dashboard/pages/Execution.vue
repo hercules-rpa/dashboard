@@ -261,7 +261,6 @@
     mounted: function () {
       SchedulesService.get(this.$route.params.idSchedule)
         .then(response => {
-          console.log(response.data)
           this.schedule = response.data
           this.getLogSimple(this.schedule.logs[0])
         })
@@ -280,10 +279,8 @@
         this.polling = setInterval(() => {
           SchedulesService.get(this.$route.params.idSchedule)
             .then(response => {
-              console.log(response.data)
               this.schedule = response.data
               this.getLogSimple(this.schedule.logs[0])
-              console.log(this.schedule.logs[0].finished)
             })
             .catch(error => {
               throw new Error(error)
@@ -308,8 +305,6 @@
           })
       },
       goToLog (value, data) {
-        console.log(value)
-        console.log(data)
         this.$router.push('/pages/logs/' + data.item.id)
       },
       formatDate (time) {

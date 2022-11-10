@@ -158,7 +158,7 @@
 
         for (var j = 0; j < this.selectedInvestigador.areasToPrint.length; j++) {
           const a = this.selectedInvestigador.areasToPrint[j]
-          console.log('AREA ', a)
+
           strContent = strContent + a.nombre.replace(',', '') + ',' + a.puntuacion + '\n'
         }
 
@@ -174,11 +174,11 @@
         var strContent = ''
         for (var i = 0; i < this.arrayInvestigadores.length; i++) {
           const inv = this.arrayInvestigadores[i]
-          console.log('INV', inv)
+
           strContent = strContent + inv.nombre + ',' + inv.email + '\n'
           for (var j = 0; j < inv.areasToPrint.length; j++) {
             const a = inv.areasToPrint[j]
-            console.log('AREA ', a)
+
             strContent = strContent + a.nombre.replace(',', '') + ',' + a.puntuacion + '\n'
           }
         }
@@ -201,13 +201,12 @@
               investigador.areasToPrint = []
               this.buildResponse(investigador.items[0].children, investigador.areasToPrint)
               this.invLoaded = false
-              console.log(investigador)
             })
           })
           .catch(error => {
             this.error = false
             this.code = error
-            console.log(error)
+
             throw new Error(error)
           })
       },
@@ -226,7 +225,7 @@
         }]
       },
       fillChildrenRecursive (padre) {
-        // console.log('recursive')
+        //
         if (padre.children.length > 0) {
           padre.children.forEach(hijo => {
             hijo.rating = padre.rating

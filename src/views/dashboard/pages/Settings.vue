@@ -82,7 +82,6 @@
     mounted: function () {
       ProcessSettingsService.query()
         .then(response => {
-          console.log(response.data)
           this.configs = response.data
         })
         .catch(error => {
@@ -91,7 +90,7 @@
     },
     methods: {
       complete (index) {
-        console.log('ventana nuevo proceso')
+
       },
       getProcessForm (idProcess) {
         ProcessService.getForm(idProcess)
@@ -104,12 +103,9 @@
           })
       },
       goToProcessSettings (p) {
-        console.log(p)
         this.$router.push('/pages/settings/' + p.path.replaceAll('/', '+'))
       },
       goToConfig (event, data) {
-        console.log(data)
-        console.log(event)
         this.$router.push('/pages/settings/' + data.item.path.replaceAll('/', '+'))
       },
     },

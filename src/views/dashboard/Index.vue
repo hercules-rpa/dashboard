@@ -26,17 +26,17 @@
     created: function () {
       // this.$router.beforeEach((to, from, next) => {
       //   if (!this.$store.getters.isLogged && to.name !== 'Login') {
-      //     console.log(this.$store.getters.isLogged)
-      //     console.log(to.name)
+      //
+      //
       //     // return { name: 'Login' }
       //     return '/'
       //   } else {
-      //     console.log(this.$store.getters.isLogged)
-      //     console.log(to.name)
+      //
+      //
       //     return to.name
       //   }
-      //   // console.log(this.$store.getters.isLogged)
-      //   // console.log(to.name)
+      //   //
+      //   //
       // })
     },
     mounted: function () {

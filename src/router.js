@@ -129,12 +129,6 @@ export default new Router({
           path: 'pages/problems',
           component: () => import('@/views/dashboard/pages/Problems'),
         },
-        // Pages
-        {
-          name: 'UserProfile',
-          path: 'pages/user',
-          component: () => import('@/views/dashboard/pages/UserProfile'),
-        },
         {
           name: 'Notifications',
           path: 'components/notifications',
@@ -161,12 +155,6 @@ export default new Router({
           name: 'Google Maps',
           path: 'maps/google-maps',
           component: () => import('@/views/dashboard/maps/GoogleMaps'),
-        },
-        // Upgrade
-        {
-          name: 'Upgrade',
-          path: 'upgrade',
-          component: () => import('@/views/dashboard/Upgrade'),
         },
       ],
     },

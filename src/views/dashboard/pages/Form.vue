@@ -440,30 +440,26 @@
     mounted: function () {
       ComisionesService.getComisiones()
         .then(response => {
-          console.log(response.data)
           const array = Array.from(response.data, ([name, value]) => ({ name, value }))
-
           console.log(array)
         }).catch((error) => {
           throw new Error(error)
         })
       ComitesService.getComites()
         .then(response => {
-          console.log(response.data)
+
         }).catch((error) => {
           throw new Error(error)
         })
       ProcessService.get(this.$route.params.idProcess)
         .then(response => {
           this.processDesc = response.data
-          console.log(this.processDesc)
         })
         .catch((error) => {
           throw new Error(error)
         })
       ProcessService.getForm(this.$route.params.idProcess)
         .then(response => {
-          console.log(response.data)
           this.schema = response.data
         })
         .catch(error => {
@@ -478,7 +474,6 @@
       downloadLog (lData) {
       },
       goToExecution () {
-        console.log(this.jobData)
         this.$router.push('/pages/executions/' + this.jobData.schedule_id)
       },
       formatTimeSchedule () {
@@ -487,7 +482,7 @@
         this.tscheduleFormatted.forever = this.timeSchedule.forever
         this.tscheduleFormatted.tag = this.timeSchedule.tag
         this.tscheduleFormatted.category = 'asdf'
-        console.log(this.tscheduleFormatted)
+
         return this.tscheduleFormatted
       },
       execute () {
@@ -507,17 +502,13 @@
           this.params.process.parameters = this.schema === null ? null : this.processParameters
           this.params.process.id_process = parseInt(this.$route.params.idProcess)
           this.params.process.priority = this.generalOptions.priority
-          console.log(this.params)
 
-          console.log(this.params)
           OrchestratorService.execute(this.params).then((response) => {
-            console.log(response.data)
             this.jobData = response.data
             this.code = response.status
-            console.log(this.code)
+
             this.dialog = true
           }).catch(error => {
-            console.log(error)
             this.code = error.status
             this.dialog = true
             throw new Error(error)

@@ -99,7 +99,6 @@
     mounted: function () {
       ProcessService.getProcessVisible()
         .then(response => {
-          console.log(response.data)
           this.processes = response.data
         })
         .catch(error => {
@@ -108,7 +107,7 @@
     },
     methods: {
       complete (index) {
-        console.log('ventana nuevo proceso')
+
       },
       getProcessForm (idProcess) {
         ProcessService.getForm(idProcess)
@@ -121,12 +120,9 @@
           })
       },
       goToProcessSettings (p) {
-        console.log(p)
         this.$router.push('/pages/settings')
       },
       goToForm (value, data) {
-        console.log(value)
-        console.log(data)
         this.$router.push('/pages/newprocess/' + data.item.process_id + '/form')
       },
     },

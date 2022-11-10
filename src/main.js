@@ -57,7 +57,6 @@ Vue.use(VueFormulate, {
     })
     progress(100) // (native fetch doesn’t support progress updates)
     const data = await result.json()
-    console.log(data)
     return data
   } catch (err) {
     error('Unable to upload file')

@@ -123,7 +123,6 @@
     mounted: function () {
       ProblemsService.query()
         .then(response => {
-          console.log(response.data)
           this.problems = response.data
         })
         .catch(error => {
@@ -132,11 +131,9 @@
     },
     methods: {
       complete (index) {
-        console.log('ventana nuevo proceso')
+
       },
       goToProblem (value, data) {
-        console.log(value)
-        console.log(data)
         this.$router.push('/pages/logs/' + data.item.log)
       },
       getErrorLine (msg) {
@@ -149,4 +146,4 @@
 <style lang="sass">
 .search-adjust
   width: 200px
-</style>
+</style>s

@@ -239,15 +239,12 @@
       }
     },
     mounted: function () {
-      console.log(this.$route.params.idSchedule)
       SchedulesService.get(this.$route.params.idSchedule)
         .then(response => {
-          console.log('SCHEDULE' + response.data)
           this.schedule = response.data
 
           ProcessService.get(this.schedule.id_process)
             .then(response => {
-              console.log('PROCESO' + response.data)
               this.processDesc = response.data
             })
             .catch((error) => {
@@ -260,7 +257,6 @@
     },
     methods: {
       goToSchedule () {
-        console.log(this.jobData)
         this.$router.push('/pages/executions/' + this.jobData.schedule_id)
       },
       formatTimeSchedule () {
@@ -269,7 +265,7 @@
         this.tscheduleFormatted.forever = this.timeSchedule.forever
         this.tscheduleFormatted.tag = this.timeSchedule.tag
         this.tscheduleFormatted.category = 'asdf'
-        console.log(this.tscheduleFormatted)
+
         return this.tscheduleFormatted
       },
       save () {
@@ -278,12 +274,11 @@
         this.params.process.parameters = this.schema === null ? null : this.processParameters
         this.params.process.id_process = this.schedule.id_process
         this.params.process.priority = this.generalOptions.priority
-        console.log(this.params)
+
         SchedulesService.modify(this.schedule.id, this.params).then((response) => {
-          console.log(response.data)
           this.jobData = response.data
           this.code = response.status
-          console.log(this.code)
+
           this.dialog = true
         })
       },

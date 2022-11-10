@@ -82,7 +82,6 @@
     },
     mounted: function () {
       RobotsService.query().then(response => {
-        console.log(response.data)
         this.robots = response.data
         this.robots.forEach(robot => {
           robot.online ? this.robotsOnline.push(robot) : this.robotsOffline.push(robot)
@@ -101,7 +100,6 @@
       pollData () {
         this.polling = setInterval(() => {
           RobotsService.query().then(response => {
-            console.log(response.data)
             this.robots = response.data
             this.robotsOnline = []
             this.robotsOffline = []

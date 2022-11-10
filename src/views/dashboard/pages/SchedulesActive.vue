@@ -230,7 +230,6 @@
       loadTable () {
         SchedulesService.query({ params: { active: true } })
           .then(response => {
-            console.log(response.data)
             this.schedules = response.data
           })
           .catch(error => {
@@ -238,7 +237,7 @@
           })
       },
       complete (index) {
-        console.log('ventana nuevo proceso')
+
       },
       getExecution (idExecution) {
         SchedulesService.getForm(idExecution)
@@ -250,8 +249,6 @@
           })
       },
       goToExecution (value, data) {
-        console.log(value)
-        console.log(data)
         this.$router.push('/pages/executions/' + data.item.id)
       },
       showModalDelete (schedule) {
@@ -262,10 +259,8 @@
         this.$router.push('/pages/schedules/' + schedule.id + '/edit')
       },
       deleteSchedule (id) {
-        console.log(id)
         SchedulesService.delete(id).then(
           response => {
-            console.log(response.data)
             this.dialog3 = false
             this.loadTable()
           },

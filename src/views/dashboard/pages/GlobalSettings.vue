@@ -100,28 +100,6 @@
                     :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/]]"
                   />
                   <FormulateInput
-                    class="mt-5"
-                    type="text"
-                    name="ftp_user"
-                    label="ftp user"
-                    :placeholder="globalSettings.ftp_user"
-                  />
-                  <FormulateInput
-                    class="mt-5"
-                    type="text"
-                    name="ftp_password"
-                    label="ftp password"
-                    :placeholder="globalSettings.ftp_password"
-                  />
-                  <FormulateInput
-                    class="mt-5"
-                    type="text"
-                    name="ftp_port"
-                    label="ftp port"
-                    :placeholder="globalSettings.port"
-                    :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/]]"
-                  />
-                  <FormulateInput
                     type="submit"
                     :disabled="isLoading"
                     :label="isLoading ? 'Cargando...' : 'Guardar'"
@@ -624,7 +602,6 @@
         SettingsService.editGlobalSettings(this.globalSettings)
           .then(response => {
             if (response.status === 200) {
-              console.log('modificado settings correcto')
               alert('Gracias, los ajustes se han modificado correctamente')
             }
           })
@@ -637,7 +614,6 @@
         SettingsService.editPSettings(this.pSettings)
           .then(response => {
             if (response.status === 200) {
-              console.log('modificado settings correcto')
               alert('Gracias, los ajustes se han modificado correctamente')
             }
           })
@@ -650,7 +626,6 @@
         SettingsService.editAMQPSettings(this.amqpSettings)
           .then(response => {
             if (response.status === 200) {
-              console.log('modificado settings correcto')
               alert('Gracias, los ajustes se han modificado correctamente')
             }
           })
@@ -663,7 +638,6 @@
         SettingsService.editDBProcessSettings(this.dbprocessSettings)
           .then(response => {
             if (response.status === 200) {
-              console.log('modificado settings correcto')
               alert('Gracias, los ajustes se han modificado correctamente')
             }
           })
@@ -676,7 +650,6 @@
         SettingsService.editDBBISettings(this.dbbiSettings)
           .then(response => {
             if (response.status === 200) {
-              console.log('modificado settings correcto')
               alert('Gracias, los ajustes se han modificado correctamente')
             }
           })
@@ -689,7 +662,6 @@
         SettingsService.editOrchestratorSettings(this.orchestratorSettings)
           .then(response => {
             if (response.status === 200) {
-              console.log('modificado settings correcto')
               alert('Gracias, los ajustes se han modificado correctamente')
             }
           })
@@ -705,7 +677,6 @@
       downloadLog (lData) {
       },
       goToExecution () {
-        console.log(this.jobData)
         this.$router.push('/pages/executions/' + this.jobData.schedule_id)
       },
       formatTimeSchedule () {
@@ -714,7 +685,7 @@
         this.tscheduleFormatted.forever = this.timeSchedule.forever
         this.tscheduleFormatted.tag = this.timeSchedule.tag
         this.tscheduleFormatted.category = 'asdf'
-        console.log(this.tscheduleFormatted)
+
         return this.tscheduleFormatted
       },
       execute () {

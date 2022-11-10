@@ -108,8 +108,6 @@
       FeedbackService.query(this.$route.params.token, this.$route.params.idconvocatoria + '/' + this.$route.params.util)
         .then(response => {
           if (response.status === 201 || response.status === 200) {
-            console.log(response.data)
-
             this.message = response.data
             this.error = false
             this.show = true

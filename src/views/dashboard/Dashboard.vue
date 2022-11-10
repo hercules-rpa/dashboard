@@ -416,7 +416,6 @@
     mounted: function () {
       StatisticsService.query()
         .then(response => {
-          console.log(response.data)
           this.data = response.data
           this.robotsOnline = this.data.robots_online
           this.itProblems = this.data.process_problems
@@ -446,7 +445,6 @@
         })
       LogsService.query()
         .then(response => {
-          console.log(response.data)
           this.executions = response.data
         })
         .catch(error => {
@@ -467,8 +465,6 @@
           })
       },
       goToExecution (value, data) {
-        console.log(value)
-        console.log(data)
         this.$router.push('/pages/logs/' + data.item.id)
       },
     },

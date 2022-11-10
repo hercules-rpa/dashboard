@@ -132,7 +132,6 @@
     mounted: function () {
       LogsService.query()
         .then(response => {
-          console.log(response.data)
           this.executions = response.data
         })
         .catch(error => {
@@ -141,7 +140,7 @@
     },
     methods: {
       complete (index) {
-        console.log('ventana nuevo proceso')
+
       },
       getExecution (idExecution) {
         SchedulesService.getForm(idExecution)
@@ -153,8 +152,6 @@
           })
       },
       goToExecution (value, data) {
-        console.log(value)
-        console.log(data)
         this.$router.push('/pages/logs/' + data.item.id)
       },
     },
