@@ -24,13 +24,13 @@ export const ApiService = {
 
   query (resource, params) {
     return Vue.axios.get(resource, params).catch(error => {
-      throw new Error(`[UMUROBOTS] ApiService ${error}`)
+      throw new Error(`[HERCULES-RPA] ApiService ${error}`)
     })
   },
 
   get (resource, slug = '') {
     return Vue.axios.get(`${resource}/${slug}`).catch(error => {
-      throw new Error(`[UMUROBOTS] ApiService ${error}`)
+      throw new Error(`[HERCULES-RPA] ApiService ${error}`)
     })
   },
 
@@ -52,13 +52,13 @@ export const ApiService = {
 
   delete (resource, slug = '') {
     return Vue.axios.delete(`${resource}/${slug}`).catch(error => {
-      throw new Error(`[UMUROBOTS] ApiService ${error}`)
+      throw new Error(`[HERCULES-RPA] ApiService ${error}`)
     })
   },
 
   deleteOld (resource) {
     return Vue.axios.delete(resource).catch(error => {
-      throw new Error(`[UMUROBOTS] ApiService ${error}`)
+      throw new Error(`[HERCULES-RPA] ApiService ${error}`)
     })
   },
 }
@@ -230,7 +230,7 @@ export const FilesService = {
     },
     borrarDatosEntrenamiento (token, perfilBase) {
       Vue.axios.defaults.headers.common.Authorization = `Bearer ${token}`
-      return ApiService.delete('register/calificacion/area/reset', perfilBase)
+      return ApiService.deleteOld('register/calificacion/area/reset?load=' + perfilBase)
     },
     getAllProfiles () {
       return ApiService.query('register/profile/investigadores')
@@ -244,10 +244,16 @@ export const FilesService = {
     },
 }
 
-export const LoginService = {
+export const AuthService = {
   login (user, password) {
-      return ApiService.post('login', { username: user, password: password })
-    },
+      return ApiService.post('auth/login', { username: user, password: password })
+  },
+    logout () {
+      return ApiService.get('auth/logout')
+  },
+      refreshToken () {
+      return ApiService.get('auth/refresh')
+  },
 }
 
 export const ComisionesService = {

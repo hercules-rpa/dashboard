@@ -76,7 +76,7 @@
 
 <script>
   import Vue from 'vue'
-  import { LoginService } from '@/common/api.service'
+  import { AuthService } from '@/common/api.service'
   export default {
     name: 'Login',
     data () {
@@ -115,7 +115,7 @@
         this.loginError = false
       },
       login () {
-        LoginService.login(this.user, this.password)
+        AuthService.login(this.user, this.password)
           .then(response => {
             if (response.status === 200) {
               this.token = response.data.Auth

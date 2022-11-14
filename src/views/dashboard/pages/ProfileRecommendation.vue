@@ -442,6 +442,7 @@
       },
       cerrarDialog () {
         this.dialog = false
+        this.$router.go()
       },
       cerrarDialogEntrenamiento () {
         this.dialog4 = false
