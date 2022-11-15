@@ -88,7 +88,7 @@
                   <FormulateInput
                     type="select"
                     :value="processParameters.comite"
-                    name="comité"
+                    name="comite"
                     :options="comites"
                     placeholder="Selecciona una opción"
                     label="Comité de investigación"

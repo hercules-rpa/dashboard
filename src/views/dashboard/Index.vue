@@ -27,6 +27,7 @@
       refreshLimitTimeInMillis: 300000,
       dialog: false,
       token: '',
+      adv: false,
     }),
     created: function () {
       this.checkToken()
@@ -80,15 +81,18 @@
           console.log(expiration - Date.now())
           if (expiration < Date.now()) {
             this.$router.push('/')
-          }
-          if (expiration - Date.now() < this.refreshLimitTimeInMillis) {
-            if (confirm('La sesión caducará en 5 minutos, pulse aceptar para seguir conectado o cancelar para salir')) {
-              this.refreshToken()
-              console.log('Seguir conectado')
-            } else {
-              this.$store.dispatch('logoutAction')
-              this.$router.push('/')
-              console.log('Salir')
+          } else {
+            if (expiration - Date.now() < this.refreshLimitTimeInMillis && !this.adv) {
+              this.adv = true
+              if (confirm('La sesión caducará en 5 minutos, pulse aceptar para seguir conectado o cancelar para salir')) {
+                this.refreshToken()
+                this.adv = false
+                console.log('Seguir conectado')
+              } else {
+                this.$store.dispatch('logoutAction')
+                this.$router.push('/')
+                console.log('Salir')
+              }
             }
           }
         }, 5000)
