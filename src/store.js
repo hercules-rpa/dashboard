@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { saveToken, destroyToken } from '@/common/jwt.service'
 import { ApiService } from '@/common/api.service'
+import { AuthService } from './common/api.service'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -28,6 +29,7 @@ export default new Vuex.Store({
     },
     logout (state) {
       destroyToken()
+      AuthService.logout()
       ApiService.destroyToken()
       state.token = null
       state.logged = false

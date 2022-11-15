@@ -32,6 +32,73 @@
                 error-behavior="live"
                 @submit="execute"
               >
+                <div
+                  v-if="this.$route.params.idProcess === '22'"
+                >
+                  <FormulateInput
+                    type="text"
+                    :value="processParameters.investigador"
+                    name="investigador"
+                    label="Identificador de investigador(email,ORCID,personaRef)"
+                    validation="required"
+                  />
+                  <FormulateInput
+                    type="select"
+                    :value="processParameters.tipo_acreditacion"
+                    name="tipo_acreditacion"
+                    :options="{1: 'Titularidad', 2: 'Cátedra',3: 'Profesor de Universidad Privada (PUP)',4: 'Profesor Contratado Doctor(PCD)',5: 'Profesor Ayudante Doctor (PAD)'}"
+                    placeholder="Selecciona una opción"
+                    label="Acreditación"
+                    validation="required"
+                  />
+                  <FormulateInput
+                    type="select"
+                    :value="processParameters.comision"
+                    name="comision"
+                    :options="comisiones"
+                    placeholder="Selecciona una opción"
+                    label="Comisión de investigación"
+                    validation="required"
+                  />
+                  <FormulateInput
+                    type="submit"
+                    label="Ejecutar"
+                  />
+                </div>
+                <div
+                  v-if="this.$route.params.idProcess === '18'"
+                >
+                  <FormulateInput
+                    type="text"
+                    :value="processParameters.investigador"
+                    name="investigador"
+                    label="Identificador de investigador(email,ORCID,personaRef)"
+                    validation="required"
+                  />
+
+                  <FormulateInput
+                    type="text"
+                    :value="processParameters.periodo"
+                    name="periodo"
+                    label="Periodo"
+                    placeholder="2020,2021,2022 o 2016-2021"
+                    validation="required"
+                  />
+
+                  <FormulateInput
+                    type="select"
+                    :value="processParameters.comite"
+                    name="comité"
+                    :options="comites"
+                    placeholder="Selecciona una opción"
+                    label="Comité de investigación"
+                    validation="required"
+                  />
+                  <FormulateInput
+                    type="submit"
+                    label="Ejecutar"
+                  />
+                </div>
                 <FormulateInput
                   v-if="processParameters.comite === '8'"
                   type="checkbox"
@@ -58,11 +125,6 @@
                   placeholder="Selecciona una opción"
                   label="Subcomité"
                   validation="required"
-                />
-                <FormulateInput
-                  v-if="this.$route.params.idProcess === '22' || this.$route.params.idProcess === '18'"
-                  type="submit"
-                  label="Ejecutar"
                 />
               </FormulateForm>
               <div v-if="test">
@@ -440,14 +502,35 @@
     mounted: function () {
       ComisionesService.getComisiones()
         .then(response => {
-          const array = Array.from(response.data, ([name, value]) => ({ name, value }))
-          console.log(array)
+          const array = Object.entries(response.data)
+          const aux = []
+          for (var i = 0; i < array.length; i++) {
+            const id = array[i][0]
+            const nombre = array[i][1].name
+            const ob = {}
+            ob.value = parseInt(id)
+            ob.label = nombre
+            aux.push(ob)
+          }
+          this.comisiones = aux
+          console.log(aux)
         }).catch((error) => {
           throw new Error(error)
         })
       ComitesService.getComites()
         .then(response => {
-
+          const array = Object.entries(response.data)
+          const aux = []
+          for (var i = 0; i < array.length; i++) {
+            const id = array[i][0]
+            const nombre = array[i][1].name
+            const ob = {}
+            ob.value = parseInt(id)
+            ob.label = nombre
+            aux.push(ob)
+          }
+          this.comites = aux
+          console.log(aux)
         }).catch((error) => {
           throw new Error(error)
         })
@@ -460,7 +543,9 @@
         })
       ProcessService.getForm(this.$route.params.idProcess)
         .then(response => {
-          this.schema = response.data
+          if (this.$route.params.idProcess !== '22' && this.$route.params.idProcess !== '18') {
+            this.schema = response.data
+          }
         })
         .catch(error => {
           throw new Error(error)

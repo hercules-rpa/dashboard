@@ -252,7 +252,7 @@ export const AuthService = {
       return ApiService.get('auth/logout')
   },
       refreshToken () {
-      return ApiService.get('auth/refresh')
+      return ApiService.get('auth/refresh_session')
   },
 }
 

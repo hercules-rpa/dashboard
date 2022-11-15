@@ -24,7 +24,10 @@
                 :options="{global: 'Ajustes globales',process: 'Ajustes de procesos', amqp: 'Ajustes AMQP', dbprocess: 'BBDD Procesos ', dbbi: 'Ajustes BBDD BI', orch: 'Ajustes del Orquestador'}"
                 label="Tipo de ajustes"
               />
-              <div v-if="settingsType=='global'">
+              <div
+                v-if="settingsType=='global'"
+                id="gSettings"
+              >
                 <FormulateForm
                   v-model="globalSettings"
                   class="mt-5"
@@ -106,7 +109,10 @@
                   />
                 </FormulateForm>
               </div>
-              <div v-if="settingsType=='process'">
+              <div
+                v-if="settingsType=='process'"
+                id="pSettings"
+              >
                 <FormulateForm
                   v-model="pSettings"
                   name="process"
