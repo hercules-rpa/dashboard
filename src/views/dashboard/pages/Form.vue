@@ -578,7 +578,7 @@
         this.tscheduleFormatted.at = this.timeSchedule.at
         this.tscheduleFormatted.forever = this.timeSchedule.forever
         this.tscheduleFormatted.tag = this.timeSchedule.tag
-        this.tscheduleFormatted.category = this.timeSchedule.category === undefined ? null : 'Planificado'
+        this.tscheduleFormatted.category = this.timeSchedule.category === undefined ? 'Proceso' : 'Planificado'
         // this.tscheduleFormatted = this.timeSchedule
 
         return this.tscheduleFormatted

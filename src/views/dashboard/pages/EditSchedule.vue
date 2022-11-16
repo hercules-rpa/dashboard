@@ -11,7 +11,7 @@
         <v-card-title>
           <v-icon class="mr-3">
             mdi-form-select
-          </v-icon>Edit Schedule - {{ schedule.id }}: Process {{ schedule.process_name }} : {{ schedule.id_process }}
+          </v-icon>Editar Planificación - {{ schedule.id }}: Proceso {{ schedule.process_name }} : {{ schedule.id_process }}
         </v-card-title>
         <v-container
           class="py-0"
@@ -174,7 +174,7 @@
     >
       <v-card class="text-center">
         <v-card-title>
-          <span v-if="code === 201">Schedule modified correctly</span><span v-else>Error modifying process</span>
+          <span v-if="code === 201">Planificación modificada correctamente</span><span v-else>Error modificando planificación</span>
 
           <v-spacer />
 
@@ -187,12 +187,12 @@
         </v-card-title>
 
         <v-card-text v-if="code === 201">
-          The schedule was modified succesfully <router-link
+          La planificación ha sido modificada correctamente <router-link
             class="blue--text text--darken-3"
             :to="{ path: '/pages/executions/'+jobData.schedule_id }"
           >
             {{ jobData.schedule_id }}
-          </router-link> do you want to go to the schedule window ?
+          </router-link> ¿ Quieres ir a la ventana de planificación ?
         </v-card-text><v-card-text v-else>
           Ha ocurrido un error el proceso no se ha podido crear correctamente codigo de error {{ code }}
         </v-card-text>
