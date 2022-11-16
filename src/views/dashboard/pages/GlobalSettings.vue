@@ -19,7 +19,7 @@
               md="6"
             >
               <v-list
-                width="250"
+                width="270"
               >
                 <v-list-item-group
                   v-model="model"
@@ -217,14 +217,14 @@
                     class="mt-5"
                     type="text"
                     name="user"
-                    label="User"
+                    label="Usuario"
                     :placeholder="amqpSettings.user"
                   />
                   <FormulateInput
                     class="mt-5"
                     type="text"
                     name="password"
-                    label="Password"
+                    label="Contraseña"
                     :placeholder="amqpSettings.password"
                   />
                   <FormulateInput
@@ -239,7 +239,7 @@
                     class="mt-5"
                     type="text"
                     name="port"
-                    label="Port"
+                    label="Puerto"
                     :placeholder="amqpSettings.port"
                     :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/]]"
                   />
@@ -300,14 +300,14 @@
                     class="mt-5"
                     type="text"
                     name="user"
-                    label="User"
+                    label="Usuario"
                     :placeholder="dbprocessSettings.user"
                   />
                   <FormulateInput
                     class="mt-5"
                     type="text"
                     name="password"
-                    label="Password"
+                    label="Contraseña"
                     :placeholder="dbprocessSettings.password"
                   />
                   <FormulateInput
@@ -322,7 +322,7 @@
                     class="mt-5"
                     type="text"
                     name="port"
-                    label="Port"
+                    label="Puerto"
                     :placeholder="dbprocessSettings.port"
                     :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/]]"
                   />
@@ -330,7 +330,7 @@
                     class="mt-5"
                     type="text"
                     name="database"
-                    label="Database"
+                    label="Base de datos"
                     :placeholder="dbprocessSettings.database"
                   />
                   <FormulateInput
@@ -355,7 +355,7 @@
                     class="mt-5"
                     type="text"
                     name="id"
-                    label="ID ORCHESTRATOR"
+                    label="ID ORQUESTADOR"
                     :placeholder="orchestratorSettings.id_orch"
                   />
                   <FormulateInput
@@ -369,14 +369,14 @@
                     class="mt-5"
                     type="text"
                     name="company"
-                    label="COMPANY"
+                    label="COMPAÑIA"
                     :placeholder="orchestratorSettings.company"
                   />
                   <FormulateInput
                     class="mt-5"
                     type="text"
                     name="pathlog_store"
-                    label="PATHLOG_STORE"
+                    label="ALMACÉN DE LOGS"
                     :placeholder="orchestratorSettings.pathlog_store"
                   />
                   <FormulateInput
@@ -539,14 +539,13 @@
         items: [
           {
             icon: 'mdi-cog',
-            text: 'Global Settings',
+            text: 'Ajustes Globales',
             to: '/pages/globalsettings/global',
           },
           {
-            icon: 'mdi-cog-box',
-            text: 'Process',
+            icon: 'mdi-cog-play',
+            text: 'Ajustes de Procesos',
             to: '/pages/globalsettings/process',
-            highlighted: true,
           },
           {
             icon: 'mdi-graph',
@@ -555,7 +554,7 @@
           },
           {
             icon: 'mdi-database',
-            text: 'Ajustes BBDD',
+            text: 'Ajustes de la Base de Datos',
             to: '/pages/globalsettings/dbprocess',
           },
           {
