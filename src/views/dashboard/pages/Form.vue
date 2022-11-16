@@ -46,7 +46,7 @@
                     type="select"
                     :value="processParameters.tipo_acreditacion"
                     name="tipo_acreditacion"
-                    :options="{1: 'Titularidad', 2: 'Cátedra',3: 'Profesor de Universidad Privada (PUP)',4: 'Profesor Contratado Doctor(PCD)',5: 'Profesor Ayudante Doctor (PAD)'}"
+                    :options="{1: 'Titularidad', 2: 'Cátedra'}"
                     placeholder="Selecciona una opción"
                     label="Acreditación"
                     validation="required"
@@ -165,7 +165,7 @@
               </FormulateForm>
 
               <div class="mt-5 text-heading-6 font-weight-black black--text">
-                Opciones de planificacion
+                Opciones de planificación
               </div>
 
               <FormulateForm
@@ -380,7 +380,7 @@
         tscheduleFormatted: {},
         dialog: false,
         dialogAlert: false,
-        test: false,
+        test: true,
         testSchema: {},
         jobData: {},
         code: {},
@@ -567,6 +567,7 @@
         this.tscheduleFormatted.forever = this.timeSchedule.forever
         this.tscheduleFormatted.tag = this.timeSchedule.tag
         this.tscheduleFormatted.category = 'asdf'
+        this.tscheduleFormatted = this.timeSchedule
 
         return this.tscheduleFormatted
       },

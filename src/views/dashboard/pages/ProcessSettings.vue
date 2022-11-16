@@ -245,21 +245,6 @@
             value: 'id',
           },
           {
-            sortable: false,
-            text: 'Autoria',
-            value: 'value.autoria_orden',
-          },
-          {
-            sortable: false,
-            text: 'Libros',
-            value: 'value.libros',
-          },
-          {
-            sortable: false,
-            text: 'Congresos',
-            value: 'value.congresos',
-          },
-          {
             text: '',
             value: 'controls',
             sortable: false,

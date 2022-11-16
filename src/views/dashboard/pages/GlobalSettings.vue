@@ -62,7 +62,7 @@
                   <FormulateInput
                     type="text"
                     name="edma_host_sparql"
-                    hint="Introduce IP or Domain"
+                    hint="Introduce IP or Dominio"
                     label="EDMA HOST SPARQL"
                     :placeholder="globalSettings.edma_host_sparql"
                     :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/]]"
@@ -77,8 +77,8 @@
                   <FormulateInput
                     type="text"
                     name="edma_host_servicios"
-                    hint="Introduce IP or Domain"
-                    label="EDMA host servicios"
+                    hint="Introduce IP or Dominio"
+                    label="EDMA HOST SERVICIOS"
                     :placeholder="globalSettings.edma_host_servicios"
                     :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/]]"
                   />
@@ -87,20 +87,20 @@
                     class="mt-5"
                     type="text"
                     name="sgi_user"
-                    label="SGI user"
+                    label="SGI USER"
                     :placeholder="globalSettings.sgi_user"
                   />
                   <FormulateInput
                     class="mt-5"
                     type="text"
                     name="sgi_password"
-                    label="SGI password"
+                    label="SGI CONTRASEÑA"
                     :placeholder="globalSettings.sgi_password"
                   />
                   <FormulateInput
                     type="text"
                     name="sgi_ip"
-                    label="SGI IP"
+                    label="SGI HOST"
                     :placeholder="globalSettings.sgi_url"
                     :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/]]"
                   />
@@ -110,20 +110,6 @@
                     label="SGI PORT"
                     default="8080"
                     :placeholder="globalSettings.sgi_port"
-                    :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/]]"
-                  />
-                  <FormulateInput
-                    type="text"
-                    name="database_ip"
-                    label="DATABASE IP"
-                    :placeholder="globalSettings.database_ip"
-                    :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/]]"
-                  />
-                  <FormulateInput
-                    type="text"
-                    name="database_port"
-                    label="DATABASE PORT"
-                    :placeholder="globalSettings.database_port"
                     :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/]]"
                   />
                   <FormulateInput
@@ -150,15 +136,15 @@
                   <FormulateInput
                     type="text"
                     name="salaprensa_url"
-                    hint="Introduce IP or Domain"
-                    label="Sala prensa URL"
+                    hint="Introduce IP or Dominio"
+                    label="SALA PRENSA URL"
                     :placeholder="pSettings.salaprensa_url"
                     :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/]]"
                   />
                   <FormulateInput
                     type="text"
                     name="ucc_url"
-                    hint="Introduce IP or Domain"
+                    hint="Introduce IP or Dominio"
                     label="UCC URL"
                     :placeholder="pSettings.ucc_url"
                     :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/]]"
@@ -166,7 +152,7 @@
                   <FormulateInput
                     type="text"
                     name="boe_url"
-                    hint="Introduce IP or Domain"
+                    hint="Introduce IP or Dominio"
                     label="BOE URL"
                     :placeholder="pSettings.boe_url"
                     :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/]]"
@@ -174,17 +160,33 @@
                   <FormulateInput
                     type="text"
                     name="bdns_url"
-                    hint="Introduce IP or Domain"
+                    hint="Introduce IP or Dominio"
                     label="BDNS URL"
                     :placeholder="pSettings.bdns_url"
                     :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/]]"
                   />
                   <FormulateInput
                     type="text"
+                    name="bdns_search"
+                    hint="Introduce IP or Dominio"
+                    label="BDNS SEARCH"
+                    :placeholder="pSettings.bdns_search"
+                    :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/]]"
+                  />
+                  <FormulateInput
+                    type="text"
                     name="europe_url"
-                    hint="Introduce IP or Domain"
+                    hint="Introduce IP or Dominio"
                     label="EUROPE URL"
                     :placeholder="pSettings.europe_url"
+                    :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/]]"
+                  />
+                  <FormulateInput
+                    type="text"
+                    name="europe_link"
+                    hint="Introduce IP or Dominio"
+                    label="EUROPE LINK"
+                    :placeholder="pSettings.europe_link"
                     :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/]]"
                   />
 
@@ -210,21 +212,21 @@
                     class="mt-5"
                     type="text"
                     name="user"
-                    label="user"
+                    label="User"
                     :placeholder="amqpSettings.user"
                   />
                   <FormulateInput
                     class="mt-5"
                     type="text"
                     name="password"
-                    label="password"
+                    label="Password"
                     :placeholder="amqpSettings.password"
                   />
                   <FormulateInput
                     type="text"
                     name="host"
                     hint="Introduce host"
-                    label="host"
+                    label="Host"
                     :placeholder="amqpSettings.host"
                     :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/]]"
                   />
@@ -232,7 +234,7 @@
                     class="mt-5"
                     type="text"
                     name="port"
-                    label="port"
+                    label="Port"
                     :placeholder="amqpSettings.port"
                     :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/]]"
                   />
@@ -293,21 +295,21 @@
                     class="mt-5"
                     type="text"
                     name="user"
-                    label="user"
+                    label="User"
                     :placeholder="dbprocessSettings.user"
                   />
                   <FormulateInput
                     class="mt-5"
                     type="text"
                     name="password"
-                    label="password"
+                    label="Password"
                     :placeholder="dbprocessSettings.password"
                   />
                   <FormulateInput
                     type="text"
                     name="host"
                     hint="Introduce host"
-                    label="host"
+                    label="Host"
                     :placeholder="dbprocessSettings.host"
                     :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/]]"
                   />
@@ -315,7 +317,7 @@
                     class="mt-5"
                     type="text"
                     name="port"
-                    label="port"
+                    label="Port"
                     :placeholder="dbprocessSettings.port"
                     :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/]]"
                   />
@@ -355,21 +357,21 @@
                     class="mt-5"
                     type="text"
                     name="name"
-                    label="name"
+                    label="NOMBRE"
                     :placeholder="orchestratorSettings.name"
                   />
                   <FormulateInput
                     class="mt-5"
                     type="text"
                     name="company"
-                    label="company"
+                    label="COMPANY"
                     :placeholder="orchestratorSettings.company"
                   />
                   <FormulateInput
                     class="mt-5"
                     type="text"
                     name="pathlog_store"
-                    label="pathlog_store"
+                    label="PATHLOG_STORE"
                     :placeholder="orchestratorSettings.pathlog_store"
                   />
                   <FormulateInput
