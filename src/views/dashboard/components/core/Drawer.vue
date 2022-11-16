@@ -132,7 +132,7 @@
         {
           icon: 'mdi-cog',
           title: 'Preferencias globales',
-          to: '/pages/globalsettings',
+          to: '/pages/globalsettings/global',
         },
       ],
     }),

@@ -16,18 +16,42 @@
           <v-row class="mt-5 mb-5">
             <v-col
               cols="12"
-              md="12"
+              md="6"
             >
-              <FormulateInput
-                v-model="settingsType"
-                type="select"
-                :options="{global: 'Ajustes globales',process: 'Ajustes de procesos', amqp: 'Ajustes AMQP', dbprocess: 'BBDD Procesos ', dbbi: 'Ajustes BBDD BI', orch: 'Ajustes del Orquestador'}"
-                label="Tipo de ajustes"
-              />
+              <v-list>
+                <v-list-item-group
+                  v-model="model"
+                  mandatory
+                  color="primary"
+                >
+                  <v-list-item
+
+                    v-for="(item, i) in items"
+                    :key="i"
+                    @click="clickItem(item)"
+                  >
+                    <v-list-item-icon>
+                      <v-icon v-text="item.icon" />
+                    </v-list-item-icon>
+
+                    <v-list-item-content>
+                      <v-list-item-title v-text="item.text" />
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-list-item-group>
+              </v-list>
+            </v-col>
+            <v-col
+              cols="12"
+              md="6"
+            >
               <div
                 v-if="settingsType=='global'"
                 id="gSettings"
               >
+                <div class="text-heading-6 font-weight-black black--text">
+                  Ajustes Globales de la aplicación
+                </div>
                 <FormulateForm
                   v-model="globalSettings"
                   class="mt-5"
@@ -113,6 +137,9 @@
                 v-if="settingsType=='process'"
                 id="pSettings"
               >
+                <div class="text-heading-6 font-weight-black black--text">
+                  Ajustes de Proceso
+                </div>
                 <FormulateForm
                   v-model="pSettings"
                   name="process"
@@ -177,7 +204,7 @@
                   @submit="editAMQPSettings"
                 >
                   <div class="text-heading-6 font-weight-black black--text">
-                    AMQP Settings
+                    Ajustes AMQP
                   </div>
                   <FormulateInput
                     class="mt-5"
@@ -252,6 +279,9 @@
                 </FormulateForm>
               </div>
               <div v-if="settingsType=='dbprocess'">
+                <div class="text-heading-6 font-weight-black black--text">
+                  Ajustes de la Base de datos de procesos
+                </div>
                 <FormulateForm
                   v-model="dbprocessSettings"
                   name="dbprocess"
@@ -259,9 +289,6 @@
                   error-behavior="live"
                   @submit="editDBProcessSettings"
                 >
-                  <div class="text-heading-6 font-weight-black black--text">
-                    DB Process Settings
-                  </div>
                   <FormulateInput
                     class="mt-5"
                     type="text"
@@ -306,61 +333,6 @@
                 </FormulateForm>
               </div>
 
-              <div v-if="settingsType=='dbbi'">
-                <FormulateForm
-                  v-model="dbbiSettings"
-                  class="mt-5"
-                  error-behavior="live"
-                  name="dbbi"
-                  @submit="editDBBISettings"
-                >
-                  <div class="text-heading-6 font-weight-black black--text">
-                    DB BI Settings
-                  </div>
-                  <FormulateInput
-                    class="mt-5"
-                    type="text"
-                    name="user"
-                    label="user"
-                    :placeholder="dbbiSettings.user"
-                  />
-                  <FormulateInput
-                    class="mt-5"
-                    type="text"
-                    name="password"
-                    label="password"
-                    :placeholder="dbbiSettings.password"
-                  />
-                  <FormulateInput
-                    type="text"
-                    name="host"
-                    hint="Introduce host"
-                    label="host"
-                    :placeholder="dbbiSettings.host"
-                    :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]|localhost/]]"
-                  />
-                  <FormulateInput
-                    class="mt-5"
-                    type="text"
-                    name="port"
-                    label="port"
-                    :placeholder="dbbiSettings.port"
-                    :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/]]"
-                  />
-                  <FormulateInput
-                    class="mt-5"
-                    type="text"
-                    name="keyspace"
-                    label="Key Space"
-                    :placeholder="dbbiSettings.keyspace"
-                  />
-                  <FormulateInput
-                    type="submit"
-                    label="Guardar"
-                  />
-                </FormulateForm>
-              </div>
-
               <div v-if="settingsType=='orch'">
                 <FormulateForm
                   v-model="orchestratorSettings"
@@ -370,7 +342,7 @@
                   @submit="editOrchestratorSettings"
                 >
                   <div class="text-heading-6 font-weight-black black--text">
-                    Orchestrator Settings
+                    Ajustes del Orquestador
                   </div>
                   <FormulateInput
                     class="mt-5"
@@ -557,9 +529,40 @@
         jobData: {},
         code: {},
         schema: [],
+        items: [
+          {
+            icon: 'mdi-cog',
+            text: 'Global Settings',
+            to: '/pages/globalsettings/global',
+          },
+          {
+            icon: 'mdi-cog-box',
+            text: 'Process',
+            to: '/pages/globalsettings/process',
+          },
+          {
+            icon: 'mdi-graph',
+            text: 'Ajustes AMQP',
+            to: '/pages/globalsettings/amqp',
+          },
+          {
+            icon: 'mdi-database',
+            text: 'Ajustes BBDD',
+            to: '/pages/globalsettings/dbprocess',
+          },
+          {
+            icon: 'mdi-brain',
+            text: 'Ajustes del Orquestador',
+            to: '/pages/globalsettings/orch',
+          },
+        ],
       }
     },
+    computed: {
+
+    },
     mounted: function () {
+      this.settingsType = this.$route.params.settingsType
       SettingsService.getGlobalSettings()
         .then(response => {
           this.globalSettings = response.data
@@ -603,7 +606,20 @@
           throw new Error(error)
         })
     },
+
     methods: {
+      clickItem (item) {
+        console.log(item.to)
+        this.$router.push(item.to)
+        this.$router.go()
+      },
+      mapItem (item) {
+        return {
+          ...item,
+          children: item.children ? item.children.map(this.mapItem) : undefined,
+          title: this.$t(item.title),
+        }
+      },
       async editGlobalSettings () {
         SettingsService.editGlobalSettings(this.globalSettings)
           .then(response => {
@@ -684,15 +700,6 @@
       },
       goToExecution () {
         this.$router.push('/pages/executions/' + this.jobData.schedule_id)
-      },
-      formatTimeSchedule () {
-        this.tscheduleFormatted.every = [this.timeSchedule.every_number === undefined ? null : this.timeSchedule.every_number, this.timeSchedule.every_unit]
-        this.tscheduleFormatted.at = this.timeSchedule.at
-        this.tscheduleFormatted.forever = this.timeSchedule.forever
-        this.tscheduleFormatted.tag = this.timeSchedule.tag
-        this.tscheduleFormatted.category = 'asdf'
-
-        return this.tscheduleFormatted
       },
       execute () {
 

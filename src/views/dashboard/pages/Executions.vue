@@ -24,6 +24,8 @@
         :search="search"
         :sort-by.sync="sortBy"
         :sort-desc.sync="sortDesc"
+        :loading="loading"
+        loading-text="Cargando datos...por favor espere"
         @dblclick:row="goToExecution"
       >
         <template v-slot:[`item.start_time`]="{ item }">
@@ -81,6 +83,7 @@
         sortBy: 'end_time',
         sortDesc: true,
         search: '',
+        loading: true,
         headers: [
           {
             sortable: true,
@@ -133,6 +136,7 @@
       LogsService.query()
         .then(response => {
           this.executions = response.data
+          this.loading = false
         })
         .catch(error => {
           alert('Ha ocurrido un error', error)

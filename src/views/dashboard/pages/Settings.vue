@@ -21,6 +21,7 @@
         :headers="headers"
         :items="configs"
         :search="search"
+        :loading="loading"
         loading-text="Cargando datos...por favor espere"
         @dblclick:row="goToConfig"
       >
@@ -50,6 +51,7 @@
     data () {
       return {
         search: '',
+        loading: true,
         headers: [
           {
             sortable: true,
@@ -83,6 +85,7 @@
       ProcessSettingsService.query()
         .then(response => {
           this.configs = response.data
+          this.loading = false
         })
         .catch(error => {
           throw new Error(error)
