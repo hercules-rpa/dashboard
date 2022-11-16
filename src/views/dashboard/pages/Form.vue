@@ -562,12 +562,24 @@
         this.$router.push('/pages/executions/' + this.jobData.schedule_id)
       },
       formatTimeSchedule () {
+        if (this.timeSchedule.concrete) {
+          // this.tscheduleFormatted.concreteDayHour = this.timeSchedule.concreteDayHour
+          const date = new Date(this.timeSchedule.concreteDayHour)
+          const realDate = date.getTime() - Date.now()
+          const seconds = Math.floor(realDate / 1000)
+          this.timeSchedule.every_number = seconds
+          this.timeSchedule.every_unit = 'seconds'
+          this.timeSchedule.at = null
+          this.timeSchedule.category = 'Planificado día y hora concretos'
+          this.timeSchedule.forever = false
+          // this.tscheduleFormatted.every = [this.timeSchedule.every_number, this.timeSchedule.every_unit]
+        }
         this.tscheduleFormatted.every = [this.timeSchedule.every_number === undefined ? null : this.timeSchedule.every_number, this.timeSchedule.every_unit]
         this.tscheduleFormatted.at = this.timeSchedule.at
         this.tscheduleFormatted.forever = this.timeSchedule.forever
         this.tscheduleFormatted.tag = this.timeSchedule.tag
-        this.tscheduleFormatted.category = 'asdf'
-        this.tscheduleFormatted = this.timeSchedule
+        this.tscheduleFormatted.category = this.timeSchedule.category === undefined ? null : 'Planificado'
+        // this.tscheduleFormatted = this.timeSchedule
 
         return this.tscheduleFormatted
       },
