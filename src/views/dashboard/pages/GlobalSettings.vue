@@ -18,7 +18,9 @@
               cols="12"
               md="6"
             >
-              <v-list>
+              <v-list
+                width="250"
+              >
                 <v-list-item-group
                   v-model="model"
                   mandatory
@@ -28,6 +30,9 @@
 
                     v-for="(item, i) in items"
                     :key="i"
+                    active-class="highlighted"
+                    :class="item.to === $route.path ? 'highlighted' : ''"
+                    :to="item.to"
                     @click="clickItem(item)"
                   >
                     <v-list-item-icon>
@@ -349,7 +354,7 @@
                   <FormulateInput
                     class="mt-5"
                     type="text"
-                    name="id_orch"
+                    name="id"
                     label="ID ORCHESTRATOR"
                     :placeholder="orchestratorSettings.id_orch"
                   />
@@ -541,6 +546,7 @@
             icon: 'mdi-cog-box',
             text: 'Process',
             to: '/pages/globalsettings/process',
+            highlighted: true,
           },
           {
             icon: 'mdi-graph',
@@ -561,7 +567,9 @@
       }
     },
     computed: {
-
+      computedItems () {
+        return this.items.map(this.mapItem)
+      },
     },
     mounted: function () {
       this.settingsType = this.$route.params.settingsType
