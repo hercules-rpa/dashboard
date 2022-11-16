@@ -140,7 +140,7 @@
         <v-card-title>
           <v-icon class="mr-3">
             mdi-cog
-          </v-icon>Process Settings - {{ this.$route.params.configPath.replaceAll('+', ' ') }}
+          </v-icon>Process Settings - {{ this.$route.params.configPath.split('+').pop() }}
         </v-card-title>
         <v-container
           class="py-0"
@@ -177,7 +177,7 @@
                 class="ma-2 white--text"
                 @click="dialogReset = true"
               >
-                Congiuración por defecto
+                Configuración por defecto
                 <v-icon
                   right
                   dark

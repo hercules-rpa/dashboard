@@ -22,7 +22,7 @@
               md="6"
             >
               <div class="text-heading-6 font-weight-black black--text">
-                General Options
+                Opciones generales
               </div>
               <FormulateForm
                 v-model="generalOptions"
@@ -34,21 +34,21 @@
                   type="select"
                   name="id_robot"
                   label="Robot"
-                  placeholder="Select a robot"
+                  placeholder="Selecciona un robot"
                   :value="null"
                   :options="processDesc.capable_robots"
                 />
                 <FormulateInput
                   type="number"
                   name="priority"
-                  label="Process priority"
+                  label="Prioridad"
                   default="1"
                   validation="required"
                 />
               </FormulateForm>
 
               <div class="mt-5 text-heading-6 font-weight-black black--text">
-                Schedule Options
+                Opciones de planificación
               </div>
 
               <FormulateForm
@@ -59,61 +59,80 @@
                 <FormulateInput
                   type="select"
                   name="mode"
-                  label="Execution mode"
-                  value="Schedule"
-                  :options="{ Instant: 'Instanteous', Schedule: 'Schedule'}"
+                  label="Modo de Ejecución"
+                  :options="{Schedule: 'Planificado'}"
                 />
                 <div v-if="timeSchedule.mode == 'Schedule'">
                   <FormulateInput
-                    type="number"
-                    name="every_number"
-                    :value="null"
-                    label="every"
+                    v-model="concreteValue"
+                    type="checkbox"
+                    name="concrete"
+                    label="Día y hora concreto"
                   />
+                  <FormulateInput
+                    v-if="concreteValue"
+                    type="datetime-local"
+                    name="concreteDayHour"
+                    label="Día y hora concreto"
+                    placeholder="Sample datetime-local placeholder"
+                    validation="required"
+                  />
+
                   <div
-                    v-if="timeSchedule.every_number == null || timeSchedule.every_number == ''"
+                    v-if="!concreteValue"
                   >
                     <FormulateInput
-                      type="select"
-                      name="every_unit"
-                      label="time unit"
-                      :options="days"
+                      type="number"
+                      name="every_number"
+                      :value="null"
+                      label="cada"
                     />
-                  </div><div v-else>
+                    <div
+                      v-if="timeSchedule.every_number == null || timeSchedule.every_number == ''"
+                    >
+                      <FormulateInput
+                        type="select"
+                        name="every_unit"
+                        label="Unidad de tiempo"
+                        :options="days"
+                      />
+                    </div><div v-else>
+                      <FormulateInput
+                        type="select"
+                        name="every_unit"
+                        label="Unidad de tiempo"
+                        :options="units"
+                      />
+                    </div>
                     <FormulateInput
-                      type="select"
-                      name="every_unit"
-                      label="time unit"
-                      :options="units"
+                      class="mt-5"
+                      type="time"
+                      name="at"
+                      label="a"
+                      :value="null"
+                      placeholder="at"
+                    />
+                    <FormulateInput
+                      v-model="foreverValue"
+                      type="checkbox"
+                      name="forever"
+                      label="Repetir"
                     />
                   </div>
                   <FormulateInput
                     class="mt-5"
-                    type="time"
-                    name="at"
-                    label="at"
-                    :value="null"
-                    placeholder="at"
-                  />
-                  <FormulateInput
-                    type="select"
-                    name="forever"
-                    :value="false"
-                    label="forever"
-                    :options="{false: 'false',true: 'true'}"
-                  />
-                  <FormulateInput
                     type="text"
                     name="tag"
-                    label="tag"
+                    label="Etiqueta"
+                    :value="!concreteValue ? timeSchedule.concreteDayHour : timeSchedule.concreteDayHour"
                     validation="required"
                   />
+                  <FormulateInput
+                    v-if="schema == null"
+                    type="submit"
+                    label="Guardar"
+                  />
                 </div>
-                <FormulateInput
-                  v-if="schema == null"
-                  type="submit"
-                  label="Save"
-                />
               </FormulateForm>
               <div v-if="test">
                 <h3 class="mt-5">
@@ -207,6 +226,9 @@
       return {
         generalOptions: { priority: 1 },
         timeSchedule: {},
+        foreverValue: false,
+        concreteValue: false,
+        concrete: false,
         processParameters: {},
         capableRobots: {},
         schedule: {},
@@ -214,27 +236,27 @@
         params: {},
         tscheduleFormatted: {},
         dialog: false,
-        test: false,
+        test: true,
         schema: null,
         jobData: {},
         code: {},
         days: {
-          monday: 'monday',
-          tuesday: 'tuesday',
-          wednesday: 'wednesday',
-          thurdsday: 'thurdsday',
-          friday: 'friday',
-          saturday: 'saturday',
-          sunday: 'sunday',
-          week: 'week',
-          day: 'day',
+          monday: 'lunes',
+          tuesday: 'martes',
+          wednesday: 'miércoles',
+          thurdsday: 'jueves',
+          friday: 'viernes',
+          saturday: 'sábado',
+          sunday: 'domingo',
+          week: 'semana',
+          day: 'día',
         },
         units: {
-          seconds: 'seconds',
-          minutes: 'minutes',
-          hours: 'hours',
-          days: 'days',
-          weeks: 'weeks',
+          seconds: 'segundos',
+          minutes: 'minutos',
+          hours: 'horas',
+          days: 'días',
+          weeks: 'semanas',
         },
       }
     },
@@ -242,6 +264,20 @@
       SchedulesService.get(this.$route.params.idSchedule)
         .then(response => {
           this.schedule = response.data
+          // this.timeSchedule = this.schedule.time_schedule
+          this.timeSchedule.mode = 'Schedule'
+          this.timeSchedule.every_number = this.schedule.time_schedule.every[0]
+          this.timeSchedule.every_unit = this.schedule.time_schedule.every[1]
+          this.timeSchedule.at = this.schedule.time_schedule.at
+          this.timeSchedule.tag = this.schedule.time_schedule.tag
+          this.timeSchedule.forever = this.schedule.time_schedule.forever
+          // const secondsAt = this.schedule.time_schedule.every[0]
+          // const secondsInit = Math.floor(Date.now() / 1000)
+          // const suma = secondsAt + secondsInit
+          // const result2 = new Date(suma * 1000).toISOString()
+          // this.timeSchedule.concreteDayHour1 = result2
+          // this.timeSchedule.concrete = false
+          // console.log(result2)
 
           ProcessService.get(this.schedule.id_process)
             .then(response => {
@@ -260,11 +296,24 @@
         this.$router.push('/pages/executions/' + this.jobData.schedule_id)
       },
       formatTimeSchedule () {
+        if (this.timeSchedule.concrete) {
+          // this.tscheduleFormatted.concreteDayHour = this.timeSchedule.concreteDayHour
+          const date = new Date(this.timeSchedule.concreteDayHour)
+          const realDate = date.getTime() - Date.now()
+          const seconds = Math.floor(realDate / 1000)
+          this.timeSchedule.every_number = seconds
+          this.timeSchedule.every_unit = 'seconds'
+          this.timeSchedule.at = null
+          this.timeSchedule.category = 'Planificado día y hora concretos'
+          this.timeSchedule.forever = false
+          // this.tscheduleFormatted.every = [this.timeSchedule.every_number, this.timeSchedule.every_unit]
+        }
         this.tscheduleFormatted.every = [this.timeSchedule.every_number === undefined ? null : this.timeSchedule.every_number, this.timeSchedule.every_unit]
         this.tscheduleFormatted.at = this.timeSchedule.at
         this.tscheduleFormatted.forever = this.timeSchedule.forever
         this.tscheduleFormatted.tag = this.timeSchedule.tag
-        this.tscheduleFormatted.category = 'asdf'
+        this.tscheduleFormatted.category = this.timeSchedule.category === undefined ? null : 'Planificado'
+        // this.tscheduleFormatted = this.timeSchedule
 
         return this.tscheduleFormatted
       },

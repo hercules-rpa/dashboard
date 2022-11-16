@@ -424,19 +424,19 @@
 
           // this.dailyExecutionsChartApex.series[0].data = this.data.execution_day_week.map(el => el.toFixed(1))
           this.dailyExecutionsChartApex.series.push({
-            name: 'daily-executions',
+            name: 'ejecuciones-diarias',
             data: this.data.execution_day_week.map(el => el.toFixed(1)),
           })
 
           // this.monthlyExecutionsChartApex.series[0].data.push(this.data.execution_month_year.map(el => el.toFixed(1)))
           this.monthlyExecutionsChartApex.series.push({
-            name: 'monthly-executions',
+            name: 'ejecuciones-mensuales',
             data: this.data.execution_month_year.map(el => el.toFixed(1)),
           })
 
           // this.lastMonthChartApex.series[0].data = this.data.execution_day_month.map(el => el.toFixed(1))
           this.lastMonthChartApex.series.push({
-            name: 'last-month-executions',
+            name: 'ejecuciones-ultimo-mes',
             data: this.data.execution_day_month.map(el => el.toFixed(1)),
           })
         })
