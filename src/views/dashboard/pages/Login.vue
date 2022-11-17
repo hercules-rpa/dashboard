@@ -38,6 +38,7 @@
                       label="Usuario"
                       type="string"
                       required
+                      @keydown.enter.prevent="login"
                     />
                     <v-text-field
                       id="password"
@@ -46,6 +47,7 @@
                       name="password"
                       label="Contraseña"
                       type="password"
+                      @keydown.enter.prevent="login"
                     />
                   </v-form>
                   <div
