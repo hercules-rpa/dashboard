@@ -79,7 +79,31 @@ export const RobotsService = {
     */
     getRobotLogs (slug) {
       return ApiService.get('robots/' + slug + '/logs')
-    },
+  },
+  resetRobot (idRobot) {
+    const params = {}
+    params.time_schedule = null
+    params.process = {}
+    params.process.id_robot = idRobot
+    params.process.priority = 1
+    params.process.parameters = {}
+    params.process.parameters.update = false
+    params.id_process = 98
+    params.exclude_robots = []
+    return ApiService.post('schedules/execute', params)
+  },
+  updateRobot (idRobot) {
+    const params = {}
+    params.time_schedule = null
+    params.process = {}
+    params.process.id_robot = idRobot
+    params.process.priority = 1
+    params.process.parameters = {}
+    params.process.parameters.update = true
+    params.id_process = 98
+    params.exclude_robots = []
+    return ApiService.post('schedules/execute', params)
+  },
   }
 
   export const SchedulesService = {

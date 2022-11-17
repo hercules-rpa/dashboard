@@ -97,6 +97,7 @@
             <v-card-text>
               <div>
                 <v-textarea
+                  v-scroll.self="$vuetify.goTo(target, options)"
                   autofocus
                   rows="20"
                   row-height="30"
@@ -137,6 +138,9 @@
         finStatus: false,
         timerid: undefined,
         dialog: false,
+        duration: 300,
+        offset: 9999,
+        easing: 'easeInOutCubic',
         lData: {
           logText: '',
           robot: '',
@@ -147,6 +151,15 @@
         log: {
         },
       }
+    },
+    computed: {
+      options () {
+        return {
+          duration: this.duration,
+          offset: this.offset,
+          easing: this.easing,
+        }
+      },
     },
     mounted: function () {
       LogsService.get(this.$route.params.idLog)

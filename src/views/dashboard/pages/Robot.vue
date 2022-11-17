@@ -84,6 +84,36 @@
               {{ robot.online ? 'mdi-check-circle' : 'mdi-close-circle' }}
             </v-icon>
           </v-chip>
+          <v-btn
+            color="blue"
+            class="ma-2"
+            dark
+            small
+            rounded
+            @click="updateRobot()"
+          >
+            Actualizar Robot
+            <v-icon
+              class="ml-1"
+            >
+              mdi-update
+            </v-icon>
+          </v-btn>
+          <v-btn
+            color="primary"
+            class="ma-2"
+            dark
+            small
+            rounded
+            @click="resetRobot()"
+          >
+            Reset
+            <v-icon
+              class="ml-1"
+            >
+              mdi-power
+            </v-icon>
+          </v-btn>
         </v-card-title>
         <v-card-subtitle class="mt-1">
           <div>id:{{ robot.id }}</div>

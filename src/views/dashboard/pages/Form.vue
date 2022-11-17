@@ -61,6 +61,16 @@
                     validation="required"
                   />
                   <FormulateInput
+                    v-if="processParameters.comision === '21'"
+                    type="select"
+                    :value="processParameters.categoria_acreditacion"
+                    name="categoria_acreditacion"
+                    :options="{investigacion: 'Investigación', docencia: 'Docencia'}"
+                    placeholder="Selecciona una opción"
+                    label="Categoría de acreditación"
+                    validation="required"
+                  />
+                  <FormulateInput
                     type="submit"
                     label="Ejecutar"
                   />
@@ -95,37 +105,28 @@
                     validation="required"
                   />
                   <FormulateInput
+                    v-if="processParameters.comite === '8'"
+                    type="checkbox"
+                    :value="processParameters.perfil_tecnologico"
+                    name="perfil_tecnologico"
+                    label="Perfil Tecnológico"
+                  />
+
+                  <FormulateInput
+                    v-if="processParameters.comite === '9'"
+                    type="select"
+                    :value="processParameters.subcomite"
+                    name="subcomite"
+                    :options="{1: 'Ciencias Sociales, Políticas y Comunicación', 2: 'Ciencias del Comportamiento',3: 'Biblioteconomía y Documentación',4: 'Estudios de Género',5: 'Antropología Social, Trabajo Social y Servicios Sociales e Historia del Pensamiento y de los Movimientos Sociales',6:'Otros'}"
+                    placeholder="Selecciona una opción"
+                    label="Subcomité"
+                    validation="required"
+                  />
+                  <FormulateInput
                     type="submit"
                     label="Ejecutar"
                   />
                 </div>
-                <FormulateInput
-                  v-if="processParameters.comite === '8'"
-                  type="checkbox"
-                  :value="processParameters.perfil_tecnologico"
-                  name="perfil_tecnologico"
-                  label="Perfil Tecnológico"
-                />
-                <FormulateInput
-                  v-if="processParameters.comision === '21'"
-                  type="select"
-                  :value="processParameters.categoria_acreditacion"
-                  name="categoria_acreditacion"
-                  :options="{investigacion: 'Investigación', docencia: 'Docencia'}"
-                  placeholder="Selecciona una opción"
-                  label="Categoría de acreditación"
-                  validation="required"
-                />
-                <FormulateInput
-                  v-if="processParameters.comite === '9'"
-                  type="select"
-                  :value="processParameters.subcomite"
-                  name="subcomite"
-                  :options="{1: 'Ciencias Sociales, Políticas y Comunicación', 2: 'Ciencias del Comportamiento',3: 'Biblioteconomía y Documentación',4: 'Estudios de Género',5: 'Antropología Social, Trabajo Social y Servicios Sociales e Historia del Pensamiento y de los Movimientos Sociales',6:'Otros'}"
-                  placeholder="Selecciona una opción"
-                  label="Subcomité"
-                  validation="required"
-                />
               </FormulateForm>
               <div v-if="test">
                 <h3 class="mt-5">
