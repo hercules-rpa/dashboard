@@ -181,6 +181,8 @@
                     :search="search"
                     :sort-by.sync="sortBy"
                     :sort-desc.sync="sortDesc"
+                    :loading="loading"
+                    loading-text="Cargando datos...por favor espere"
                     @click:row="getLog"
                     @dblclick:row="goToLog"
                   >
@@ -225,6 +227,7 @@
         timerid: undefined,
         sortBy: 'end_time',
         sortDesc: true,
+        loading: true,
         log: {
           data: '',
         },
@@ -280,7 +283,10 @@
           SchedulesService.get(this.$route.params.idSchedule)
             .then(response => {
               this.schedule = response.data
-              this.getLogSimple(this.schedule.logs[0])
+              if (this.schedule.logs.length <= 1) {
+                this.getLogSimple(this.schedule.logs[0])
+              }
+              this.loading = false
             })
             .catch(error => {
               throw new Error(error)

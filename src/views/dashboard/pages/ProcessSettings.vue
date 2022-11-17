@@ -192,6 +192,8 @@
                 :search="search"
                 :sort-by.sync="sortBy"
                 :sort-desc.sync="sortDesc"
+                :loading="loading"
+                loading-text="Cargando datos...por favor espere"
               >
                 <template v-slot:[`item.controls`]="{ item }">
                   <v-btn
@@ -224,6 +226,7 @@
         search: '',
         options: {},
         sortBy: 'created',
+        loading: true,
         sortDesc: true,
         dialogEditAll: false,
         dialogReset: false,
@@ -263,20 +266,25 @@
       }
     },
     mounted: function () {
-      ProcessSettingsService.getConfig(this.$route.params.configPath.replaceAll('+', '/'))
-        .then(response => {
-          this.comisiones = response.data
-
-          const it = Object.entries(this.comisiones)
-          it.forEach(resp => {
-            this.comisionesArray.push({ id: resp[0], value: resp[1] })
-          })
-        })
-        .catch((error) => {
-          throw new Error(error)
-        })
+      this.init()
     },
     methods: {
+      init () {
+        this.loading = true
+        ProcessSettingsService.getConfig(this.$route.params.configPath.replaceAll('+', '/'))
+          .then(response => {
+            this.comisiones = response.data
+            this.comisionesArray = []
+            const it = Object.entries(this.comisiones)
+            it.forEach(resp => {
+              this.comisionesArray.push({ id: resp[0], value: resp[1] })
+            })
+            this.loading = false
+          })
+          .catch((error) => {
+            throw new Error(error)
+          })
+      },
       crearArrayConfigs () {
         const it = Object.entries(this.comisiones)
         it.forEach(resp => {
@@ -293,7 +301,7 @@
         ProcessSettingsService.editConfig(this.$route.params.configPath.replaceAll('+', '/'), this.comisiones)
           .then(response => {
             if (response.status === 200) {
-
+              this.init()
             }
           })
           .catch((error) => {
@@ -308,7 +316,7 @@
         ProcessSettingsService.editConfig(this.$route.params.configPath.replaceAll('+', '/'), this.comisiones)
           .then(response => {
             if (response.status === 200) {
-
+              this.init()
             }
           })
           .catch((error) => {
@@ -322,6 +330,7 @@
           .then(response => {
             if (response.status === 200) {
               this.dialogReset = false
+              this.init()
             } else {
               alert('Error')
             }

@@ -25,6 +25,8 @@
           :search="search"
           :sort-by.sync="sortBy"
           :sort-desc.sync="sortDesc"
+          :loading="loading"
+          loading-text="Cargando datos...por favor espere"
           @dblclick:row="goToExecution"
         >
           <template v-slot:[`item.id_robot`]="{ item }">
@@ -134,6 +136,7 @@
         dialogEdit: false,
         scheduleId: '',
         schedule: {},
+        loading: true,
         processDesc: {},
         generalOptions: {},
         timeSchedule: {},
@@ -231,6 +234,7 @@
         SchedulesService.query({ params: { active: true } })
           .then(response => {
             this.schedules = response.data
+            this.loading = false
           })
           .catch(error => {
             throw new Error(error)

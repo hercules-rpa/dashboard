@@ -21,6 +21,8 @@
         :headers="headers"
         :items="processes"
         :search="search"
+        :loading="loading"
+        loading-text="Cargando datos...por favor espere"
         @dblclick:row="goToForm"
       >
         <template v-slot:[`item.capable_robots`]="{ item }">
@@ -63,6 +65,7 @@
     data () {
       return {
         search: '',
+        loading: true,
         headers: [
           {
             sortable: true,
@@ -100,6 +103,7 @@
       ProcessService.getProcessVisible()
         .then(response => {
           this.processes = response.data
+          this.loading = false
         })
         .catch(error => {
           throw new Error(error)

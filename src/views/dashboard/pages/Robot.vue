@@ -376,6 +376,8 @@
             :sort-by.sync="sortBy"
             :sort-desc.sync="sortDesc"
             :items-per-page="5"
+            :loading="loading"
+            loading-text="Cargando datos...por favor espere"
             @dblclick:row="goToExecution"
           >
             <template v-slot:[`item.start_time`]="{ item }">
@@ -475,6 +477,7 @@
         finStatus: false,
         polling: null,
         timerid: undefined,
+        loading: true,
         dialog: false,
         lData: {
           logText: '',
@@ -684,6 +687,7 @@
           this.ramChart.options.high = Math.max.apply(null, this.robot.stats.ram)
           this.diskChart.data.series[0] = this.robot.stats.disk
           this.diskChart.options.high = Math.max.apply(null, this.robot.stats.disk)
+          this.loading = false
         })
         .catch(error => {
           throw new Error(error)

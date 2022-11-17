@@ -24,6 +24,8 @@
         :search="search"
         :sort-by.sync="sortBy"
         :sort-desc.sync="sortDesc"
+        :loading="loading"
+        loading-text="Cargando datos...por favor espere"
         @dblclick:row="goToProblem"
       >
         <template v-slot:[`item.ts`]="{ item }">
@@ -79,6 +81,7 @@
 
     data () {
       return {
+        loading: true,
         headers: [
           {
             sortable: true,
@@ -124,6 +127,7 @@
       ProblemsService.query()
         .then(response => {
           this.problems = response.data
+          this.loading = false
         })
         .catch(error => {
           alert('Ha ocurrido un error', error)
