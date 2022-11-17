@@ -28,7 +28,7 @@
             :process="robot.process_running"
             :online="robot.online"
             :last-seen="robot.last_seen"
-            @click.native="$router.push(`/pages/robots/${robot.robot_id}`)"
+            :to="`/pages/robots/${robot.robot_id}`"
           />
         </v-hover>
       </v-col>
@@ -56,7 +56,7 @@
             :process="robot.process_running"
             :online="robot.online"
             :last-seen="robot.last_seen"
-            @click.native="$router.push(`/pages/robots/${robot.robot_id}`)"
+            :to="`/pages/robots/${robot.robot_id}`"
           />
         </v-hover>
       </v-col>

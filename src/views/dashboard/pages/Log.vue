@@ -97,7 +97,7 @@
             <v-card-text>
               <div>
                 <v-textarea
-                  v-scroll.self="$vuetify.goTo(target, options)"
+
                   autofocus
                   rows="20"
                   row-height="30"
@@ -106,6 +106,7 @@
                   name="input-7-4"
                   :label="'Proceso : ' + log.process_name"
                   :value="log.data.replace(/(\\r)*\\n/g, '\n')"
+                  @click="$vuetify.goTo(target, options)"
                 />
               </div>
             </v-card-text>
