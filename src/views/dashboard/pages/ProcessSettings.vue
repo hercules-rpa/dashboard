@@ -186,6 +186,7 @@
                 </v-icon>
               </v-btn>
               <v-data-table
+                v-if="fichero !== 'concesiones.json'"
                 :headers="headers"
                 :items="comisionesArray"
                 single-select
@@ -266,6 +267,7 @@
       }
     },
     mounted: function () {
+      this.fichero = this.$route.params.configPath.split('+').pop()
       this.init()
     },
     methods: {
