@@ -113,7 +113,7 @@
             class="ml-5"
             dark
             x-small
-            @click.prevent="getLog(process.id_log)"
+            @click.prevent="$emit('clickButton',$event,process.id_log)"
           >
             mostrar log
             <v-icon

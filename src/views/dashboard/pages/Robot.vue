@@ -737,6 +737,22 @@
       clearInterval(this.polling)
     },
     methods: {
+      resetRobot () {
+        RobotsService.resetRobot(this.robot.id)
+          .then(response => {
+            console.log(response.data)
+          }).catch(error => {
+            alert('Ha ocurrido un error reseteando el robot', error)
+          })
+      },
+      updateRobot () {
+        RobotsService.updateRobot(this.robot.id)
+          .then(response => {
+            console.log(response.data)
+          }).catch(error => {
+            alert('Ha ocurrido un error actualizando el robot', error)
+          })
+      },
       pollData () {
         this.polling = setInterval(() => {
           RobotsService.get(this.$route.params.idRobot)
@@ -778,7 +794,7 @@
         const link = document.createElement('a')
         const blob = new Blob([lData.logText], { type: 'application/txt' })
         link.href = window.URL.createObjectURL(blob)
-        link.download = lData.processName + '_' + lData.robot + lData.idLog + '.log'
+        link.download = lData.processName + '_' + lData.robot + '_' + lData.idLog + '.log'
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)

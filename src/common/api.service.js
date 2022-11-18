@@ -88,8 +88,8 @@ export const RobotsService = {
     params.process.priority = 1
     params.process.parameters = {}
     params.process.parameters.update = false
-    params.id_process = 98
-    params.exclude_robots = []
+    params.process.id_process = 98
+    params.process.exclude_robots = []
     return ApiService.post('schedules/execute', params)
   },
   updateRobot (idRobot) {
@@ -100,8 +100,8 @@ export const RobotsService = {
     params.process.priority = 1
     params.process.parameters = {}
     params.process.parameters.update = true
-    params.id_process = 98
-    params.exclude_robots = []
+    params.process.id_process = 98
+    params.process.exclude_robots = []
     return ApiService.post('schedules/execute', params)
   },
   }

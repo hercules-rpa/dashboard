@@ -218,7 +218,7 @@
         const link = document.createElement('a')
         const blob = new Blob([this.log.data.replace(/(\\r)*\\n/g, '\n')], { type: 'application/txt' })
         link.href = window.URL.createObjectURL(blob)
-        link.download = this.log.process_name + '_' + this.log.id_robot + this.log.id + '.log'
+        link.download = this.log.process_name + '_' + this.log.id_robot + '_' + this.log.id + '.log'
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
