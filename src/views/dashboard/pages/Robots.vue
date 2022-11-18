@@ -188,7 +188,7 @@
       getLog (idLog) {
         this.dialog = true
         this.timerid = setInterval(() => {
-          if (this.finStatus === false) {
+          if (!this.finStatus && this.dialog) {
             LogsService
               .get(idLog)
               .then((response) => {
