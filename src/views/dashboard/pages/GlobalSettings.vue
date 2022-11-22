@@ -74,6 +74,13 @@
                   />
                   <FormulateInput
                     type="text"
+                    name="url_release"
+                    label="URL ACTUALIZACIÓN ROBOTS"
+                    :placeholder="globalSettings.url_release"
+                    :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/]]"
+                  />
+                  <FormulateInput
+                    type="text"
                     name="edma_host_sparql"
                     hint="Introduce IP or Dominio"
                     label="EDMA HOST SPARQL"
