@@ -514,7 +514,6 @@
             aux.push(ob)
           }
           this.comisiones = aux
-          console.log(aux)
         }).catch((error) => {
           throw new Error(error)
         })
@@ -531,7 +530,6 @@
             aux.push(ob)
           }
           this.comites = aux
-          console.log(aux)
         }).catch((error) => {
           throw new Error(error)
         })

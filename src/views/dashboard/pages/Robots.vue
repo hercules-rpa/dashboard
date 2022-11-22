@@ -181,7 +181,6 @@
         document.body.removeChild(link)
       },
       prueba (evt, idLog) {
-        console.log(idLog)
         this.getLog(idLog)
         this.idLog = idLog
       },

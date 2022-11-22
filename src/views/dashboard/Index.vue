@@ -51,7 +51,6 @@
     },
     methods: {
       refreshToken () {
-        console.log('refreshtoken')
         // this.dialog = false
         AuthService.refreshToken()
           .then(response => {
@@ -65,17 +64,12 @@
           })
       },
       logout () {
-        console.log('logout')
         this.dialog = false
       },
       checkToken () {
         this.polling = setInterval(() => {
-          console.log('tOKEN')
           const decodedToken = VueJwtDecode.decode(JwtService.getToken())
           const expiration = decodedToken.exp * 1000
-          console.log(expiration)
-          console.log(Date.now())
-          console.log(expiration - Date.now())
           if (expiration < Date.now()) {
             this.$router.push('/')
           } else {
@@ -84,11 +78,9 @@
               if (confirm('La sesión caducará en 5 minutos, pulse aceptar para seguir conectado o cancelar para salir')) {
                 this.refreshToken()
                 this.adv = false
-                console.log('Seguir conectado')
               } else {
                 this.$store.dispatch('logoutAction')
                 this.$router.push('/')
-                console.log('Salir')
               }
             }
           }

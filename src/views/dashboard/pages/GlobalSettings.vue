@@ -633,7 +633,6 @@
 
     methods: {
       clickItem (item) {
-        console.log(item.to)
         this.$router.push(item.to)
         this.$router.go()
       },
