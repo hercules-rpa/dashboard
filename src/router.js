@@ -129,6 +129,12 @@ export default new Router({
           path: 'pages/problems',
           component: () => import('@/views/dashboard/pages/Problems'),
         },
+        // Accesibilidad
+        {
+          name: 'Accessibility',
+          path: 'pages/accessibility',
+          component: () => import('@/views/dashboard/pages/Accessibility'),
+        },
         {
           name: 'Notifications',
           path: 'components/notifications',
@@ -149,12 +155,6 @@ export default new Router({
           name: 'Regular Tables',
           path: 'tables/regular-tables',
           component: () => import('@/views/dashboard/tables/RegularTables'),
-        },
-        // Maps
-        {
-          name: 'Google Maps',
-          path: 'maps/google-maps',
-          component: () => import('@/views/dashboard/maps/GoogleMaps'),
         },
       ],
     },
