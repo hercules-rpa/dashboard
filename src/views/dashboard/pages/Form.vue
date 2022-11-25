@@ -65,7 +65,7 @@
                     type="select"
                     :value="processParameters.categoria_acreditacion"
                     name="categoria_acreditacion"
-                    :options="{investigacion: 'Investigación', docencia: 'Docencia'}"
+                    :options="{'1': 'Investigación', '2': 'Docencia'}"
                     placeholder="Selecciona una opción"
                     label="Categoría de acreditación"
                     validation="required"
@@ -106,8 +106,9 @@
                   />
                   <FormulateInput
                     v-if="processParameters.comite === '8'"
+                    v-model="processParameters.perfil_tecnologico"
                     type="checkbox"
-                    :value="processParameters.perfil_tecnologico"
+                    :value="false"
                     name="perfil_tecnologico"
                     label="Perfil Tecnológico"
                   />
@@ -374,7 +375,7 @@
         concreteValue: false,
         comites: {},
         comisiones: {},
-        processParameters: {},
+        processParameters: { perfil_tecnologico: false },
         capableRobots: {},
         processDesc: {},
         params: {},
