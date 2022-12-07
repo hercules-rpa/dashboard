@@ -89,7 +89,7 @@
     >
       <v-card>
         <v-card-title>
-          Estás segur@?
+          ¿Desea eliminar la planificación seleccionada?
 
           <v-spacer />
 

@@ -372,7 +372,7 @@
     data () {
       return {
         generalOptions: { priority: 1 },
-        timeSchedule: {},
+        timeSchedule: { at: null },
         foreverValue: false,
         concreteValue: false,
         comites: {},
@@ -381,7 +381,7 @@
         capableRobots: {},
         processDesc: {},
         params: {},
-        tscheduleFormatted: {},
+        tscheduleFormatted: { at: null },
         dialog: false,
         dialogAlert: false,
         test: false,
@@ -403,6 +403,7 @@
           minutes: 'minutos',
           hours: 'horas',
           days: 'días',
+          weeks: 'semanas',
         },
         schemaMail: [
           {

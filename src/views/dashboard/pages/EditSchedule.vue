@@ -252,7 +252,6 @@
           day: 'día',
         },
         units: {
-          seconds: 'segundos',
           minutes: 'minutos',
           hours: 'horas',
           days: 'días',
