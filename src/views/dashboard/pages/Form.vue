@@ -224,6 +224,7 @@
                       />
                     </div>
                     <FormulateInput
+                      v-if="timeSchedule.every_unit != 'minutes'"
                       class="mt-5"
                       type="time"
                       name="at"
@@ -233,6 +234,7 @@
                     />
                     <FormulateInput
                       v-model="foreverValue"
+                      class="mt-3"
                       type="checkbox"
                       name="forever"
                       label="Repetir"
@@ -398,11 +400,9 @@
           day: 'día',
         },
         units: {
-          seconds: 'segundos',
           minutes: 'minutos',
           hours: 'horas',
           days: 'días',
-          weeks: 'semanas',
         },
         schemaMail: [
           {

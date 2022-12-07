@@ -87,8 +87,8 @@
           <v-btn
             color="blue"
             class="ma-2"
-            dark
             small
+            disabled
             rounded
             @click="updateRobot()"
           >
@@ -102,7 +102,7 @@
           <v-btn
             color="primary"
             class="ma-2"
-            dark
+            disabled
             small
             rounded
             @click="resetRobot()"

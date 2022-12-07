@@ -48,13 +48,6 @@
                 </div>
               </div>
               <div>
-                <span class="text-subtitle-1 font-weight-light">Estado: </span>
-                <span
-                  class="text-subtitle-1 font-weight-normal"
-                  :class="[schedule.active ? 'green--text' : 'red--text']"
-                >{{ schedule.active == true ? 'ACTIVO' : 'INACTIVO' }}</span>
-              </div>
-              <div>
                 <span class="text-subtitle-1 font-weight-light">ID de Planificación: </span>
                 <router-link
                   class="blue--text text--darken-3"

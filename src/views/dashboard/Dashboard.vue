@@ -286,6 +286,7 @@
               text: 'Cargando...',
             },
             colors: ['#0aaec2'],
+
             responsive: [
               {
                 breakpoint: 480,
