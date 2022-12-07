@@ -258,21 +258,21 @@
                     :placeholder="amqpSettings.port"
                     :validation="[['matches', /^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/]]"
                   />
-                  <h3>Subscriptions</h3>
+                  <h3>Suscripciones</h3>
                   <div class="ml-5">
                     <v-btn
                       class="mt-5 mb-5"
                       color="#41b883"
                       @click="amqpSettings.subscriptions.push('New subscription')"
                     >
-                      Add Subscription
+                      Añadir Suscripción
                     </v-btn>
                     <v-btn
                       class="mt-5 mb-5"
                       color="#41b883"
                       @click="amqpSettings.subscriptions.pop()"
                     >
-                      Remove Subscription
+                      Quitar Suscripción
                     </v-btn>
                     <FormulateInput
                       v-for="(model, index) in amqpSettings.subscriptions"
