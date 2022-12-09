@@ -668,7 +668,9 @@
           })
       },
       async editAMQPSettings () {
-        delete this.amqpSettings['^text_8']
+        for (var i = 0; i < 1000; i++) {
+          delete this.amqpSettings['text_' + i]
+        }
         console.log(this.amqpSettings)
         SettingsService.editAMQPSettings(this.amqpSettings)
           .then(response => {
