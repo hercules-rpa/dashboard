@@ -386,7 +386,7 @@
                   <FormulateInput
                     class="mt-5"
                     type="text"
-                    name="id"
+                    name="id_orch"
                     label="ID ORQUESTADOR"
                     :placeholder="orchestratorSettings.id_orch"
                   />
@@ -410,6 +410,14 @@
                     name="pathlog_store"
                     label="ALMACÉN DE LOGS"
                     :placeholder="orchestratorSettings.pathlog_store"
+                  />
+                  <FormulateInput
+                    type="text"
+                    name="cdn_url"
+                    hint="Introduce IP or Dominio"
+                    label="CDN URL"
+                    :placeholder="orchestratorSettings.cdn_url"
+                    :validation="[['matches', /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/]]"
                   />
                   <FormulateInput
                     type="submit"
