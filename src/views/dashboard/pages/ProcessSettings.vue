@@ -96,7 +96,7 @@
     </v-dialog>
     <v-dialog
       v-model="dialogReset"
-      max-width="300"
+      max-width="500"
     >
       <v-card>
         <v-card-title>

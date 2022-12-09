@@ -92,20 +92,24 @@
     data: () => ({
       links: [
         {
-          href: '#',
+          href: '#/dashboard',
           text: 'Equipo',
         },
         {
-          href: '#',
+          href: '#/dashboard',
           text: 'Sobre Nosotros',
         },
         {
-          href: '#',
+          href: '#/dashboard',
           text: 'Blog',
         },
         {
-          href: '#',
+          href: '#/dashboard',
           text: 'Licencia',
+        },
+        {
+          href: '#/pages/accessibility',
+          text: 'Accesibilidad',
         },
       ],
     }),

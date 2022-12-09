@@ -445,56 +445,104 @@
           </v-data-table>
         </v-container>
       </v-card>
-
-      <v-card
-        class="px-5 py-3"
-        :class="[!robot.online ? 'pattern-ray' : '']"
-      >
-        <v-card-title>
-          <v-icon class="mr-3">
-            mdi-chart-bar
-          </v-icon>Estadísticas
-        </v-card-title>
-        <v-container
-          class="py-0"
+      <v-row>
+        <v-col
+          cols="12"
+          lg="4"
         >
-          <v-row class="mt-5 mb-5">
-            <v-col
-              cols="12"
-              md="4"
+          <v-card
+            class="px-5 py-3"
+            :class="[!robot.online ? 'pattern-ray' : '']"
+          >
+            <v-card-title>
+              <v-icon class="mr-3">
+                mdi-chip
+              </v-icon>Uso de CPU
+            </v-card-title>
+            <v-container
+              class="py-0"
             >
-              <apexchart
-                width="500"
-                type="line"
-                :options="cpuChartApex.options"
-                :series="cpuChartApex.series"
-              />
-            </v-col>
-            <v-col
-              cols="12"
-              md="4"
+              <v-row class="mt-5 mb-5">
+                <v-col
+                  cols="12"
+                  md="12"
+                >
+                  <apexchart
+                    height="300"
+                    type="line"
+                    :options="cpuChartApex.options"
+                    :series="cpuChartApex.series"
+                  />
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-card>
+        </v-col>
+        <v-col
+          cols="12"
+          lg="4"
+        >
+          <v-card
+            class="px-5 py-3"
+            :class="[!robot.online ? 'pattern-ray' : '']"
+          >
+            <v-card-title>
+              <v-icon class="mr-3">
+                mdi-memory
+              </v-icon>Uso de memoria(RAM)
+            </v-card-title>
+            <v-container
+              class="py-0"
             >
-              <apexchart
-                width="500"
-                type="line"
-                :options="ramChartApex.options"
-                :series="ramChartApex.series"
-              />
-            </v-col>
-            <v-col
-              cols="12"
-              md="4"
+              <v-row class="mt-5 mb-5">
+                <v-col
+                  cols="12"
+                  md="12"
+                >
+                  <apexchart
+                    height="300"
+                    type="line"
+                    :options="ramChartApex.options"
+                    :series="ramChartApex.series"
+                  />
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-card>
+        </v-col>
+        <v-col
+          cols="12"
+          lg="4"
+        >
+          <v-card
+            class="px-5 py-3"
+            :class="[!robot.online ? 'pattern-ray' : '']"
+          >
+            <v-card-title>
+              <v-icon class="mr-3">
+                mdi-disc
+              </v-icon>Uso de disco
+            </v-card-title>
+            <v-container
+              class="py-0"
             >
-              <apexchart
-                width="500"
-                type="line"
-                :options="diskChartApex.options"
-                :series="diskChartApex.series"
-              />
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-card>
+              <v-row class="mt-5 mb-5">
+                <v-col
+                  cols="12"
+                  md="12"
+                >
+                  <apexchart
+                    height="300"
+                    type="line"
+                    :options="diskChartApex.options"
+                    :series="diskChartApex.series"
+                  />
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-card>
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>
@@ -519,7 +567,6 @@
         cpuChartApex: {
           options: {
             title: {
-              text: 'Uso de CPU',
             },
             chart: {
               id: 'vuechart-example',
@@ -542,14 +589,13 @@
             ],
           },
           series: [{
-            name: 'cpu-usage',
+            name: 'uso-cpu',
             data: [30, 40, 45, 50, 49, 60, 70, 91],
           }],
         },
         ramChartApex: {
           options: {
             title: {
-              text: 'Uso de Memoria(RAM)',
             },
             chart: {
               id: 'vuechart-example',
@@ -561,14 +607,14 @@
             colors: ['#528254'],
           },
           series: [{
-            name: 'ram-usage',
+            name: 'uso-ram',
             data: [30, 40, 45, 50, 49, 60, 70, 91],
           }],
         },
         diskChartApex: {
           options: {
             title: {
-              text: 'Uso de disco',
+
             },
             chart: {
               id: 'vuechart-example',
@@ -580,7 +626,7 @@
             colors: ['#0e8c9c'],
           },
           series: [{
-            name: 'disk-usage',
+            name: 'uso-disco',
             data: [30, 40, 45, 50, 49, 60, 70, 91],
           }],
         },
