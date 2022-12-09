@@ -396,7 +396,7 @@
           monday: 'lunes',
           tuesday: 'martes',
           wednesday: 'miércoles',
-          thurdsday: 'jueves',
+          thursday: 'jueves',
           friday: 'viernes',
           saturday: 'sábado',
           sunday: 'domingo',
