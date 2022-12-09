@@ -576,7 +576,11 @@
           // this.tscheduleFormatted.every = [this.timeSchedule.every_number, this.timeSchedule.every_unit]
         }
         this.tscheduleFormatted.every = [this.timeSchedule.every_number === undefined ? null : this.timeSchedule.every_number, this.timeSchedule.every_unit]
-        this.tscheduleFormatted.at = this.timeSchedule.at
+        if (this.timeSchedule.at === undefined) {
+          this.tscheduleFormatted.at = null
+        } else {
+          this.tscheduleFormatted.at = this.timeSchedule.at
+        }
         this.tscheduleFormatted.forever = this.timeSchedule.forever
         this.tscheduleFormatted.tag = this.timeSchedule.tag
         this.tscheduleFormatted.category = this.timeSchedule.category === undefined ? 'Proceso' : 'Planificado'

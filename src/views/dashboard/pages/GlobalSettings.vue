@@ -263,7 +263,7 @@
                     <v-btn
                       class="mt-5 mb-5"
                       color="#41b883"
-                      @click="amqpSettings.subscriptions.push('New subscription')"
+                      @click="amqpSettings.subscriptions.push('Nueva suscripcion')"
                     >
                       Añadir Suscripción
                     </v-btn>
@@ -668,6 +668,8 @@
           })
       },
       async editAMQPSettings () {
+        delete this.amqpSettings['^text_8']
+        console.log(this.amqpSettings)
         SettingsService.editAMQPSettings(this.amqpSettings)
           .then(response => {
             if (response.status === 200) {
