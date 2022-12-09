@@ -274,6 +274,23 @@
                     >
                       Quitar Suscripción
                     </v-btn>
+                    <div v-if="test">
+                      <span
+                        v-for="(model, index) in amqpSettings.subscriptions"
+                        :key="index"
+                      >
+                        <FormulateInput
+                          v-model="amqpSettings.subscriptions[index]"
+                        />
+                        <v-btn
+                          class="mt-5 mb-5"
+                          color="#41b883"
+                          @click="amqpSettings.subscriptions.splice(index)"
+                        >
+                          X
+                        </v-btn>
+                      </span>
+                    </div>
                     <FormulateInput
                       v-for="(model, index) in amqpSettings.subscriptions"
                       :key="index"

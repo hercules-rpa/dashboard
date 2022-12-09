@@ -105,6 +105,7 @@
                       />
                     </div>
                     <FormulateInput
+                      v-if="timeSchedule.every_unit != 'minutes' &&timeSchedule.every_unit != 'weeks'"
                       class="mt-5"
                       type="time"
                       name="at"

@@ -19,6 +19,7 @@ import VueFeedbackReaction from 'vue-feedback-reaction'
 import VJsoneditor from 'v-jsoneditor/src/index'
 import VueApexCharts from 'vue-apexcharts'
 import VueHtml2pdf from 'vue-html2pdf'
+import { es } from '@braid/vue-formulate-i18n'
 
 Vue.config.productionTip = false
 
@@ -46,6 +47,7 @@ Vue.component('apexchart', VueApexCharts)
 Vue.use(VueHtml2pdf)
 
 Vue.use(VueFormulate, {
+  plugins: [es],
   uploader: async function (file, progress, error, options) {
   try {
     options.uploadUrl = 'http://10.208.99.12:5000/api/orchestrator/files'

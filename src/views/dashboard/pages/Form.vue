@@ -173,6 +173,8 @@
               <FormulateForm
                 v-model="timeSchedule"
                 class="mt-5"
+                error-behavior="live"
+                @validation="validation = $event"
                 @submit="execute"
               >
                 <FormulateInput
@@ -224,7 +226,7 @@
                       />
                     </div>
                     <FormulateInput
-                      v-if="timeSchedule.every_unit != 'minutes'"
+                      v-if="timeSchedule.every_unit != 'minutes' &&timeSchedule.every_unit != 'weeks'"
                       class="mt-5"
                       type="time"
                       name="at"
@@ -247,6 +249,7 @@
                     label="Etiqueta"
                     :value="!concreteValue ? timeSchedule.concreteDayHour : timeSchedule.concreteDayHour"
                     validation="required"
+                    error-behavior="live"
                   />
                 </div>
                 <FormulateInput
@@ -376,6 +379,7 @@
         foreverValue: false,
         concreteValue: false,
         comites: {},
+        validation: {},
         comisiones: {},
         processParameters: { perfil_tecnologico: false },
         capableRobots: {},
@@ -589,33 +593,37 @@
         return this.tscheduleFormatted
       },
       execute () {
-        if (this.processDesc.capable_robots.length === 0) {
-          this.dialogAlert = true
+        if (this.validation.hasErrors) {
+          console.log(this.validation.errors)
         } else {
-          if (this.processParameters.file !== undefined) {
-            delete this.processParameters.file.context
-            this.processParameters.files = []
-            this.processParameters.file.files.forEach(element => {
-              this.processParameters.files.push(element.path)
+          if (this.processDesc.capable_robots.length === 0) {
+            this.dialogAlert = true
+          } else {
+            if (this.processParameters.file !== undefined) {
+              delete this.processParameters.file.context
+              this.processParameters.files = []
+              this.processParameters.file.files.forEach(element => {
+                this.processParameters.files.push(element.path)
+              })
+              delete this.processParameters.file
+            }
+            this.timeSchedule.mode === 'Instant' ? this.params.time_schedule = null : this.params.time_schedule = this.formatTimeSchedule()
+            this.params.process = this.generalOptions
+            this.params.process.parameters = this.schema === null ? null : this.processParameters
+            this.params.process.id_process = parseInt(this.$route.params.idProcess)
+            this.params.process.priority = this.generalOptions.priority
+
+            OrchestratorService.execute(this.params).then((response) => {
+              this.jobData = response.data
+              this.code = response.status
+
+              this.dialog = true
+            }).catch(error => {
+              this.code = error.status
+              this.dialog = true
+              throw new Error(error)
             })
-            delete this.processParameters.file
           }
-          this.timeSchedule.mode === 'Instant' ? this.params.time_schedule = null : this.params.time_schedule = this.formatTimeSchedule()
-          this.params.process = this.generalOptions
-          this.params.process.parameters = this.schema === null ? null : this.processParameters
-          this.params.process.id_process = parseInt(this.$route.params.idProcess)
-          this.params.process.priority = this.generalOptions.priority
-
-          OrchestratorService.execute(this.params).then((response) => {
-            this.jobData = response.data
-            this.code = response.status
-
-            this.dialog = true
-          }).catch(error => {
-            this.code = error.status
-            this.dialog = true
-            throw new Error(error)
-          })
         }
       },
     },
