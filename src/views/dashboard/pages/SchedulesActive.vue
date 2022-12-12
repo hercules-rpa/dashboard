@@ -85,7 +85,7 @@
     </v-container>
     <v-dialog
       v-model="dialog3"
-      max-width="300"
+      max-width="450"
     >
       <v-card>
         <v-card-title>
