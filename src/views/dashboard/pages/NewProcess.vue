@@ -44,6 +44,7 @@
             class="ma-2"
             outlined
             x-small
+            title="settings"
             fab
             color="primary"
             @click="goToProcessSettings(item)"

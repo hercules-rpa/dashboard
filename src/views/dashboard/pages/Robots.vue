@@ -64,8 +64,13 @@
     >
       <v-checkbox
         v-model="showOffline"
-        :label="`Mostrar robots Offline`"
-      />
+      >
+        <template v-slot:label>
+          <div class="grey--text text--darken-2">
+            Mostrar robots offline
+          </div>
+        </template>
+      </v-checkbox>
       <v-row>
         <v-col
           v-for="robot in robotsOnline"

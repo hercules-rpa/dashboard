@@ -31,6 +31,7 @@
             outlined
             x-small
             fab
+            title="settings"
             color="primary"
             @click="goToProcessSettings(item)"
           >

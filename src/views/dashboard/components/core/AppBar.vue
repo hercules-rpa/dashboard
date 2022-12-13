@@ -11,6 +11,7 @@
       class="mr-3"
       elevation="1"
       fab
+      title="atras"
       small
       @click="$router.go(-1)"
     >
@@ -23,6 +24,7 @@
       elevation="1"
       fab
       small
+      title="dots"
       @click="setDrawer(!drawer)"
     >
       <v-icon v-if="value">
@@ -42,6 +44,7 @@
       min-width="0"
       text
       to="/dashboard"
+      title="dashboard"
     >
       <v-icon>mdi-view-dashboard</v-icon>
     </v-btn>
@@ -57,6 +60,7 @@
           min-width="0"
           text
           v-bind="attrs"
+          title="perfil"
           v-on="on"
         >
           <v-icon>mdi-account</v-icon>

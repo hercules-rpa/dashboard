@@ -173,7 +173,7 @@
                 </v-icon>
               </v-btn>
               <v-btn
-                color="#de9c18"
+                color="#986b0f"
                 class="ma-2 white--text"
                 @click="dialogReset = true"
               >

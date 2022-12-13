@@ -90,13 +90,12 @@
           Ejecutando proceso...
         </span><span
           v-else-if="!online"
-          style="color: red"
-          class="text-h5 font-weight-light"
+          class="text-h5 font-weight-light red--text text--darken-2"
         >
           INTENTANDO RECONECTAR...
         </span><span
           v-else
-          style="color: orange"
+          style="color: #9d6500"
           class="text-h5 font-weight-light"
         >
           LIBRE
