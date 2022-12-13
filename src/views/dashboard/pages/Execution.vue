@@ -94,7 +94,7 @@
                 <span class="text-subtitle-1 font-weight-light">Estado: </span>
                 <span
                   class="text-subtitle-1 font-weight-normal"
-                  :class="[log.finished ? 'green--text' : 'yellow--text']"
+                  :class="[log.finished ? 'green--text text--darken-3' : 'yellow--text text--darken-3']"
                 >{{ log.finished ? 'FINALIZADO' : 'EN PROGRESO' }}</span>
               </div>
               <div>
@@ -114,7 +114,7 @@
                   <span class="text-subtitle-1 font-weight-light">Resultado: </span>
                   <span
                     class="text-subtitle-1 font-weight-normal"
-                    :class="[log.state == 'ERROR' ? 'red--text' : 'green--text']"
+                    :class="[log.state == 'ERROR' ? 'red--text text--darken-2' : 'green--text text--darken-3']"
                   >{{ log.state }}</span>
                 </div>
               </div>
@@ -180,7 +180,7 @@
                     @dblclick:row="goToLog"
                   >
                     <template v-slot:[`item.state`]="{ item }">
-                      <div :class="[item.state == 'OK' ? 'green--text' : 'red--text']">
+                      <div :class="[item.state == 'OK' ? 'green--text text--darken-3' : 'red--text text--darken-2']">
                         {{ item.state }}
                       </div>
                     </template>

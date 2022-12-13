@@ -119,7 +119,7 @@
           <div>id:{{ robot.id }}</div>
           <div
             v-if="!robot.online"
-            class="red--text pt-3"
+            class="red--text text--darken-2 pt-3"
           >
             Reconectando... <v-progress-circular
               v-if="!robot.online"
@@ -206,9 +206,9 @@
               >
                 <router-link
                   :to="{ path: '/pages/logs/'+problem.log }"
-                  class="text-subtitle-1 font-weight-light red--text"
+                  class="text-subtitle-1 red--text text--darken-2"
                 >
-                  <span class="text-subtitle-1 font-weight-light red--text">{{ getErrorLine(problem.msg) }} {{ problem.ts | date }}</span>
+                  <span class="text-subtitle-1 red--text text--darken-2">{{ getErrorLine(problem.msg) }} {{ problem.ts | date }}</span>
                 </router-link>
                 <v-btn
                   color="blue"
@@ -298,7 +298,7 @@
                 <div v-else>
                   <span class="text-subtitle-1 font-weight-light">Ningún proceso en cola</span>
                   <div v-if="robot.online">
-                    <span class="green--text text-subtitle-1 font-weight-light">esperando nuevos procesos...</span>
+                    <span class="green--text text--darken-3 text-subtitle-1">esperando nuevos procesos...</span>
                   </div><div v-else>
                     <span class="red--text text-subtitle-1 font-weight-light">robot offline</span>
                   </div>
@@ -357,7 +357,7 @@
                 >
                   <router-link
                     :to="{ path: '/pages/logs/'+exec.log }"
-                    :class="[ exec.success ? 'green--text':'red--text' ]"
+                    :class="[ exec.success ? 'green--text text--darken-3':'red--text text--darken-2' ]"
                     class="text-subtitle-1 font-weight-light"
                   >
                     {{ exec.process }} - {{ exec.ts | date }}
@@ -433,12 +433,12 @@
               </router-link>
             </template>
             <template v-slot:[`item.finished`]="{ item }">
-              <div :class="[item.finished ? 'green--text' : 'yellow--text']">
+              <div :class="[item.finished ? 'green--text text--darken-3' : 'yellow--text text--darken-3']">
                 {{ item.finished ? 'FINALIZADO' : 'EJECUTANDO' }}
               </div>
             </template>
             <template v-slot:[`item.state`]="{ item }">
-              <div :class="[item.state == 'OK' ? 'green--text' : 'red--text']">
+              <div :class="[item.state == 'OK' ? 'green--text text--darken-3' : 'red--text text--darken-2']">
                 {{ item.state }}
               </div>
             </template>

@@ -8,7 +8,7 @@
     <template v-slot:after-heading>
       <div class="ml-auto text-right">
         <div
-          class="body-3 grey--text font-weight-light"
+          class="body-3 grey--text text--darken-1"
           v-text="title"
         />
 
@@ -35,7 +35,7 @@
 
     <span
       :class="subTextColor"
-      class="text-caption grey--text font-weight-light"
+      class="text-caption grey--text text--darken-1"
       v-text="subText"
     />
   </base-material-card>

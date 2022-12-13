@@ -32,7 +32,7 @@
           {{ item.ts | date }}
         </template>
         <template v-slot:[`item.msg`]="{ item }">
-          <span class="red--text">
+          <span class="red--text text--darken-2">
             {{ getErrorLine(item.msg) }}
           </span>
         </template>

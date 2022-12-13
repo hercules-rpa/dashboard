@@ -43,14 +43,14 @@
                 <span class="text-subtitle-1 font-weight-light">Estado: </span>
                 <span
                   class="text-subtitle-1 font-weight-normal"
-                  :class="[log.finished ? 'green--text' : 'yellow--text']"
+                  :class="[log.finished ? 'green--text text--darken-3' : 'yellow--text text--darken-3']"
                 >{{ log.finished ? 'FINALIZADO' : 'EN PROGRESO' }}</span>
               </div>
               <div>
                 <span class="text-subtitle-1 font-weight-light">Resultado: </span>
                 <span
                   class="text-subtitle-1 font-weight-normal"
-                  :class="[log.state == 'ERROR' ? 'red--text' : 'green--text']"
+                  :class="[log.state == 'ERROR' ? 'red--text text--darken-2' : 'green--text text--darken-3']"
                 >{{ log.state }}</span>
               </div>
               <div>

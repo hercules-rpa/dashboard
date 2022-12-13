@@ -52,7 +52,7 @@
                   </v-form>
                   <div
                     v-if="loginError"
-                    class="red--text"
+                    class="red--text text--darken-2"
                   >
                     *Usuario o contraseña incorrectos
                   </div>

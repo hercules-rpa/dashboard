@@ -59,7 +59,7 @@
           </router-link>
         </template>
         <template v-slot:[`item.finished`]="{ item }">
-          <div :class="[item.finished ? 'green--text' : 'yellow--text']">
+          <div :class="[item.finished ? 'green--text text--darken-3' : 'yellow--text text--darken-3']">
             {{ item.finished ? 'FINISHED' : 'RUNNING' }}
           </div>
         </template>

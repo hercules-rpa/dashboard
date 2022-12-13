@@ -18,7 +18,7 @@
             <v-card-text>
               <h1
                 v-if="error"
-                class="mt-10 red--text"
+                class="mt-10 red--text text--darken-2"
               >
                 Ha ocurrido un error : Sesión caducada
               </h1>

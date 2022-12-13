@@ -60,10 +60,10 @@
     >
       <template v-slot:after-heading>
         <div class="ml-auto text-right">
-          <h5 class="text-h4 grey--text font-weight-light">
+          <h5 class="text-h4 grey--text text--darken-1">
             {{ robotName }}
           </h5>
-          <h5 class="text-h4 grey--text font-weight-light">
+          <h5 class="text-h4 grey--text text--darken-1">
             id:{{ robotId }}
           </h5>
           <h3 class="text-h4 font-weight-light text--primary">
@@ -149,7 +149,7 @@
       </div>
       <div
         v-else
-        class="text-subtitle1 grey--text font-weight-light"
+        class="text-subtitle1 grey--text text--darken-1"
       >
         <v-icon
           color="red"
