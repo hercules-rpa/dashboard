@@ -701,6 +701,7 @@
           .then(response => {
             if (response.status === 200) {
               alert('Gracias, los ajustes se han modificado correctamente')
+              this.$router.go()
             }
           })
           .catch((error) => {
