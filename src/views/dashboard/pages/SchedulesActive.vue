@@ -63,6 +63,7 @@
               outlined
               x-small
               fab
+              title="editar"
               color="primary"
               @click="goToEditSchedule(item)"
             >
@@ -72,6 +73,7 @@
               class="ma-2"
               outlined
               x-small
+              title="borrar"
               fab
               color="red"
               @click="showModalDelete(item)"
