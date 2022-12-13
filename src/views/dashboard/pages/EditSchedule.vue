@@ -308,7 +308,7 @@
           this.timeSchedule.forever = false
           // this.tscheduleFormatted.every = [this.timeSchedule.every_number, this.timeSchedule.every_unit]
         }
-        this.tscheduleFormatted.every = [this.timeSchedule.every_number === undefined ? null : this.timeSchedule.every_number, this.timeSchedule.every_unit]
+        this.tscheduleFormatted.every = [this.timeSchedule.every_number === undefined || this.timeSchedule.every_number === '' ? null : this.timeSchedule.every_number, this.timeSchedule.every_unit]
         if (this.timeSchedule.at === undefined) {
           this.tscheduleFormatted.at = null
         } else {
