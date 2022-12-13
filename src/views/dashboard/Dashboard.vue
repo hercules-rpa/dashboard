@@ -439,6 +439,7 @@
           })
 
           // this.lastMonthChartApex.series[0].data = this.data.execution_day_month.map(el => el.toFixed(1))
+          console.log(this.data.execution_day_month.map(el => el.toFixed(1)))
           this.lastMonthChartApex.series.push({
             name: 'ejecuciones-ultimo-mes',
             data: this.data.execution_day_month.map(el => el.toFixed(1)),
