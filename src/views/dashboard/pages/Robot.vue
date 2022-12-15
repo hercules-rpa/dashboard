@@ -6,7 +6,7 @@
     >
       <v-card class="text-center">
         <v-card-title>
-          {{ lData.robot }} Ejecutando proceso
+          {{ lData.robot }} Detalle de proceso
 
           <v-spacer />
 
@@ -246,7 +246,7 @@
           <v-row class="mt-5 mb-5">
             <v-col
               cols="12"
-              md="4"
+              md="6"
             >
               <router-link
                 v-if="process_running != null"
@@ -307,80 +307,26 @@
             </v-col>
             <v-col
               cols="12"
-              md="4"
+              md="6"
             >
-              <router-link
-                :to="{ path: '/pages/robot/'+robot.id+'/executions' }"
+              <div
                 class="text-subtitle-1 font-weight-medium black--text"
               >
                 Procesos en cola:
-              </router-link>
-              <div class="mt-5">
-                <div
-                  v-for="exec in robot.process_queue"
-                  :key="exec"
-                >
-                  <router-link
-                    :to="{ path: '/pages/logs/'+exec.log }"
-                    class="blue--text text-subtitle-1 font-weight-light"
-                  >
-                    {{ exec.process }} {{ exec.ts | date }}
-                  </router-link>
-                  <span>
-                    <v-btn
-                      class="ma-2"
-                      x-small
-                      outlined
-                      color="red"
-                      @click="showModalDelete(item)"
-                    >
-                      <v-icon>mdi-delete</v-icon>
-                    </v-btn>
-                  </span>
-                </div>
               </div>
-            </v-col>
-            <v-col
-              cols="12"
-              md="4"
-            >
-              <router-link
-                :to="{ path: '/pages/robot/'+robot.id+'/executions' }"
-                class="text-subtitle-1 font-weight-medium black--text"
-              >
-                Últimas ejecuciones:
-              </router-link>
               <div class="mt-5">
-                <div
-                  v-for="exec in robot.last_executions"
-                  :key="exec"
-                >
-                  <router-link
-                    :to="{ path: '/pages/logs/'+exec.log }"
-                    :class="[ exec.success ? 'green--text text--darken-3':'red--text text--darken-2' ]"
-                    class="text-subtitle-1 font-weight-light"
-                  >
-                    {{ exec.process }} - {{ exec.ts | date }}
-                  </router-link>
-                  <span>
-                    <v-btn
-                      color="blue"
-                      class="ma-2"
-                      dark
-                      x-small
-                      outlined
-                      rounded
-                      @click="getLog(exec.log)"
-                    >
-                      log
-                      <v-icon
-                        class="ml-1"
-                      >
-                        mdi-eye
-                      </v-icon>
-                    </v-btn>
-                  </span>
-                </div>
+                <v-data-table
+                  :headers="queueHeaders"
+                  :items="processQueue"
+                  single-select
+                  :search="search"
+                  :sort-by.sync="sortBy"
+                  :sort-desc.sync="sortDesc"
+                  :items-per-page="4"
+                  :loading="loading"
+                  loading-text="Cargando datos...por favor espere"
+                  @dblclick:row="goToExecutionQueue"
+                />
               </div>
             </v-col>
           </v-row>
@@ -744,7 +690,17 @@
           {
             sortable: true,
             text: 'Proceso',
-            value: 'process_name',
+            value: 'name',
+          },
+          {
+            sortable: true,
+            text: 'Prioridad',
+            value: 'priority',
+          },
+          {
+            sortable: true,
+            text: 'Log',
+            value: 'id_log',
           },
         ],
       }
@@ -753,6 +709,7 @@
       RobotsService.get(this.$route.params.idRobot)
         .then(response => {
           this.robot = response.data
+          this.processQueue = response.data.process_queue
           this.cpuChart.data.series[0] = this.robot.stats.cpu
           this.cpuChartApex.series[0].data = this.robot.stats.cpu.map(el => el.toFixed(1))
           this.ramChartApex.series[0].data = this.robot.stats.ram.map(el => el.toFixed(1))
@@ -804,6 +761,8 @@
           RobotsService.get(this.$route.params.idRobot)
             .then(response => {
               this.robot = response.data
+              this.processQueue = response.data.process_queue
+              console.log(this.robot.process_queue)
             })
             .catch(error => {
               throw new Error(error)
@@ -845,6 +804,9 @@
         link.click()
         document.body.removeChild(link)
       },
+      goToExecutionQueue (value, data) {
+        this.$router.push('/pages/logs/' + data.item.id_log)
+      },
       goToExecution (value, data) {
         this.$router.push('/pages/logs/' + data.item.id)
       },
@@ -863,5 +825,5 @@
   background-color: #e5e5f7
   opacity: 0.6
 .v-progress-linear
-  width: 200px
+  width: 300px
 </style>
