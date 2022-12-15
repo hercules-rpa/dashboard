@@ -30,7 +30,7 @@
         >
           <div class="text-body-1 font-weight-light pt-6 pt-md-0 text-center">
             &copy; 2022, made
-            by <a href="https://um.es">TREELOGIC</a> for Hércules-RPA.
+            by <a href="https://www.treelogic.com/">TREELOGIC</a> for Hércules-RPA.
           </div>
         </v-col>
       </v-row>
