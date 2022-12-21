@@ -73,11 +73,7 @@
     </v-list>
     <template v-slot:append>
       <base-item
-        :item="{
-          title: $t('Accesibilidad'),
-          icon: 'mdi-human',
-          to: '/pages/accessibility',
-        }"
+        :item="{}"
       />
     </template>
   </v-navigation-drawer>

@@ -163,6 +163,7 @@
                   label="Prioridad"
                   default="1"
                   validation="required"
+                  help="1 = Prioridad más alta"
                 />
               </FormulateForm>
 
